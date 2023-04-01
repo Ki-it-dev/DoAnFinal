@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class web_module_web_fields_module_QuanLyDatSanCaNhan : System.Web.UI.Page
+public partial class web_module_module_QuanLyDatSanCaNhan : System.Web.UI.Page
 {
     cls_Alert alert = new cls_Alert();
     cls_San cls_San = new cls_San();

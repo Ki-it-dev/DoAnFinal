@@ -6,7 +6,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class web_module_web_users_profile_module_ChinhSuaThongTinCaNhan : System.Web.UI.Page
+public partial class web_module_module_ChinhSuaThongTinCaNhan : System.Web.UI.Page
 {
     dbcsdlDataContext db = new dbcsdlDataContext();
 

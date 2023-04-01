@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="module_ChinhSuaThongTinCaNhan.aspx.cs" Inherits="web_module_web_users_profile_module_ChinhSuaThongTinCaNhan" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="module_ChinhSuaThongTinCaNhan.aspx.cs" Inherits="web_module_module_ChinhSuaThongTinCaNhan" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>

@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class web_module_web_login_module_DangNhap : System.Web.UI.Page
+public partial class web_module_module_DangNhap : System.Web.UI.Page
 {
     dbcsdlDataContext db = new dbcsdlDataContext();
 
@@ -62,7 +62,8 @@ public partial class web_module_web_login_module_DangNhap : System.Web.UI.Page
                 registerPassword.Value, registerEmail.Value, registerName.Value, activityCode))
                 {
                     cls_Email.sendCode(registerName.Value, registerEmail.Value, activityCode);
-                    Response.Redirect("web_module/module_XacThucEmail.aspx?Email=" + registerEmail.Value);
+                    //Response.Redirect("web_module/module_XacThucEmail.aspx?Email=" + registerEmail.Value);
+                    Response.Redirect("/xac-nhan-email" + "-" + registerEmail.Value);
                 }
                 break;
             case 1:

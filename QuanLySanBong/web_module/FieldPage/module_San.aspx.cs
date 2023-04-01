@@ -61,7 +61,7 @@ public partial class web_module_module_San : System.Web.UI.Page
                 Context.Items["_idSan"] = _idSan;
                 Context.Items["_idGio"] = _idGio;
                 Context.Items["_idTime"] = _idTime;
-                Server.Transfer("web_module/module_XacNhanDatSan.aspx");
+                Server.Transfer("web_module/FieldPage/module_XacNhanDatSan.aspx");
             }
         }
     }

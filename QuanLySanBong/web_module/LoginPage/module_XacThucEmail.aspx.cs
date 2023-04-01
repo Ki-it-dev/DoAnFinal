@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class web_module_web_login_module_CapNhatMatKhau : System.Web.UI.Page
+public partial class web_module_module_XacThucEmail : System.Web.UI.Page
 {
     dbcsdlDataContext db = new dbcsdlDataContext();
 
@@ -17,17 +17,18 @@ public partial class web_module_web_login_module_CapNhatMatKhau : System.Web.UI.
 
     protected void btnXacThuc_ServerClick(object sender, EventArgs e)
     {
-        string email = Request.QueryString["Email"].ToString();
+        //string email = Request.QueryString["Email"];
+        string email = Request.Url.Segments.Last().Replace("-", "").Substring(12);
 
         tbUser update = db.tbUsers.Where(x => x.users_email == email).FirstOrDefault();
 
-        if (txtActiveCode.Value.Trim() == update.users_codeActivityEmail.Trim())
+        if (txtActiveCode.Value == update.users_codeActivityEmail.Trim())
         {
             update.users_status = true;
             db.SubmitChanges();
             alert.alert_Success(Page, "Xác thực thành công ", "");
-            //Xac thuc pass code
-            Response.Redirect("/web_module/module_CapNhatMatKhau.aspx?Account=" + update.users_account);
+            //Xac thuc email
+            Response.Redirect("/cap-nhat-trang-thai-" + update.users_account);
         }
         else
         {
