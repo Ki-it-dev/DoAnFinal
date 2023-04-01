@@ -1,0 +1,81 @@
+
+#sanpham {
+    background-image: url('../../images/SanBong/background/bg16.jpg');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+    #sanpham .dropdown {
+        background: linear-gradient(0.25turn, #3f87a6, #ebf8e1, #f69d3c);
+        text-align:center;
+        border-radius:20px;
+    }
+    
+
+    #sanpham .card {
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, yellow 63%, cyan);
+    }
+        #sanpham .card .card-img-top {
+            width: 100%;
+            height: 200px;
+        }
+
+        #sanpham .card .text-muted {
+            font-size: 12px;
+        }
+
+        #sanpham .card .card-text {
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 14px;
+        }
+
+        #sanpham .card .card-title {
+            margin-bottom: 0.5rem;
+            font-family: cursive;
+            font-weight: bold;
+            font-size:16px;
+        }
+        #sanpham .card .card-body {
+            flex: 1 1 auto;
+            padding: 0.5rem;
+        }
+
+    #sanpham .card-deck {
+        width: 100%;
+        margin-top: 70px;
+    }
+
+    #sanpham .h {
+        margin: 10px;
+        width: 100px;
+    }
+h3{
+    margin-left: 30px;
+}
+.ttcn{
+    width:100%;
+    height: 80%;
+    display: flex;
+}
+.ri{
+    display: flex;
+}
+.bo{
+    height: 20%;
+    
+}.butt{
+    vertical-align: middle;
+    text-align: center;
+    align-items: center;
+}
+.csxn{
+    font-size:35px;
+    border-radius: 20px;
+    
+}
+
+#sanpham .card-deck h6 {
+    color: red;
+    font-style: italic;
+}

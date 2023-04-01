@@ -1,0 +1,33 @@
+
+#san3 {
+    background-image: url('../../images/SanBong/background/bg15.jpg');
+    background-size: 50%;
+}
+
+    #san3 .container a {
+        border: solid 3px yellowgreen;
+        background-color: cornsilk;
+        color: black;
+        border-radius: 10px;
+        text-decoration: none;
+        text-decoration-color: yellow;
+        padding: 5px;
+    }
+
+    #san3 .container h3 {
+        color: greenyellow;
+    }
+
+.h{
+    margin: 10px;
+    width:100px;
+}
+
+h1 {
+    font-family: 'sans-serif';
+    font-style: normal;
+    font-weight: 800;
+    font-size: 50px;
+    line-height: 61px;
+    color: #FFFFFF;
+}
