@@ -25,6 +25,7 @@ public class cls_San
         //Danh sach san
         var getData = (from l in db.tbFieldTypes
                        join ls in db.tbFields on l.field_type_id equals ls.field_type_id
+                       where ls.field_status == true
                        select new
                        {
                            ls.field_id,
@@ -62,6 +63,7 @@ public class cls_San
                            //&& st.transaction_bookdate.Value.Month == dateBook.Month
                            //&& st.transaction_bookdate.Value.Year == dateBook.Year
                            && st.transaction_bookdate == dateBook
+                           && ss.field_status == true
                            select new
                            {
                                st.book_time_id,
@@ -82,6 +84,7 @@ public class cls_San
                        st.field_id == idSan
                        && st.book_time_id == idGio
                        && st.transaction_status == 0
+                       && s.field_status == true
                        //&& st.transaction_bookdate.Value.Day == dateBook.Day
                        //&& st.transaction_bookdate.Value.Month == dateBook.Month
                        //&& st.transaction_bookdate.Value.Year == dateBook.Year
@@ -107,7 +110,7 @@ public class cls_San
         var getSanDat = from bt in db.tbBookTimes
                         join p in db.tbPrices on bt.book_time_id equals p.book_time_id
                         join f in db.tbFields on p.field_type_id equals f.field_type_id
-                        where bt.book_time_id == int.Parse(idBookTime)
+                        where bt.book_time_id == int.Parse(idBookTime) && f.field_status == true
                         select new
                         {
                             bt.book_time_id,
@@ -132,7 +135,7 @@ public class cls_San
         var getSanDat = from bt in db.tbBookTimes
                         join p in db.tbPrices on bt.book_time_id equals p.book_time_id
                         join f in db.tbFields on p.field_type_id equals f.field_type_id
-                        where bt.book_time_id == int.Parse(idBookTime)
+                        where bt.book_time_id == int.Parse(idBookTime) && f.field_status == true
                         select new
                         {
                             bt.book_time_id,
@@ -146,7 +149,7 @@ public class cls_San
     //Get ten san
     public string San_TenSan(int idSan)
     {
-        var getSan = from s in db.tbFields where s.field_id == idSan select s;
+        var getSan = from s in db.tbFields where s.field_id == idSan && s.field_status == true select s;
 
         return getSan.FirstOrDefault().field_name;
     }
@@ -157,7 +160,7 @@ public class cls_San
         var getData = (from t in db.tbTempTransactions
                        join f in db.tbFields on t.field_id equals f.field_id
                        join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
-                       where t.users_id == userId
+                       where t.users_id == userId && f.field_status == true
                        select new
                        {
                            transaction_datetime = DateTime.Parse(t.transaction_datetime.ToString()).ToString("yyyy-MM-dd"),
