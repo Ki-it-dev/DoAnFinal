@@ -31,10 +31,13 @@ public class webui
         //Nguoi dung
         list.Add("webThongTinCaNhan|thong-tin-ca-nhan|~/web_module/UsersPage/module_XemThongTinCaNhan.aspx");
         list.Add("webChinhSuaThongTinCaNhan|chinh-sua-thong-tin-ca-nhan|~/web_module/UsersPage/module_ChinhSuaThongTinCaNhan.aspx");
-
         //Xac thuc email
         list.Add("webXacNhanEmail|xac-nhan-email-{value}|~/web_module/LoginPage/module_XacThucEmail.aspx");
         list.Add("webCapNhatTrangThaiTaiKhoan|cap-nhat-trang-thai-{value}|~/web_module/LoginPage/module_DangNhap.aspx");
+        //Quên mật khẩu
+        list.Add("webXacNhanMatKhau|quen-mat-khau-{value}|~/web_module/LoginPage/module_XacNhanMatKhau.aspx");
+        list.Add("webCapNhatMatKhau|cap-nhat-mat-khau-{value}|~/web_module/LoginPage/module_CapNhatMatKhau.aspx");
+
         return list;
 
     }

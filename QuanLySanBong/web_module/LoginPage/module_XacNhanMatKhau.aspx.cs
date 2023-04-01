@@ -17,7 +17,9 @@ public partial class web_module_module_CapNhatMatKhau : System.Web.UI.Page
 
     protected void btnXacThuc_ServerClick(object sender, EventArgs e)
     {
-        string email = Request.QueryString["Email"].ToString();
+        //string email = Request.QueryString["Email"].ToString();
+
+        string email = Request.Url.Segments.Last().Replace("-", "").Substring(11);
 
         tbUser update = db.tbUsers.Where(x => x.users_email == email).FirstOrDefault();
 
@@ -27,7 +29,8 @@ public partial class web_module_module_CapNhatMatKhau : System.Web.UI.Page
             db.SubmitChanges();
             alert.alert_Success(Page, "Xác thực thành công ", "");
             //Xac thuc pass code
-            Response.Redirect("/web_module/module_CapNhatMatKhau.aspx?Account=" + update.users_account);
+            //Response.Redirect("/web_module/module_CapNhatMatKhau.aspx?Account=" + update.users_account);
+            Response.Redirect("/cap-nhat-mat-khau-" + update.users_account);
         }
         else
         {

@@ -37,7 +37,7 @@ public partial class web_module_module_QuenMatKhau : System.Web.UI.Page
             cls_Email.sendCodePass(email, activityCode);
             update.users_codeActivityEmail = activityCode;
             db.SubmitChanges();
-            Response.Redirect("web_module/module_XacNhanMatKhau.aspx?Email=" + email);
+            Response.Redirect("/quen-mat-khau-" + email);
         }
         else
         {

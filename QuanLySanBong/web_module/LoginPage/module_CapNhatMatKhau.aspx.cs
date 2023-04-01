@@ -19,7 +19,8 @@ public partial class web_module_module_CapNhatMatKhau : System.Web.UI.Page
         string pass = txtPass.Value;
         string repPass = txtRepPass.Value;
 
-        string acc = Request.QueryString["Account"].ToString();
+        //string acc = Request.QueryString["Account"].ToString();
+        string acc = Request.Url.Segments.Last().Replace("-", "").Substring(14);
 
         if (pass == "" || repPass == "")
         {
@@ -37,6 +38,6 @@ public partial class web_module_module_CapNhatMatKhau : System.Web.UI.Page
         update.users_password = pass;
         db.SubmitChanges();
         alert.alert_Success(Page, "Thành công", "");
-        Response.Redirect("/Default.aspx?Account=" + update.users_account);
+        Response.Redirect("/trang-chu");
     }
 }
