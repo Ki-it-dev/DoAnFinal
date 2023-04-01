@@ -62,7 +62,7 @@ public partial class web_module_web_login_module_DangNhap : System.Web.UI.Page
                 registerPassword.Value, registerEmail.Value, registerName.Value, activityCode))
                 {
                     cls_Email.sendCode(registerName.Value, registerEmail.Value, activityCode);
-                    Response.Redirect("web_module/web_login/module_XacThucEmail.aspx?Email=" + registerEmail.Value);
+                    Response.Redirect("web_module/module_XacThucEmail.aspx?Email=" + registerEmail.Value);
                 }
                 break;
             case 1:
