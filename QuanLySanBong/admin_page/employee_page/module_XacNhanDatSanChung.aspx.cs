@@ -50,6 +50,8 @@ public partial class admin_page_employee_page_module_XacNhanDatSanChung : System
 
         tbTempTransaction del = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
 
+
+
         db.tbTempTransactions.DeleteOnSubmit(del);
 
         db.SubmitChanges();

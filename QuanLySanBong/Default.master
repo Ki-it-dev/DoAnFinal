@@ -29,9 +29,14 @@
     <link href="../css/cssModule/qlttcn.css" rel="stylesheet" type="text/css">
     <link href="../css/cssModule/xndsc.css" rel="stylesheet" type="text/css">
     <link href="../css/cssModule/qldsc.css" rel="stylesheet" type="text/css">
-     <link href="../css/cssModule/login.css" rel="stylesheet" type="text/css">
+    <link href="../css/cssModule/login.css" rel="stylesheet" type="text/css">
 
     <script src="../admin_js/sweetalert.min.js"></script>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+
     <asp:ContentPlaceHolder ID="head" runat="server">
     </asp:ContentPlaceHolder>
 </head>
@@ -146,14 +151,28 @@
                                     </li>
 
                                     <li class="nav-item">
-                                        <i class="far fa-bell"></i>
+                                        <div class="dropdown">
+                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
+                                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                                Thông báo <span>1</span>
+                                            </button>
+                                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                                <asp:Repeater runat="server" ID="rpNotif">
+                                                    <ItemTemplate>
+                                                        <a class="dropdown-item" style="<%#Eval("daXacNhan")%>;<%#Eval("choXacNhan")%>" 
+                                                            
+                                                            href="/xac-nhan-dat-san-<%#Eval("field_id") %>-<%#Eval("book_time_id") %>-<%#Eval("alert_Id") %>"><%#Eval("alert_content") %></a>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </div>
+                                        </div>
                                     </li>
                                     <li class="nav-item dropdown" style="margin-left: 20px">
                                         <div class="dropdown">
                                             <a class="nav-link" href="/trang-chu" id="A1" runat="server">Tiếng Việt</a>
-                                            <div class="dropdown-content">
+                                            <%--<div class="dropdown-content">
                                                 <a class="nav-link" href="/trang-chu" id="A2" runat="server">English</a>
-                                            </div>
+                                            </div>--%>
                                         </div>
                                     </li>
                                     <li class="nav-item">

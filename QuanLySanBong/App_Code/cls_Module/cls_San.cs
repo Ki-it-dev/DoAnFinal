@@ -115,7 +115,7 @@ public class cls_San
                         {
                             bt.book_time_id,
                             f.field_id,
-                            style = Convert.ToInt32(bt.book_time_detail.Substring(0, 2)) < DateTime.Now.Hour ? "pointer-events: none;background:aqua;"+ styleDefault : styleDefault,
+                            style = Convert.ToInt32(bt.book_time_detail.Substring(0, 2)) < DateTime.Now.Hour ? "pointer-events: none;background:aqua;" + styleDefault : styleDefault,
                         };
 
         repeater.DataSource = getSanDat;
@@ -163,8 +163,8 @@ public class cls_San
                        where t.users_id == userId && f.field_status == true
                        select new
                        {
-                           transaction_datetime = DateTime.Parse(t.transaction_datetime.ToString()).ToString("yyyy-MM-dd"),
-                           transaction_bookdate = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("yyyy-MM-dd"),
+                           transaction_datetime = DateTime.Parse(t.transaction_datetime.ToString()).ToString("dd-MM-yyyy"),
+                           transaction_bookdate = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd-MM-yyyy"),
                            f.field_name,
                            bt.book_time_detail,
                            f.field_id,
@@ -180,13 +180,21 @@ public class cls_San
         repeater.DataSource = getData;
         repeater.DataBind();
     }
-    public bool San_HuySan(int idSan, int idGio, int idUser)
+    public bool San_HuySan(int idSan, int idGio, int idUser,string timeBook)
     {
         tbTempTransaction del = db.tbTempTransactions.Where
             (x => x.field_id == idSan &&
             x.book_time_id == idGio &&
             x.users_id == idUser).FirstOrDefault();
+
+        tbAlert delAlert = db.tbAlerts.Where(
+            x => x.field_id == idSan &&
+            x.book_time_id == idGio &&
+            x.alert_datetime == Convert.ToDateTime(timeBook)).FirstOrDefault();
+
         db.tbTempTransactions.DeleteOnSubmit(del);
+        db.tbAlerts.DeleteOnSubmit(delAlert);
+
         try
         {
             db.SubmitChanges();

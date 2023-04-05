@@ -1,8 +1,8 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="module_QuanLyDatSanCaNhan.aspx.cs" Inherits="web_module_module_QuanLyDatSanCaNhan" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="qldscn">
         <div class="khoangcach">
             <h1>Quản lý đơn đặt sân của tôi</h1>
@@ -25,7 +25,7 @@
                                     </div>
                                     <div class="p-2">
                                         <a href="#"><span class="badge badge-danger"
-                                            onclick="myBtnHuy('<%#Eval("field_id") %>','<%#Eval("book_time_id") %>')" style="<%#Eval("huy")%>">Hủy</span></a>
+                                            onclick="myBtnHuy('<%#Eval("field_id") %>','<%#Eval("book_time_id") %>','<%#Eval("transaction_datetime") %>')" style="<%#Eval("huy")%>">Hủy</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -43,10 +43,11 @@
     <div style="display: none;">
         <input type="text" name="name" value="" id="txtIdSan" runat="server" />
         <input type="text" name="name" value="" id="txtIdGio" runat="server" />
+        <input type="text" name="name" value="" id="txtTimeBook" runat="server" />
     </div>
 
     <script>
-        function myBtnHuy(idSan, idGio) {
+        function myBtnHuy(idSan, idGio, timeBook) {
             swal("Bạn có thực sự muốn hủy?",
                 "Nếu hủy, dữ liệu sẽ không thể khôi phục.",
                 "warning",
@@ -57,6 +58,7 @@
                     if (value == true) {
                         document.getElementById("<%=txtIdSan.ClientID%>").value = idSan
                         document.getElementById("<%=txtIdGio.ClientID%>").value = idGio
+                        document.getElementById("<%=txtTimeBook.ClientID%>").value = timeBook
                         document.getElementById("<%=btnHuy.ClientID%>").click()
                     }
                 });

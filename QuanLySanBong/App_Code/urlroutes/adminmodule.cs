@@ -23,6 +23,8 @@ public class adminmodule
         list.Add("webXacNhanDatSanChung|xac-nhan-dat-san-chung|~/admin_page/employee_page/module_XacNhanDatSanChung.aspx");
         //Quan ly tai khoan nguoi dung
         list.Add("webQuanLyTaiKhoan|quan-ly-tai-khoan|~/admin_page/module_QuanLyTaiKhoan.aspx");
+        //Dat san theo thong bao
+        list.Add("webXacNhanDatSanTheoThongBaoCuaKhachHang|xac-nhan-dat-san-{field}-{bookTime}-{idAlert}|~/admin_page/employee_page/module_XacNhanDatSanTheoAlert.aspx");
 
         return list;
     }

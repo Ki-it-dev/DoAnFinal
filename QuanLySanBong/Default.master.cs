@@ -18,22 +18,27 @@ public partial class _Default : System.Web.UI.MasterPage
         if (Request.Cookies["UserName"] != null)
         {
             txtUserName.InnerText = cls_User.User_getUserFullName(Request.Cookies["UserName"].Value);
-
+            txtUserName.HRef = "";
             int result = cls_User.User_getUserGroupId(Request.Cookies["UserName"].Value);
 
             switch (result)
             {
+                //Admin
                 case 1:
                     adminNone = "display:block";
                     txtNone = "display:block";
                     break;
+                //Employ
                 case 2:
                     txtNone = "display:block";
                     adminNone = "display:none";
+                    loadDataNotificationForEmploy();
                     break;
+                //User
                 default:
                     txtNone = "display:none";
                     adminNone = "display:none";
+                    loadDataNotificationForUser();
                     break;
             }
         }
@@ -42,7 +47,55 @@ public partial class _Default : System.Web.UI.MasterPage
             styleNone = "display:none";
         }
     }
+    protected void loadDataNotificationForEmploy()
+    {
+        var getNotif = (from notif in db.tbAlerts
+                        join t in db.tbTempTransactions on notif.bookDate equals t.transaction_bookdate
+                        where notif.field_id == t.field_id && notif.book_time_id == t.book_time_id && notif.bookDate == t.transaction_bookdate
+                        select new
+                        {
+                            notif.alert_content,
+                            notif.alert_Id,
+                            notif.field_id,
+                            notif.book_time_id,
+                            notif.alert_datetime,
+                            notif.bookDate,
+                            t.transaction_datetime,
+                            daXacNhan = notif.alert_status == true ? "color:red" : "",
+                            choXacNhan = notif.alert_status == false ? "color:#000" : "",
+                        }).OrderBy(x => x.choXacNhan).ThenBy(x => x.transaction_datetime).ToList();
 
+
+        if (getNotif.Any())
+        {
+            rpNotif.DataSource = getNotif;
+            rpNotif.DataBind();
+        }
+
+    }
+    protected void loadDataNotificationForUser()
+    {
+        int idUser = cls_User.User_getUserId(Request.Cookies["UserName"].Value);
+
+        var getNotif = from notif in db.tbAlerts
+                       where notif.alert_status == true && notif.users_id == idUser
+                       select new
+                       {
+                           notif.alert_content,
+                           notif.alert_Id,
+                           notif.field_id,
+                           notif.book_time_id,
+
+                           daXacNhan = "",
+                           choXacNhan = "",
+                       };
+
+        if (getNotif.Any())
+        {
+            rpNotif.DataSource = getNotif;
+            rpNotif.DataBind();
+        }
+    }
     protected void btnLogOut_ServerClick(object sender, EventArgs e)
     {
         Session.Clear();

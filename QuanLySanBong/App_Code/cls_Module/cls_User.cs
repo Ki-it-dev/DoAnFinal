@@ -16,7 +16,12 @@ public class cls_User
         // TODO: Add constructor logic here
         //
     }
+    public string User_getUserName(int id)
+    {
+        var getUserName = (from u in db.tbUsers where u.users_id == id select u).FirstOrDefault().users_fullname;
 
+        return getUserName;
+    }
     public string User_getUserFullName(string cookie)
     {
         var getUserFullName = (from u in db.tbUsers where u.users_account == cookie select u).FirstOrDefault().users_fullname;
