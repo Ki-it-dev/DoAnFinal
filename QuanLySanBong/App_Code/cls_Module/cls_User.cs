@@ -43,17 +43,17 @@ public class cls_User
     public object User_getUserWithCookie(string cookie)
     {
         var getUser = (from u in db.tbUsers
-                      where u.users_account == cookie
-                      select new
-                      {
-                          u.users_account,
-                          u.users_address,
-                          u.users_email,
-                          u.users_fullname,
-                          //u.users_identity,
-                          u.users_phoneNumber,
-                          users_status = u.users_status == true ? "Đã kích hoạt" : "Chưa kích hoạt",
-                      }).FirstOrDefault();
+                       where u.users_account == cookie
+                       select new
+                       {
+                           u.users_account,
+                           u.users_address,
+                           u.users_email,
+                           u.users_fullname,
+                           //u.users_identity,
+                           u.users_phoneNumber,
+                           users_status = u.users_status == true ? "Đã kích hoạt" : "Chưa kích hoạt",
+                       });
 
         return getUser;
     }

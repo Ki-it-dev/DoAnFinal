@@ -160,8 +160,7 @@
                                                 <asp:Repeater runat="server" ID="rpNotif">
                                                     <ItemTemplate>
                                                         <a class="dropdown-item" style="<%#Eval("daXacNhan")%>;<%#Eval("choXacNhan")%>" 
-                                                            
-                                                            href="/xac-nhan-dat-san-<%#Eval("field_id") %>-<%#Eval("book_time_id") %>-<%#Eval("alert_Id") %>"><%#Eval("alert_content") %></a>
+                                                            href="<%#Eval("linkTo") %>""><%#Eval("alert_content") %></a>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
                                             </div>

@@ -72,14 +72,11 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
   partial void UpdatetbTempTransaction(tbTempTransaction instance);
   partial void DeletetbTempTransaction(tbTempTransaction instance);
     #endregion
-
     public dbcsdlDataContext() :
             base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString"].ConnectionString, mappingSource)
     {
         OnCreated();
     }
-
-
     public dbcsdlDataContext(string connection) : 
 			base(connection, mappingSource)
 	{
@@ -247,6 +244,8 @@ public partial class tbAlert : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private System.Nullable<System.DateTime> _bookDate;
 	
+	private string _alert_link_to_forUsre;
+	
 	private EntityRef<tbUser> _tbUser;
 	
 	private EntityRef<tbUser> _tbUser1;
@@ -285,6 +284,8 @@ public partial class tbAlert : INotifyPropertyChanging, INotifyPropertyChanged
     partial void Onalert_datetimeChanged();
     partial void OnbookDateChanging(System.Nullable<System.DateTime> value);
     partial void OnbookDateChanged();
+    partial void Onalert_link_to_forUsreChanging(string value);
+    partial void Onalert_link_to_forUsreChanged();
     #endregion
 	
 	public tbAlert()
@@ -553,6 +554,26 @@ public partial class tbAlert : INotifyPropertyChanging, INotifyPropertyChanged
 				this._bookDate = value;
 				this.SendPropertyChanged("bookDate");
 				this.OnbookDateChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_alert_link_to_forUsre", DbType="VarChar(MAX)")]
+	public string alert_link_to_forUsre
+	{
+		get
+		{
+			return this._alert_link_to_forUsre;
+		}
+		set
+		{
+			if ((this._alert_link_to_forUsre != value))
+			{
+				this.Onalert_link_to_forUsreChanging(value);
+				this.SendPropertyChanging();
+				this._alert_link_to_forUsre = value;
+				this.SendPropertyChanged("alert_link_to_forUsre");
+				this.Onalert_link_to_forUsreChanged();
 			}
 		}
 	}

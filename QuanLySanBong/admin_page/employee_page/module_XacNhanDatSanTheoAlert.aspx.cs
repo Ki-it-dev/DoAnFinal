@@ -45,8 +45,9 @@ public partial class admin_page_employee_page_module_XacNhanDatSanTheoAlert : Sy
         db.SubmitChanges();
 
         alert.alert_Success(Page, "Hủy thành công", "");
-        //Response.Redirect("/xac-nhan-dat-san-chung");
-        _QuanLyDatSan.Load_XacNhanDatSanChung(rpXacNhan);
+        Response.Redirect("/xac-nhan-dat-san-chung");
+        //_QuanLyDatSan.Load_XacNhanDatSanChung(rpXacNhan);
+        //_QuanLyDatSan.Load_XacNhanTheoAlert(0, 0, 0, rpXacNhan);
     }
 
     protected void btnServerXacNhan_ServerClick(object sender, EventArgs e)
@@ -74,7 +75,9 @@ public partial class admin_page_employee_page_module_XacNhanDatSanTheoAlert : Sy
 
         db.SubmitChanges();
         alert.alert_Success(Page, "Xác nhận thành công", "");
+        Response.Redirect("/xac-nhan-dat-san-chung");
         //Response.Redirect("/xac-nhan-dat-san-chung");
-        _QuanLyDatSan.Load_XacNhanDatSanChung(rpXacNhan);
+        //_QuanLyDatSan.Load_XacNhanDatSanChung(rpXacNhan);
+        //_QuanLyDatSan.Load_XacNhanTheoAlert(0, 0, 0, rpXacNhan);
     }
 }

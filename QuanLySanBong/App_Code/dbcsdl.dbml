@@ -13,6 +13,7 @@
       <Column Name="book_time_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="alert_datetime" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="bookDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="alert_link_to_forUsre" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Association Name="tbUser_tbAlert" Member="tbUser" ThisKey="employ_id" OtherKey="users_id" Type="tbUser" IsForeignKey="true" />
       <Association Name="tbUser_tbAlert1" Member="tbUser1" ThisKey="users_id" OtherKey="users_id" Type="tbUser" IsForeignKey="true" />
       <Association Name="tbAlertType_tbAlert" Member="tbAlertType" ThisKey="alert_Type_Id" OtherKey="alert_Type_Id" Type="tbAlertType" IsForeignKey="true" />

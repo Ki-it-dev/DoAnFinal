@@ -49,6 +49,8 @@ public partial class _Default : System.Web.UI.MasterPage
     }
     protected void loadDataNotificationForEmploy()
     {
+        int idGroupUser = cls_User.User_getUserGroupId(Request.Cookies["UserName"].Value);
+
         var getNotif = (from notif in db.tbAlerts
                         join t in db.tbTempTransactions on notif.bookDate equals t.transaction_bookdate
                         where notif.field_id == t.field_id && notif.book_time_id == t.book_time_id && notif.bookDate == t.transaction_bookdate
@@ -61,10 +63,11 @@ public partial class _Default : System.Web.UI.MasterPage
                             notif.alert_datetime,
                             notif.bookDate,
                             t.transaction_datetime,
-                            daXacNhan = notif.alert_status == true ? "color:red" : "",
-                            choXacNhan = notif.alert_status == false ? "color:#000" : "",
-                        }).OrderBy(x => x.choXacNhan).ThenBy(x => x.transaction_datetime).ToList();
-
+                            linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + notif.field_id + "-" + notif.book_time_id + "-" + notif.alert_Id : "/xac-nhan-dat-san-chung",
+                            daXacNhan = notif.alert_status == true ? "color:#000" : "",
+                            choXacNhan = notif.alert_status == false ? "color:red" : "",
+                        }).OrderByDescending(x => x.transaction_datetime);
+        /// xac - nhan - dat - san -<%#Eval("field_id") %>-<%#Eval("book_time_id") %>-<%#Eval("alert_Id") %>
 
         if (getNotif.Any())
         {
@@ -76,6 +79,7 @@ public partial class _Default : System.Web.UI.MasterPage
     protected void loadDataNotificationForUser()
     {
         int idUser = cls_User.User_getUserId(Request.Cookies["UserName"].Value);
+        int idGroupUser = cls_User.User_getUserGroupId(Request.Cookies["UserName"].Value);
 
         var getNotif = from notif in db.tbAlerts
                        where notif.alert_status == true && notif.users_id == idUser
@@ -85,7 +89,7 @@ public partial class _Default : System.Web.UI.MasterPage
                            notif.alert_Id,
                            notif.field_id,
                            notif.book_time_id,
-
+                           linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + notif.field_id + "-" + notif.book_time_id + "-" + notif.alert_Id : "/quan-ly-dat-san-ca-nhan",
                            daXacNhan = "",
                            choXacNhan = "",
                        };

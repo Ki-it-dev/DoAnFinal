@@ -73,6 +73,8 @@ public class cls_QuanLyDatSan
     {
         //var getDateTime = (from a in db.tbAlerts where a.alert_Id == idAlert select a.bookDate).FirstOrDefault();
 
+        //if(idField == 0 && idBookTime == 0 && idAlert == 0) { return; }
+
         var getData = (from f in db.tbFields
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
                        join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
@@ -95,7 +97,10 @@ public class cls_QuanLyDatSan
                            a.alert_Id,
                        });
 
-        repeater.DataSource = getData;
-        repeater.DataBind();
+        if (getData.Any())
+        {
+            repeater.DataSource = getData;
+            repeater.DataBind();
+        }
     }
 }

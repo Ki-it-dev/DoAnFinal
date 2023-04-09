@@ -15,12 +15,12 @@ public partial class web_module_module_DangNhap : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (Request.QueryString["Account"] != null)
+        if (!IsPostBack)
         {
-            if (!IsPostBack)
+            //string account = Request.QueryString["Account"].ToString();
+            if (Request.Url.Segments.Last() != "dang-nhap")
             {
-                string account = Request.QueryString["Account"].ToString();
-
+                string account = Request.Url.Segments.Last().Replace("-", "").Substring(16);
                 loginName.Value = account;
             }
         }
