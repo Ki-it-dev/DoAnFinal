@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IdentityModel.Protocols.WSTrust;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -31,10 +32,32 @@ public class cls_San
                            ls.field_id,
                            ls.field_name,
                            l.field_type_name,
+                           field_status = ls.field_status == true ? "Đang hoạt động" : "Không hoạt động",
                        });
 
         repeater.DataSource = getData;
         repeater.DataBind();
+    }
+    //Danh sach san theo loai san
+    public void San_DanhSachSanTheoLoaiSan(Repeater repeater, string name)
+    {
+        //Danh sach san
+        var getData = (from l in db.tbFieldTypes
+                       join ls in db.tbFields on l.field_type_id equals ls.field_type_id
+                       where ls.field_status == true && l.field_type_name == name
+                       select new
+                       {
+                           ls.field_id,
+                           ls.field_name,
+                           l.field_type_name,
+                           field_status = ls.field_status == true ? "Đang hoạt động" : "Không hoạt động",
+                       });
+
+        if (getData.Any())
+        {
+            repeater.DataSource = getData;
+            repeater.DataBind();
+        }
     }
     //Danh sach khung gio
     public void San_DanhSachKhungGio(Repeater repeater)
@@ -180,7 +203,7 @@ public class cls_San
         repeater.DataSource = getData;
         repeater.DataBind();
     }
-    public bool San_HuySan(int idSan, int idGio, int idUser,string timeBook)
+    public bool San_HuySan(int idSan, int idGio, int idUser, string timeBook)
     {
         tbTempTransaction del = db.tbTempTransactions.Where
             (x => x.field_id == idSan &&
@@ -204,5 +227,71 @@ public class cls_San
         {
             return false;
         }
+    }
+    //Them xoa sua san ben admin
+    public bool SanAdmin_Sua(int _id, string _nameField, int _typeFieldId, bool status)
+    {
+        tbField update = db.tbFields.Where(x => x.field_id == _id).FirstOrDefault();
+        update.field_name = _nameField;
+        update.field_status = status;
+        update.field_type_id = _typeFieldId;
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    public bool SanAdmin_Them(string _nameField, int _typeFieldId)
+    {
+        tbField insert = new tbField();
+        insert.field_name = _nameField;
+        insert.field_status = true;
+        insert.field_type_id = _typeFieldId;
+        db.tbFields.InsertOnSubmit(insert);
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    public bool SanAdmin_Del(int _id)
+    {
+        tbField del = db.tbFields.Where(x => x.field_id == _id).FirstOrDefault();
+
+        db.tbFields.DeleteOnSubmit(del);
+
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    public void SanAdmin_DanhSachSan(Repeater repeater)
+    {
+        //Danh sach san
+        var getData = (from l in db.tbFieldTypes
+                       join ls in db.tbFields on l.field_type_id equals ls.field_type_id
+                       select new
+                       {
+                           ls.field_id,
+                           ls.field_name,
+                           l.field_type_name,
+                           field_status = ls.field_status == true ? "Đang hoạt động" : "Không hoạt động",
+                       });
+
+        repeater.DataSource = getData;
+        repeater.DataBind();
     }
 }
