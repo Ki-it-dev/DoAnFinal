@@ -20,7 +20,7 @@ public class cls_San
         // TODO: Add constructor logic here
         //
     }
-    //Danh sach san
+    //Danh sach san cho nguoi dung
     public void San_DanhSachSan(Repeater repeater)
     {
         //Danh sach san
@@ -175,6 +175,13 @@ public class cls_San
         var getSan = from s in db.tbFields where s.field_id == idSan && s.field_status == true select s;
 
         return getSan.FirstOrDefault().field_name;
+    }
+    //Get id theo loai san
+    public int San_LoaiSan(string loaiSan)
+    {
+        int getId = (from s in db.tbFieldTypes where s.field_type_name == loaiSan select s.field_type_id).FirstOrDefault();
+
+        return getId;
     }
     //Show ra san cua tung tai khoan
     public void San_ShowAcc(int userId, Repeater repeater)

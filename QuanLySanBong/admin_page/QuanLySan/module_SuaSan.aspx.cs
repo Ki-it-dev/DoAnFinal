@@ -40,7 +40,7 @@ public partial class admin_page_QuanLySan_module_SuaSan : System.Web.UI.Page
         {
             string _id = Request.Url.Segments.Last().Replace("-", "").Substring(6);
 
-            int loaiSan = int.Parse(cbbLoaiSan.Value.ToString());
+            int loaiSan = san.San_LoaiSan(cbbLoaiSan.Text);
             bool status = false;
             string tenSan = txtField.Value;
 

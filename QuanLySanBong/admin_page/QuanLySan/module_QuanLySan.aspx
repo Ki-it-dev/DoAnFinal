@@ -8,10 +8,10 @@
         <div class="khoangcach">
             <h1>Quản lý sân</h1>
             <a class="btn btn-secondary" id="addField" runat="server" onserverclick="addField_ServerClick">Thêm</a>
-            <span>Chọn loại sân</span>
+            <%--<span>Chọn loại sân</span>
             <dx:ASPxComboBox ID="cbbLoaiSan" runat="server" TextField="field_type_name" OnSelectedIndexChanged="cbbLoaiSan_SelectedIndexChanged"
                 ValueField="field_type_id" ValueType="System.Int32" ClientInstanceName="cbbLoaiSan" AutoPostBack="true" Width="95%">
-            </dx:ASPxComboBox>
+            </dx:ASPxComboBox>--%>
 
             <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">

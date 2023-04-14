@@ -21,9 +21,8 @@ public partial class admin_page_module_QuanLySan : System.Web.UI.Page
     {
         //Do danh sach loai san vao dropdown list
         var listSan = from s in db.tbFieldTypes select s;
-
-        cbbLoaiSan.DataSource = listSan;
-        cbbLoaiSan.DataBind();
+        //cbbLoaiSan.DataSource = listSan;
+        //cbbLoaiSan.DataBind();
         //Do toan bo danh sach san
         san.SanAdmin_DanhSachSan(rpSan);
     }
@@ -39,12 +38,10 @@ public partial class admin_page_module_QuanLySan : System.Web.UI.Page
     {
         Response.Redirect("/them-san");
     }
-    protected void cbbLoaiSan_SelectedIndexChanged(object sender, EventArgs e)
-    {
-        var _name = cbbLoaiSan.SelectedItem;
+    //protected void cbbLoaiSan_SelectedIndexChanged(object sender, EventArgs e)
+    //{
+    //    var _name = cbbLoaiSan.SelectedItem;
 
-        san.San_DanhSachSanTheoLoaiSan(rpSan,_name.ToString());
-    }
-
-    
+    //    san.San_DanhSachSanTheoLoaiSan(rpSan,_name.ToString());
+    //}
 }
