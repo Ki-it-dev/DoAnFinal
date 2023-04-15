@@ -21,7 +21,7 @@ public partial class web_module_module_San : System.Web.UI.Page
     protected void loadData(DateTime date)
     {
         //Danh sach san
-        cls_San.San_DanhSachSan(rpDanhSachSan);
+        cls_San.San_DanhSachNhomTheoTenSan(rpDanhSachSan);
         //Danh sach khung gio
         cls_San.San_DanhSachKhungGio(rpKhungGio);
         //Khach da dat san

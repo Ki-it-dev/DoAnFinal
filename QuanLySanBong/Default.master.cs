@@ -51,29 +51,28 @@ public partial class _Default : System.Web.UI.MasterPage
     {
         int idGroupUser = cls_User.User_getUserGroupId(Request.Cookies["UserName"].Value);
 
-        var getNotif = (from notif in db.tbAlerts
-                        join t in db.tbTempTransactions on notif.bookDate equals t.transaction_bookdate
-                        where notif.field_id == t.field_id && notif.book_time_id == t.book_time_id && notif.bookDate == t.transaction_bookdate
-                        select new
-                        {
-                            notif.alert_content,
-                            notif.alert_Id,
-                            notif.field_id,
-                            notif.book_time_id,
-                            notif.alert_datetime,
-                            notif.bookDate,
-                            t.transaction_datetime,
-                            linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + notif.field_id + "-" + notif.book_time_id + "-" + notif.alert_Id : "/xac-nhan-dat-san-chung",
-                            daXacNhan = notif.alert_status == true ? "color:#000" : "",
-                            choXacNhan = notif.alert_status == false ? "color:red" : "",
-                        }).OrderByDescending(x => x.transaction_datetime);
-        /// xac - nhan - dat - san -<%#Eval("field_id") %>-<%#Eval("book_time_id") %>-<%#Eval("alert_Id") %>
+        //var getNotif = (from notif in db.tbAlerts
+        //                join t in db.tbTempTransactions on notif.trans_id equals t.temp_transaction_id
+        //                where t.field_id == t.field_id && t.book_time_id == t.book_time_id && t.transaction_bookdate == t.transaction_bookdate
+        //                select new
+        //                {
+        //                    notif.alert_content,
+        //                    notif.alert_Id,
+        //                    t.field_id,
+        //                    t.book_time_id,
+        //                    notif.alert_datetime,
+        //                    t.transaction_bookdate,
+        //                    t.transaction_datetime,
+        //                    linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + t.field_id + "-" + t.book_time_id + "-" + notif.alert_Id : "/xac-nhan-dat-san-chung",
+        //                    daXacNhan = notif.alert_status == true ? "color:#000" : "",
+        //                    choXacNhan = notif.alert_status == false ? "color:red" : "",
+        //                }).OrderByDescending(x => x.transaction_datetime);
 
-        if (getNotif.Any())
-        {
-            rpNotif.DataSource = getNotif;
-            rpNotif.DataBind();
-        }
+        //if (getNotif.Any())
+        //{
+        //    rpNotif.DataSource = getNotif;
+        //    rpNotif.DataBind();
+        //}
 
     }
     protected void loadDataNotificationForUser()
@@ -81,24 +80,25 @@ public partial class _Default : System.Web.UI.MasterPage
         int idUser = cls_User.User_getUserId(Request.Cookies["UserName"].Value);
         int idGroupUser = cls_User.User_getUserGroupId(Request.Cookies["UserName"].Value);
 
-        var getNotif = from notif in db.tbAlerts
-                       where notif.alert_status == true && notif.users_id == idUser
-                       select new
-                       {
-                           notif.alert_content,
-                           notif.alert_Id,
-                           notif.field_id,
-                           notif.book_time_id,
-                           linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + notif.field_id + "-" + notif.book_time_id + "-" + notif.alert_Id : "/quan-ly-dat-san-ca-nhan",
-                           daXacNhan = "",
-                           choXacNhan = "",
-                       };
+        //var getNotif = from notif in db.tbAlerts
+        //               join t in db.tbTempTransactions on notif.trans_id equals t.temp_transaction_id
+        //               where notif.alert_status == true && t.users_id == idUser
+        //               select new
+        //               {
+        //                   notif.alert_content,
+        //                   notif.alert_Id,
+        //                   t.field_id,
+        //                   t.book_time_id,
+        //                   linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + t.field_id + "-" + t.book_time_id + "-" + notif.alert_Id : "/quan-ly-dat-san-ca-nhan",
+        //                   daXacNhan = "",
+        //                   choXacNhan = "",
+        //               };
 
-        if (getNotif.Any())
-        {
-            rpNotif.DataSource = getNotif;
-            rpNotif.DataBind();
-        }
+        //if (getNotif.Any())
+        //{
+        //    rpNotif.DataSource = getNotif;
+        //    rpNotif.DataBind();
+        //}
     }
     protected void btnLogOut_ServerClick(object sender, EventArgs e)
     {

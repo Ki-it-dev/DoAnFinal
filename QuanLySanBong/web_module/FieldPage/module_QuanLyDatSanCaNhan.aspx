@@ -20,12 +20,8 @@
                                     <div class="p-2"><span class="badge badge-warning" style="<%#Eval("choXacNhan")%>">Chờ xác nhận</span></div>
                                     <div class="p-2"><span class="badge badge-secondary" style="<%#Eval("daHuy")%>">Đã hủy</span></div>
                                     <div class="p-2">
-                                        <%--<a href="#"><span class="badge badge-danger"
-                                            onclick="myBtnChinhSua('<%#Eval("field_id") %>','<%#Eval("book_time_id") %>')" style="<%#Eval("chinhSua")%>">Chỉnh sửa</span></a>--%>
-                                    </div>
-                                    <div class="p-2">
                                         <a href="#"><span class="badge badge-danger"
-                                            onclick="myBtnHuy('<%#Eval("field_id") %>','<%#Eval("book_time_id") %>','<%#Eval("transaction_datetime") %>')" style="<%#Eval("huy")%>">Hủy</span></a>
+                                            onclick="myBtnHuy('<%#Eval("temp_transaction_id") %>')" style="<%#Eval("huy")%>">Hủy</span></a>
                                     </div>
                                 </div>
                             </div>
@@ -39,15 +35,12 @@
         <div style="padding: 8%;"></div>
     </div>
     <a href="#" id="btnHuy" runat="server" onserverclick="btnHuy_ServerClick"></a>
-    <%--<a href="#" id="btnChinhSua" runat="server" onserverclick="btnChinhSua_ServerClick"></a>--%>
     <div style="display: none;">
-        <input type="text" name="name" value="" id="txtIdSan" runat="server" />
-        <input type="text" name="name" value="" id="txtIdGio" runat="server" />
-        <input type="text" name="name" value="" id="txtTimeBook" runat="server" />
+        <input type="text" name="name" value="" id="txtIdTrans" runat="server" />
     </div>
 
     <script>
-        function myBtnHuy(idSan, idGio, timeBook) {
+        function myBtnHuy(idTrans) {
             swal("Bạn có thực sự muốn hủy?",
                 "Nếu hủy, dữ liệu sẽ không thể khôi phục.",
                 "warning",
@@ -56,20 +49,11 @@
                     dangerMode: true
                 }).then(function (value) {
                     if (value == true) {
-                        document.getElementById("<%=txtIdSan.ClientID%>").value = idSan
-                        document.getElementById("<%=txtIdGio.ClientID%>").value = idGio
-                        document.getElementById("<%=txtTimeBook.ClientID%>").value = timeBook
+                        document.getElementById("<%=txtIdTrans.ClientID%>").value = idTrans
                         document.getElementById("<%=btnHuy.ClientID%>").click()
                     }
                 });
         }
-
-        <%--function myBtnChinhSua(idSan, idGio) {
-            document.getElementById("<%=txtIdSan.ClientID%>").value = idSan
-            document.getElementById("<%=txtIdGio.ClientID%>").value = idGio
-            document.getElementById("<%=btnChinhSua.ClientID%>").click()
-        }--%>
-
     </script>
 </asp:Content>
 

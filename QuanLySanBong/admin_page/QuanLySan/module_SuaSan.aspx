@@ -17,6 +17,10 @@
             <asp:ListItem Text="Đang hoạt động" />
             <asp:ListItem Text="Không hoạt động" />
         </asp:DropDownList>
+        <%--<span>Chọn loại khung giờ</span>
+        <dx:ASPxComboBox ID="cbbKhungGio" runat="server" TextField="book_time_type"
+            ValueField="book_time_type" ValueType="System.Int32" ClientInstanceName="cbbKhungGio" Width="95%">
+        </dx:ASPxComboBox>--%>
         <button type="submit" class="btn btn-primary" id="save" runat="server" onserverclick="save_ServerClick">Lưu</button>
         <a href="/quan-ly-san" class="btn btn-primary">Quay lại</a>
     </formview>

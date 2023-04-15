@@ -17,20 +17,21 @@ public class cls_Notification
         // TODO: Add constructor logic here
         //
     }
-    public bool Notification_Insert_Field(int idUser,string content,string linkTo,int idField,int idBookTime,DateTime date)
+    public bool Notification_Insert_Field(string content, string linkTo, int idTrans)
     {
         tbAlert insert = new tbAlert();
 
         insert.alert_Type_Id = 1;
-        insert.users_id = idUser;
+        insert.trans_id = idTrans;
+        //insert.users_id = idUser;
         insert.alert_status = false;
         insert.alert_content = content;
         insert.alert_link_to = linkTo;
         insert.isRead = false;
-        insert.field_id = idField;
-        insert.book_time_id = idBookTime;
+        //insert.field_id = idField;
+        //insert.book_time_id = idBookTime;
         insert.alert_datetime = DateTime.Now;
-        insert.bookDate = date;
+        //insert.bookDate = date;
 
         db.tbAlerts.InsertOnSubmit(insert);
 
@@ -44,4 +45,5 @@ public class cls_Notification
             return false;
         }
     }
+
 }

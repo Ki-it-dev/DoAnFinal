@@ -32,11 +32,9 @@ public partial class web_module_module_QuanLyDatSanCaNhan : System.Web.UI.Page
 
         try
         {
-            int idGio = int.Parse(txtIdGio.Value);
-            int idSan = int.Parse(txtIdSan.Value);
-            string timeBook = DateTime.Parse(txtTimeBook.Value).ToString("dd-MM-yyyy");
+            int idTrans = int.Parse(txtIdTrans.Value);
 
-            if (cls_San.San_HuySan(idSan, idGio, idUser, timeBook))
+            if (cls_San.San_HuySan(idTrans))
                 alert.alert_Success(Page, "Hủy thành công", "");
             else alert.alert_Warning(Page, "Hủy thất bại", "");
             cls_San.San_ShowAcc(idUser, rpDanhSachDatSan);

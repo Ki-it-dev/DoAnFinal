@@ -21,7 +21,7 @@ public partial class admin_page_QuanLySan_module_SuaSan : System.Web.UI.Page
 
         var field = (from s in db.tbFields
                      join tp in db.tbFieldTypes on s.field_type_id equals tp.field_type_id
-                     where s.field_id == int.Parse(_id)
+                     where s.field_type_id == int.Parse(_id)
                      select new { s.field_name, s.field_status, tp.field_type_name, tp.field_type_id });
 
         cbbLoaiSan.Value = Convert.ToString(field.FirstOrDefault().field_type_name);
@@ -40,13 +40,11 @@ public partial class admin_page_QuanLySan_module_SuaSan : System.Web.UI.Page
         {
             string _id = Request.Url.Segments.Last().Replace("-", "").Substring(6);
 
-            int loaiSan = san.San_LoaiSan(cbbLoaiSan.Text);
+            int getTypeId = san.San_LoaiSan(cbbLoaiSan.Text);
             bool status = false;
             string tenSan = txtField.Value;
 
             if (ddlStatus.Text == "Đang hoạt động") status = true;
-
-            int getTypeId = (from t in db.tbFieldTypes where t.field_type_id == loaiSan select t.field_type_id).FirstOrDefault();
 
             if (san.SanAdmin_Sua(int.Parse(_id), txtField.Value, getTypeId, status))
             {

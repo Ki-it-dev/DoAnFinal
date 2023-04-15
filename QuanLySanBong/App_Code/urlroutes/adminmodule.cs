@@ -29,6 +29,10 @@ public class adminmodule
         list.Add("webQuanLySan|quan-ly-san|~/admin_page/QuanLySan/module_QuanLySan.aspx");
         list.Add("webThemSan|them-san|~/admin_page/QuanLySan/module_ThemSan.aspx");
         list.Add("webSuaSan|sua-san-{id}|~/admin_page/QuanLySan/module_SuaSan.aspx");
+        //Quan ly khung gio
+        list.Add("webQuanLyKhungGio|quan-ly-khung-gio|~/admin_page/QuanLyGio/module_QuanLyKhungGio.aspx");
+        list.Add("webChiTietKhungGio|chi-tiet-khung-gio-{typeID}|~/admin_page/QuanLyGio/module_ChiTietKhungGio.aspx");
+        list.Add("webThemKhungGio|them-khung-gio|~/admin_page/QuanLyGio/module_ThemKhungGio.aspx");
 
         return list;
     }

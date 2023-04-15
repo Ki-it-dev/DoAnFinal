@@ -11,7 +11,6 @@ public partial class web_module_module_XacNhanDatSan : System.Web.UI.Page
     cls_User cls_User = new cls_User();
     cls_San cls_San = new cls_San();
     cls_BookTime cls_BookTime = new cls_BookTime();
-    cls_Price cls_Price = new cls_Price();
     cls_Transaction cls_Transaction = new cls_Transaction();
     cls_Notification _Notification = new cls_Notification();
 
@@ -41,7 +40,7 @@ public partial class web_module_module_XacNhanDatSan : System.Web.UI.Page
                 field_name = cls_San.San_TenSan(Convert.ToInt32(_idSan));
                 book_time_detail = cls_BookTime.BookTime_GetBookTimeDetail(Convert.ToInt32(_idGio));
                 txtusers_fullname = cls_User.User_getUserFullName(Request.Cookies["UserName"].Value);
-                price = cls_Price.Price(Convert.ToInt32(_idGio));
+                price = cls_San.San_GiaTienTheoSan(Convert.ToInt32(txtIdSan.Value)).ToString();
             }
         }
     }
@@ -55,13 +54,11 @@ public partial class web_module_module_XacNhanDatSan : System.Web.UI.Page
         int getUserId = cls_User.User_getUserId(Request.Cookies["UserName"].Value);
 
         string getBookTime = cls_BookTime.BookTime_GetBookTimeDetail(Convert.ToInt32(txtIdGio.Value)).Substring(0, 2);
-        string getPrice = cls_Price.Price(Convert.ToInt32(txtIdGio.Value));
+        decimal getPrice = cls_San.San_GiaTienTheoSan(Convert.ToInt32(txtIdSan.Value));
 
         string nameUser = cls_User.User_getUserFullName(Request.Cookies["UserName"].Value);
         string nameField = cls_San.San_TenSan(int.Parse(txtIdSan.Value));
         string timeDetail = cls_BookTime.BookTime_GetBookTimeDetail(int.Parse(txtIdGio.Value));
-
-        //string time = DateTime.Now.ToString("h:mm:ss tt");
 
         string contentAlert = nameField + " đá vào lúc " + timeDetail + " ngày " + DateTime.Parse(txtTime.Value.ToString()).ToString("dd/MM/yyyy") + " đang cần được xác nhận!!!";
         string linkToAlert = "/xac-nhan-dat-san-" + txtIdSan.Value + "-" + txtIdGio.Value;
@@ -73,12 +70,11 @@ public partial class web_module_module_XacNhanDatSan : System.Web.UI.Page
         else
         {
             if (cls_Transaction.Transaction_Insert(
-                    int.Parse(txtIdSan.Value), getUserId, int.Parse(txtIdGio.Value),
-                    double.Parse(getPrice), Convert.ToDateTime(txtTime.Value)
+                    int.Parse(txtIdSan.Value), getUserId, getPrice, Convert.ToDateTime(txtTime.Value)
                 ))
             {
-                if (_Notification.Notification_Insert_Field(getUserId, contentAlert, linkToAlert,
-                    int.Parse(txtIdSan.Value), int.Parse(txtIdGio.Value), Convert.ToDateTime(txtTime.Value)))
+                int _idTrans = cls_Transaction.Transaction_Id(getUserId, int.Parse(txtIdSan.Value), int.Parse(txtIdGio.Value), Convert.ToDateTime(txtTime.Value));
+                if (_Notification.Notification_Insert_Field(contentAlert, linkToAlert, _idTrans))
                     Response.Redirect("/quan-ly-dat-san-ca-nhan");
                 //alert.alert_Success(Page, "Xác nhận thành công Vui lòng chờ nhân viên xác nhận", "");
                 else alert.alert_Warning(Page, "Lỗi gửi thông báo!!!", "");

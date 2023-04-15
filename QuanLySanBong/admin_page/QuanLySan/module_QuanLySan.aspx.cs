@@ -19,29 +19,16 @@ public partial class admin_page_module_QuanLySan : System.Web.UI.Page
     }
     protected void loadData()
     {
-        //Do danh sach loai san vao dropdown list
-        var listSan = from s in db.tbFieldTypes select s;
-        //cbbLoaiSan.DataSource = listSan;
-        //cbbLoaiSan.DataBind();
-        //Do toan bo danh sach san
-        san.SanAdmin_DanhSachSan(rpSan);
+        san.SanDanhSachSan_Admin(rpSan);
     }
     protected void btnXoaServer_ServerClick(object sender, EventArgs e)
     {
-        if (san.SanAdmin_Del(int.Parse(txtId.Value))){
-            alert.alert_Success(Page, "Xóa thành công", "");
-            loadData();
-        }
+        if (san.SanAdmin_Del(txtName.Value)) alert.alert_Success(Page, "Xóa thành công", "");
         else alert.alert_Warning(Page, "Xóa thất bại", "");
+        loadData();
     }
     protected void addField_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect("/them-san");
     }
-    //protected void cbbLoaiSan_SelectedIndexChanged(object sender, EventArgs e)
-    //{
-    //    var _name = cbbLoaiSan.SelectedItem;
-
-    //    san.San_DanhSachSanTheoLoaiSan(rpSan,_name.ToString());
-    //}
 }

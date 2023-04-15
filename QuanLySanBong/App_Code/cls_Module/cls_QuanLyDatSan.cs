@@ -20,15 +20,16 @@ public class cls_QuanLyDatSan
     public void Load_QuanLyDatSanChung(Repeater repeater)
     {
         var getData = (from f in db.tbFields
+                       join tf in db.tbFieldTypes on f.field_type_id equals tf.field_type_id
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
-                       join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
+                       join bt in db.tbBookTimes on f.book_time_id equals bt.book_time_id
                        join u in db.tbUsers on t.users_id equals u.users_id
                        select new
                        {
                            f.field_name,
                            bt.book_time_detail,
                            u.users_account,
-                           t.price,
+                           tf.price,
                            t.transaction_datetime,
                            transaction_bookdate = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd-MM-yyyy"),
                            transaction_status = t.transaction_status == 1 ? "Đã xác nhận" : "Chờ xác nhận",
@@ -44,22 +45,22 @@ public class cls_QuanLyDatSan
     {
         var getData = (from f in db.tbFields
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
-                       join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
+                       join bt in db.tbBookTimes on f.book_time_id equals bt.book_time_id
                        join u in db.tbUsers on t.users_id equals u.users_id
                        where t.transaction_status == 0
                        select new
                        {
+                           f.field_id,
                            f.field_name,
                            u.users_account,
                            u.users_fullname,
                            bt.book_time_detail,
+                           bt.book_time_id,
+
+                           t.temp_transaction_id,
 
                            transaction_datetime = DateTime.Parse(t.transaction_datetime.ToString()).ToString("dd-MM-yyyy"),
                            transaction_bookdate = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd-MM-yyyy"),
-
-                           t.book_time_id,
-                           t.field_id,
-
                        });
 
         if (getData.Any())
@@ -71,18 +72,14 @@ public class cls_QuanLyDatSan
     //Load san theo alert
     public void Load_XacNhanTheoAlert(int idField, int idBookTime, int idAlert, Repeater repeater)
     {
-        //var getDateTime = (from a in db.tbAlerts where a.alert_Id == idAlert select a.bookDate).FirstOrDefault();
-
-        //if(idField == 0 && idBookTime == 0 && idAlert == 0) { return; }
-
         var getData = (from f in db.tbFields
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
-                       join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
-                       join a in db.tbAlerts on t.transaction_bookdate equals a.bookDate
+                       join bt in db.tbBookTimes on f.book_time_id equals bt.book_time_id
+                       join a in db.tbAlerts on t.temp_transaction_id equals a.trans_id
                        join u in db.tbUsers on t.users_id equals u.users_id
                        where 
                        t.transaction_status == 0
-                       && a.alert_Id == idAlert && a.field_id == idField && a.book_time_id == idBookTime
+                       && a.alert_Id == idAlert && t.field_id == idField && f.book_time_id == idBookTime
                        && bt.book_time_id == idBookTime && f.field_id == idField
                        select new
                        {
@@ -92,7 +89,7 @@ public class cls_QuanLyDatSan
                            u.users_fullname,
                            transaction_datetime = DateTime.Parse(t.transaction_datetime.ToString()).ToString("dd-MM-yyyy"),
                            transaction_bookdate = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd-MM-yyyy"),
-                           t.book_time_id,
+                           f.book_time_id,
                            t.field_id,
                            a.alert_Id,
                        });
@@ -101,6 +98,41 @@ public class cls_QuanLyDatSan
         {
             repeater.DataSource = getData;
             repeater.DataBind();
+        }
+    }
+    //Cap nhat trang thai thanh cong trong dat san chung
+    public bool Update_TrangThaiSan(int idTrans)
+    {
+        tbTempTransaction update = db.tbTempTransactions.Where(x => x.temp_transaction_id == idTrans).FirstOrDefault();
+        update.transaction_status = 1;
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    //Huy san trong dat san chung
+    public bool Delete_SanChung(int idTrans)
+    {
+        tbTempTransaction del = 
+            db.tbTempTransactions.Where(x => x.temp_transaction_id == idTrans).FirstOrDefault();
+        //Xoa thong tin san da dat trong bang thong bao
+        tbAlert delAlert = db.tbAlerts.Where(x=>x.trans_id == idTrans).FirstOrDefault();
+
+        db.tbTempTransactions.DeleteOnSubmit(del);
+        db.tbAlerts.DeleteOnSubmit(delAlert);
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
         }
     }
 }

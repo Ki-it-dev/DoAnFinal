@@ -21,13 +21,25 @@ public partial class admin_page_QuanLySan_module_ThemSan : System.Web.UI.Page
         var listSan = from s in db.tbFieldTypes select s;
         cbbLoaiSan.DataSource = listSan;
         cbbLoaiSan.DataBind();
+        //Do danh sach loai khung gio vao dropdown list
+        //var listKhungGio = from t in db.tbBookTimes
+        //                   group t by t.book_time_type into k
+        //                   select new
+        //                   {
+        //                       book_time_type = k.Key,
+        //                   };
+        //cbbTime.DataSource = listKhungGio;
+        //cbbTime.DataBind();
     }
     protected void save_ServerClick(object sender, EventArgs e)
     {
-        if(cbbLoaiSan.SelectedItem.ToString().Length > 0 && txtField.Value.Length > 0)
+        if (cbbLoaiSan.SelectedItem.ToString().Length > 0 && txtField.Value.Length > 0)
         {
             int _id = (from s in db.tbFieldTypes where s.field_type_name == cbbLoaiSan.SelectedItem.ToString() select s.field_type_id).FirstOrDefault();
-            if (san.SanAdmin_Them(txtField.Value, _id))
+
+            var _idTypeTime = (from b in db.tbBookTimes where b.book_time_status == true select b.book_time_type).FirstOrDefault();
+
+            if (san.SanAdmin_Them(txtField.Value, _id, Convert.ToInt32(_idTypeTime)))
             {
                 txtField.Value = "";
                 alert.alert_Success(Page, "Thêm thành công", "");
@@ -37,6 +49,7 @@ public partial class admin_page_QuanLySan_module_ThemSan : System.Web.UI.Page
             {
                 alert.alert_Warning(Page, "Thêm thất bại!!!", "");
             }
-        }else { alert.alert_Warning(Page, "Vui lòng nhập đầy đủ dữ liệu!!!", ""); }
+        }
+        else { alert.alert_Warning(Page, "Vui lòng nhập đầy đủ dữ liệu!!!", ""); }
     }
 }

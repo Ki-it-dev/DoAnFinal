@@ -3,22 +3,14 @@
     <Type Name="tbAlert">
       <Column Name="alert_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="alert_Type_Id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="alert_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="alert_content" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
       <Column Name="alert_link_to" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="employ_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="isRead" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="field_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="book_time_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="alert_datetime" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="bookDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="alert_link_to_forUsre" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="tbUser_tbAlert" Member="tbUser" ThisKey="employ_id" OtherKey="users_id" Type="tbUser" IsForeignKey="true" />
-      <Association Name="tbUser_tbAlert1" Member="tbUser1" ThisKey="users_id" OtherKey="users_id" Type="tbUser" IsForeignKey="true" />
+      <Column Name="trans_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="tbAlertType_tbAlert" Member="tbAlertType" ThisKey="alert_Type_Id" OtherKey="alert_Type_Id" Type="tbAlertType" IsForeignKey="true" />
-      <Association Name="tbBookTime_tbAlert" Member="tbBookTime" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbBookTime" IsForeignKey="true" />
-      <Association Name="tbField_tbAlert" Member="tbField" ThisKey="field_id" OtherKey="field_id" Type="tbField" IsForeignKey="true" />
+      <Association Name="tbTempTransaction_tbAlert" Member="tbTempTransaction" ThisKey="trans_id" OtherKey="temp_transaction_id" Type="tbTempTransaction" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbUsers" Member="tbUsers">
@@ -34,9 +26,6 @@
       <Column Name="users_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="users_img" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="users_codeActivityEmail" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Association Name="tbUser_tbAlert" Member="tbAlerts" ThisKey="users_id" OtherKey="employ_id" Type="tbAlert" />
-      <Association Name="tbUser_tbAlert1" Member="tbAlerts1" ThisKey="users_id" OtherKey="users_id" Type="tbAlert" />
-      <Association Name="tbUser_tbFeedback" Member="tbFeedbacks" ThisKey="users_id" OtherKey="used_id" Type="tbFeedback" />
       <Association Name="tbUser_tbTempTransaction" Member="tbTempTransactions" ThisKey="users_id" OtherKey="users_id" Type="tbTempTransaction" />
       <Association Name="tbGroupUser_tbUser" Member="tbGroupUser" ThisKey="group_user_id" OtherKey="group_user_id" Type="tbGroupUser" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
@@ -56,7 +45,6 @@
       <Column Name="bill_datetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="temp_transaction_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="emp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbBill_tbFeedback" Member="tbFeedbacks" ThisKey="bill_id" OtherKey="bill_id" Type="tbFeedback" />
       <Association Name="tbProductsBill_tbBill" Member="tbProductsBill" ThisKey="productsBill_id" OtherKey="productsBill_id" Type="tbProductsBill" IsForeignKey="true" />
     </Type>
   </Table>
@@ -64,19 +52,19 @@
     <Type Name="tbBookTime">
       <Column Name="book_time_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="book_time_detail" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Association Name="tbBookTime_tbAlert" Member="tbAlerts" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbAlert" />
-      <Association Name="tbBookTime_tbPrice" Member="tbPrices" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbPrice" />
-      <Association Name="tbBookTime_tbTempTransaction" Member="tbTempTransactions" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbTempTransaction" />
+      <Column Name="book_time_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="book_time_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Association Name="tbBookTime_tbField" Member="tbFields" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbField" />
     </Type>
   </Table>
   <Table Name="dbo.tbFeedback" Member="tbFeedbacks">
     <Type Name="tbFeedback">
       <Column Name="feedback_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="feedback_content" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="used_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="bill_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbBill_tbFeedback" Member="tbBill" ThisKey="bill_id" OtherKey="bill_id" Type="tbBill" IsForeignKey="true" />
-      <Association Name="tbUser_tbFeedback" Member="tbUser" ThisKey="used_id" OtherKey="users_id" Type="tbUser" IsForeignKey="true" />
+      <Column Name="feedback_content_reply" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="emp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="trans_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbTempTransaction_tbFeedback" Member="tbTempTransaction" ThisKey="trans_id" OtherKey="temp_transaction_id" Type="tbTempTransaction" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbField" Member="tbFields">
@@ -85,8 +73,9 @@
       <Column Name="field_name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="field_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="field_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="tbField_tbAlert" Member="tbAlerts" ThisKey="field_id" OtherKey="field_id" Type="tbAlert" />
+      <Column Name="book_time_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="tbField_tbTempTransaction" Member="tbTempTransactions" ThisKey="field_id" OtherKey="field_id" Type="tbTempTransaction" />
+      <Association Name="tbBookTime_tbField" Member="tbBookTime" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbBookTime" IsForeignKey="true" />
       <Association Name="tbFieldType_tbField" Member="tbFieldType" ThisKey="field_type_id" OtherKey="field_type_id" Type="tbFieldType" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
@@ -94,8 +83,8 @@
     <Type Name="tbFieldType">
       <Column Name="field_type_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="field_type_name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Association Name="tbFieldType_tbField" Member="tbFields" ThisKey="field_type_id" OtherKey="field_type_id" Type="tbField" />
-      <Association Name="tbFieldType_tbPrice" Member="tbPrices" ThisKey="field_type_id" OtherKey="field_type_id" Type="tbPrice" />
     </Type>
   </Table>
   <Table Name="dbo.tbGroupUser" Member="tbGroupUsers">
@@ -104,16 +93,6 @@
       <Column Name="group_user_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
       <Column Name="group_user_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Association Name="tbGroupUser_tbUser" Member="tbUsers" ThisKey="group_user_id" OtherKey="group_user_id" Type="tbUser" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbPrice" Member="tbPrices">
-    <Type Name="tbPrice">
-      <Column Name="price_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="field_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="book_time_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
-      <Association Name="tbBookTime_tbPrice" Member="tbBookTime" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbBookTime" IsForeignKey="true" DeleteRule="CASCADE" />
-      <Association Name="tbFieldType_tbPrice" Member="tbFieldType" ThisKey="field_type_id" OtherKey="field_type_id" Type="tbFieldType" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.tbProducts" Member="tbProducts">
@@ -134,7 +113,7 @@
   <Table Name="dbo.tbProductsBill" Member="tbProductsBills">
     <Type Name="tbProductsBill">
       <Column Name="productsBill_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="trans_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="date_create" Type="System.DateTime" DbType="Date" CanBeNull="true" />
       <Column Name="products_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="productsBill_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
@@ -154,13 +133,13 @@
       <Column Name="temp_transaction_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
       <Column Name="field_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="users_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="book_time_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="isHidden" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="transaction_status" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="transaction_bookdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="price" Type="System.Decimal" DbType="Money" CanBeNull="true" />
       <Column Name="transaction_datetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Association Name="tbBookTime_tbTempTransaction" Member="tbBookTime" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbBookTime" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Column Name="emp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbTempTransaction_tbAlert" Member="tbAlerts" ThisKey="temp_transaction_id" OtherKey="trans_id" Type="tbAlert" />
+      <Association Name="tbTempTransaction_tbFeedback" Member="tbFeedbacks" ThisKey="temp_transaction_id" OtherKey="trans_id" Type="tbFeedback" />
       <Association Name="tbField_tbTempTransaction" Member="tbField" ThisKey="field_id" OtherKey="field_id" Type="tbField" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="tbUser_tbTempTransaction" Member="tbUser" ThisKey="users_id" OtherKey="users_id" Type="tbUser" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>

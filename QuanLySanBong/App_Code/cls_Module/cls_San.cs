@@ -1,7 +1,9 @@
-﻿using System;
+﻿using DevExpress.Web.Internal;
+using System;
 using System.Collections.Generic;
 using System.IdentityModel.Protocols.WSTrust;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI.WebControls;
 
@@ -20,6 +22,32 @@ public class cls_San
         // TODO: Add constructor logic here
         //
     }
+    //Lay gia tien theo san
+    public decimal San_GiaTienTheoSan(int idSan)
+    {
+        var getPrice = (from s in db.tbFields
+                        join ts in db.tbFieldTypes on s.field_type_id equals ts.field_type_id
+                        where s.field_id == idSan
+                        select ts.price).FirstOrDefault();
+
+        return Convert.ToDecimal(getPrice);
+    }
+    //Danh sach nhom theo then san
+    public void San_DanhSachNhomTheoTenSan(Repeater repeater)
+    {
+        //Danh sach san
+        var getData = (from l in db.tbFieldTypes
+                       join ls in db.tbFields on l.field_type_id equals ls.field_type_id
+                       where ls.field_status == true
+                       group ls by new { ls.field_name } into k
+                       select new
+                       {
+                           field_name = k.Key.field_name,
+                       });
+
+        repeater.DataSource = getData;
+        repeater.DataBind();
+    }
     //Danh sach san cho nguoi dung
     public void San_DanhSachSan(Repeater repeater)
     {
@@ -27,12 +55,15 @@ public class cls_San
         var getData = (from l in db.tbFieldTypes
                        join ls in db.tbFields on l.field_type_id equals ls.field_type_id
                        where ls.field_status == true
+                       group ls by new { ls.field_name } into k
                        select new
                        {
-                           ls.field_id,
-                           ls.field_name,
-                           l.field_type_name,
-                           field_status = ls.field_status == true ? "Đang hoạt động" : "Không hoạt động",
+                           field_type_id = (from t in db.tbFields where t.field_name == k.Key.field_name select t.field_type_id).FirstOrDefault(),
+                           field_name = k.Key.field_name,
+                           field_status = (from s in db.tbFields
+                                           where s.field_name == k.Key.field_name
+                                           select s.field_status).FirstOrDefault() == true
+                                           ? "Đang hoạt động" : "Không hoạt động",
                        });
 
         repeater.DataSource = getData;
@@ -75,22 +106,17 @@ public class cls_San
     //Khach da dat san
     public string San_DatSan(int trangThaiSan, DateTime dateBook, int returnType)
     {
-        var getTimeBook = (from p in db.tbPrices
-                           join bt in db.tbBookTimes on p.book_time_id equals bt.book_time_id
-                           join ss in db.tbFields on p.field_type_id equals ss.field_type_id
-                           join st in db.tbTempTransactions on ss.field_id equals st.field_id
-                           //join tta in db.tbTempTransactionAdmins on s.field_id equals tta.field_id
-                           //join st in db.tbTransactions on tta.temp_transaction_id equals st.temp_transaction_id
-                           where st.transaction_status == trangThaiSan
-                           //&& st.transaction_bookdate.Value.Day == dateBook.Day
-                           //&& st.transaction_bookdate.Value.Month == dateBook.Month
-                           //&& st.transaction_bookdate.Value.Year == dateBook.Year
+        var getTimeBook = (from st in db.tbTempTransactions
+                           join ss in db.tbFields on st.field_id equals ss.field_id
+                           //join bt in db.tbBookTimes on ss.book_time_id equals bt.book_time_id
+                           where
+                           st.transaction_status == trangThaiSan
                            && st.transaction_bookdate == dateBook
                            && ss.field_status == true
                            select new
                            {
-                               st.book_time_id,
-                               st.field_id,
+                               ss.book_time_id,
+                               ss.field_id,
                            });
         if (returnType == 1)
             return string.Join(",", getTimeBook.Select(x => x.field_id));//id san
@@ -99,40 +125,28 @@ public class cls_San
     //San cho nhan vien xac nhan
     public int San_ChoXacNhan(int idSan, int idGio, DateTime dateBook)
     {
-        var getData = (from p in db.tbPrices
-                       join bt in db.tbBookTimes on p.book_time_id equals bt.book_time_id
-                       join s in db.tbFields on p.field_type_id equals s.field_type_id
-                       join st in db.tbTempTransactions on s.field_id equals st.field_id
+        var getData = (from st in db.tbTempTransactions
+                       join ss in db.tbFields on st.field_id equals ss.field_id
+                       //join bt in db.tbBookTimes on st.book_time_id equals bt.book_time_id
                        where
                        st.field_id == idSan
-                       && st.book_time_id == idGio
+                       && ss.book_time_id == idGio
                        && st.transaction_status == 0
-                       && s.field_status == true
-                       //&& st.transaction_bookdate.Value.Day == dateBook.Day
-                       //&& st.transaction_bookdate.Value.Month == dateBook.Month
-                       //&& st.transaction_bookdate.Value.Year == dateBook.Year
+                       && ss.field_status == true
                        && st.transaction_bookdate == dateBook
                        select new
                        {
                            st.field_id,
-                           st.book_time_id,
+                           ss.book_time_id,
                        }).Count();
         return getData;
     }
     //Load theo khung gio trong san ngay hien tai
     public void San_LoadGioTheoSanNgayHienTai(string idBookTime, Repeater repeater)
     {
-        //var getBookTime = from bt in db.tbBookTimes
-        //                  select new
-        //                  {
-        //                      bt.book_time_id,
-        //                      bt.book_time_detail,
-        //                      field_id = idSan,
-        //                      style = Convert.ToInt32(bt.book_time_detail.Substring(0, 2)) < DateTime.Now.Hour ? "pointer-events: none;background:aqua" : "",
-        //                  };
         var getSanDat = from bt in db.tbBookTimes
-                        join p in db.tbPrices on bt.book_time_id equals p.book_time_id
-                        join f in db.tbFields on p.field_type_id equals f.field_type_id
+                            //join t in db.tbTempTransactions on bt.book_time_id equals t.book_time_id
+                        join f in db.tbFields on bt.book_time_id equals f.book_time_id
                         where bt.book_time_id == int.Parse(idBookTime) && f.field_status == true
                         select new
                         {
@@ -147,17 +161,9 @@ public class cls_San
     //Load theo khung gio trong san ngay khac
     public void San_LoadGioTheoSanNgayKhac(string idBookTime, Repeater repeater)
     {
-        //var getBookTime = from bt in db.tbBookTimes
-        //                  select new
-        //                  {
-        //                      bt.book_time_id,
-        //                      bt.book_time_detail,
-        //                      field_id = idSan,
-        //                      style = "",
-        //                  };
         var getSanDat = from bt in db.tbBookTimes
-                        join p in db.tbPrices on bt.book_time_id equals p.book_time_id
-                        join f in db.tbFields on p.field_type_id equals f.field_type_id
+                            //join s in db.tbTempTransactions on bt.book_time_id equals s.book_time_id
+                        join f in db.tbFields on bt.book_time_id equals f.book_time_id
                         where bt.book_time_id == int.Parse(idBookTime) && f.field_status == true
                         select new
                         {
@@ -189,7 +195,7 @@ public class cls_San
         //Lay ra toan bo san da dat
         var getData = (from t in db.tbTempTransactions
                        join f in db.tbFields on t.field_id equals f.field_id
-                       join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
+                       join bt in db.tbBookTimes on f.book_time_id equals bt.book_time_id
                        where t.users_id == userId && f.field_status == true
                        select new
                        {
@@ -199,6 +205,8 @@ public class cls_San
                            bt.book_time_detail,
                            f.field_id,
                            bt.book_time_id,
+
+                           t.temp_transaction_id,
 
                            daXacNhan = t.transaction_status == 1 ? "display:block" : "display:none",
                            choXacNhan = t.transaction_status == 0 ? "display:block" : "display:none",
@@ -210,17 +218,11 @@ public class cls_San
         repeater.DataSource = getData;
         repeater.DataBind();
     }
-    public bool San_HuySan(int idSan, int idGio, int idUser, string timeBook)
+    public bool San_HuySan(int idTrans)
     {
-        tbTempTransaction del = db.tbTempTransactions.Where
-            (x => x.field_id == idSan &&
-            x.book_time_id == idGio &&
-            x.users_id == idUser).FirstOrDefault();
+        tbTempTransaction del = db.tbTempTransactions.Where(x => x.temp_transaction_id == idTrans).FirstOrDefault();
 
-        tbAlert delAlert = db.tbAlerts.Where(
-            x => x.field_id == idSan &&
-            x.book_time_id == idGio &&
-            x.alert_datetime == Convert.ToDateTime(timeBook)).FirstOrDefault();
+        tbAlert delAlert = db.tbAlerts.Where(x => x.trans_id == del.temp_transaction_id).FirstOrDefault();
 
         db.tbTempTransactions.DeleteOnSubmit(del);
         db.tbAlerts.DeleteOnSubmit(delAlert);
@@ -238,42 +240,61 @@ public class cls_San
     //Them xoa sua san ben admin
     public bool SanAdmin_Sua(int _id, string _nameField, int _typeFieldId, bool status)
     {
-        tbField update = db.tbFields.Where(x => x.field_id == _id).FirstOrDefault();
-        update.field_name = _nameField;
-        update.field_status = status;
-        update.field_type_id = _typeFieldId;
         try
         {
-            db.SubmitChanges();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-    public bool SanAdmin_Them(string _nameField, int _typeFieldId)
-    {
-        tbField insert = new tbField();
-        insert.field_name = _nameField;
-        insert.field_status = true;
-        insert.field_type_id = _typeFieldId;
-        db.tbFields.InsertOnSubmit(insert);
-        try
-        {
-            db.SubmitChanges();
-            return true;
-        }
-        catch
-        {
-            return false;
-        }
-    }
-    public bool SanAdmin_Del(int _id)
-    {
-        tbField del = db.tbFields.Where(x => x.field_id == _id).FirstOrDefault();
+            db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_status = status);
+            db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_name = _nameField);
+            db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_type_id = _typeFieldId);
 
-        db.tbFields.DeleteOnSubmit(del);
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    public bool SanAdmin_Them(string _nameField, int _typeFieldId, int _idTypeTime)
+    {
+        var listIdType = from b in db.tbBookTimes where b.book_time_type == _idTypeTime select b;
+        string[] arrIdType = string.Join(",", listIdType.Select(x => x.book_time_id)).Split(',');
+        try
+        {
+            for (int i = 0; i < arrIdType.Length; i++)
+            {
+                tbField insert = new tbField();
+                insert.field_name = _nameField;
+                insert.field_status = true;
+                insert.field_type_id = _typeFieldId;
+                insert.book_time_id = Convert.ToInt32(arrIdType[i]);
+                db.tbFields.InsertOnSubmit(insert);
+                db.SubmitChanges();
+            }
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+    public bool SanAdmin_Del(string name)
+    {
+        var del = db.tbFields.Where(x => x.field_name == name);
+
+        var delTrans = (from t in db.tbTempTransactions
+                        join s in db.tbFields on t.field_id equals s.field_id
+                        where s.field_name == name
+                        select t);
+
+        var delAlert = (from t in db.tbTempTransactions
+                        join s in db.tbFields on t.field_id equals s.field_id
+                        join a in db.tbAlerts on t.temp_transaction_id equals a.trans_id
+                        where s.field_name == name
+                        select a);
+
+        db.tbFields.DeleteAllOnSubmit(del);
+        db.tbTempTransactions.DeleteAllOnSubmit(delTrans);
+        db.tbAlerts.DeleteAllOnSubmit(delAlert);
 
         try
         {
@@ -285,17 +306,21 @@ public class cls_San
             return false;
         }
     }
-    public void SanAdmin_DanhSachSan(Repeater repeater)
+    //Danh sach quan ly san admin
+    public void SanDanhSachSan_Admin(Repeater repeater)
     {
         //Danh sach san
         var getData = (from l in db.tbFieldTypes
                        join ls in db.tbFields on l.field_type_id equals ls.field_type_id
+                       group ls by new { ls.field_name } into k
                        select new
                        {
-                           ls.field_id,
-                           ls.field_name,
-                           l.field_type_name,
-                           field_status = ls.field_status == true ? "Đang hoạt động" : "Không hoạt động",
+                           field_type_id = (from t in db.tbFields where t.field_name == k.Key.field_name select t.field_type_id).FirstOrDefault(),
+                           field_name = k.Key.field_name,
+                           field_status = (from s in db.tbFields
+                                           where s.field_name == k.Key.field_name
+                                           select s.field_status).FirstOrDefault() == true
+                                           ? "Đang hoạt động" : "Không hoạt động",
                        });
 
         repeater.DataSource = getData;

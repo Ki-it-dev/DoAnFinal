@@ -12,6 +12,10 @@
         <dx:ASPxComboBox ID="cbbLoaiSan" runat="server" TextField="field_type_name"
             ValueField="field_type_id" ValueType="System.Int32" ClientInstanceName="cbbLoaiSan" Width="95%">
         </dx:ASPxComboBox>
+       <%-- <span>Chọn khung giờ</span>
+        <dx:ASPxComboBox ID="cbbTime" runat="server" TextField="book_time_type"
+            ValueField="book_time_type" ValueType="System.Int32" ClientInstanceName="cbbTime" Width="95%">
+        </dx:ASPxComboBox>--%>
         <button type="button" class="btn btn-primary" id="save" runat="server" onserverclick="save_ServerClick">Lưu</button>
         <a href="/quan-ly-san" class="btn btn-primary">Quay lại</a>
     </formview>

@@ -18,12 +18,12 @@
                                 <div class="d-flex flex-row-reverse">
                                     <div class="p-2">
                                         <a href="#"
-                                            onclick="btnHuy('<%#Eval("field_id") %>','<%#Eval("book_time_id") %>')">
+                                            onclick="btnHuy('<%#Eval("temp_transaction_id") %>')">
                                             <span class="badge badge-danger">Hủy</span></a>
                                     </div>
                                     <div class="p-2">
                                         <a href="#"
-                                            onclick="btnXacNhan('<%#Eval("field_id") %>','<%#Eval("book_time_id") %>')">
+                                            onclick="btnXacNhan('<%#Eval("temp_transaction_id") %>')">
                                             <span class="badge badge-success">Xác nhận</span></a>
                                     </div>
                                 </div>
@@ -36,21 +36,29 @@
     </div>
 
     <div style="display: none;">
-        <input type="text" name="name" value="" runat="server" id="txtIdSan" />
-        <input type="text" name="name" value="" runat="server" id="txtIdGio" />
+        <input type="text" name="name" value="" runat="server" id="txtIdTrans" />
         <a href="#" id="btnServerHuy" runat="server" onserverclick="btnServerHuy_ServerClick">content</a>
         <a href="#" id="btnServerXacNhan" runat="server" onserverclick="btnServerXacNhan_ServerClick">content</a>
     </div>
 
     <script>
-        function btnHuy(idSan, idGio) {
-            document.getElementById("<%=txtIdSan.ClientID%>").value = idSan
-            document.getElementById("<%=txtIdGio.ClientID%>").value = idGio
-            document.getElementById("<%=btnServerHuy.ClientID%>").click()
+        function btnHuy(idTrans) {
+            swal("Bạn có thực sự muốn hủy?",
+                "Nếu hủy, dữ liệu sẽ không thể khôi phục.",
+                "warning",
+                {
+                    buttons: true,
+                    dangerMode: true
+                }).then(function (value) {
+                    if (value == true) {
+                        document.getElementById("<%=txtIdTrans.ClientID%>").value = idTrans
+                        document.getElementById("<%=btnServerHuy.ClientID%>").click()
+                    }
+                });
+
         }
-        function btnXacNhan(idSan, idGio) {
-            document.getElementById("<%=txtIdSan.ClientID%>").value = idSan
-            document.getElementById("<%=txtIdGio.ClientID%>").value = idGio
+        function btnXacNhan(idTrans) {
+            document.getElementById("<%=txtIdTrans.ClientID%>").value = idTrans
             document.getElementById("<%=btnServerXacNhan.ClientID%>").click()
         }
     </script>
