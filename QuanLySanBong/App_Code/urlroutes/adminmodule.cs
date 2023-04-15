@@ -33,6 +33,10 @@ public class adminmodule
         list.Add("webQuanLyKhungGio|quan-ly-khung-gio|~/admin_page/QuanLyGio/module_QuanLyKhungGio.aspx");
         list.Add("webChiTietKhungGio|chi-tiet-khung-gio-{typeID}|~/admin_page/QuanLyGio/module_ChiTietKhungGio.aspx");
         list.Add("webThemKhungGio|them-khung-gio|~/admin_page/QuanLyGio/module_ThemKhungGio.aspx");
+        //Quan ly loai san
+        list.Add("webQuanLyLoaiSan|quan-ly-loai-san|~/admin_page/QuanLyLoaiSan/module_DanhSachLoaiSan.aspx");
+        list.Add("webThemLoaiSan|them-loai-san|~/admin_page/QuanLyLoaiSan/module_ThemLoaiSan.aspx");
+        list.Add("webSuaLoaiSan|sua-loai-san-{id}|~/admin_page/QuanLyLoaiSan/module_SuaLoaiSan.aspx");
 
         return list;
     }
