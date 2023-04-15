@@ -6,7 +6,7 @@
     <div id="index">
         <div class="d-flex flex-column ">
             <div class="p-2">
-                <div class="d-flex flex-row  justify-content-center align-items-center">
+                <div class="d-flex flex-row justify-content-center align-items-center">
                     <div class="p-2">
                         <div class="d-flex flex-column">
                             <div class="p-2">

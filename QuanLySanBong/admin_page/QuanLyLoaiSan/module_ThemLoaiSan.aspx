@@ -5,11 +5,11 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <formview>
         <div class="form-group">
-            <label for="txtField">Nhập loại sân</label>
+            <label for="txtFieldType">Nhập loại sân</label>
             <input type="text" class="form-control" id="txtFieldType" runat="server" placeholder="Nhập tên sân">
         </div>
         <div class="form-group">
-            <label for="txtField">Giá</label>
+            <label for="txtPrice">Giá</label>
             <input type="number" class="form-control" id="txtPrice" runat="server" placeholder="Nhập giá">
         </div>
         <button type="button" class="btn btn-primary" id="save" runat="server" onserverclick="save_ServerClick">Lưu</button>

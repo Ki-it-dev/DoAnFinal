@@ -1,12 +1,12 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="module_DanhSachLoaiSan.aspx.cs" Inherits="admin_page_QuanLyLoaiSan_module_DanhSachLoaiSan" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="module_DanhSachSanPham.aspx.cs" Inherits="admin_page_QuanLySanPham_module_DanhSachSanPham" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="qldsc">
         <div class="khoangcach">
             <h1>Quản lý sân</h1>
-            <a class="btn btn-secondary" id="addLoaiSan" runat="server" onserverclick="addLoaiSan_ServerClick">Thêm</a>
+            <a class="btn btn-secondary" id="addSanPham" runat="server" onserverclick="addSanPham_ServerClick">Thêm</a>
             <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">
                     <div class="p-2">
@@ -14,24 +14,31 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Tên loại sân</th>
+                                    <th scope="col">Ảnh</th>
+                                    <th scope="col">Tên sản phẩm</th>
                                     <th scope="col">Giá</th>
+                                    <th scope="col">Mô tả</th>
+                                    <th scope="col">Số lượng</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <asp:Repeater runat="server" ID="rpLoaiSan">
+                                <asp:Repeater runat="server" ID="rpSanPham">
                                     <ItemTemplate>
                                         <tr>
                                             <th scope="row"><%# Container.ItemIndex + 1 %></th>
-                                            <td><%#Eval("field_type_name")%></td>
-                                            <td><%#Eval("price")%></td>
                                             <td>
-                                                <a class="btn btn-secondary" href="/sua-loai-san-<%#Eval("field_type_id") %>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <img width="100" height="100" src="<%#Eval("producst_picture") %>" /></td>
+                                            <td><%#Eval("products_name")%></td>
+                                            <td><%#Eval("products_price")%></td>
+                                            <td><%#Eval("products_description")%></td>
+                                            <td><%#Eval("products_quantity")%></td>
+                                            <td>
+                                                <a class="btn btn-secondary" href="/cap-nhat-san-pham-<%#Eval("products_id") %>"><i class="fa-solid fa-pen-to-square"></i></a>
                                             </td>
                                             <td>
-                                                <a class="btn btn-danger" onclick="btnXoa('<%#Eval("field_type_id")%>')"><i class="fa-solid fa-xmark"></i></a>
+                                                <a class="btn btn-danger" onclick="btnXoa('<%#Eval("products_id")%>')"><i class="fa-solid fa-xmark"></i></a>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
@@ -51,7 +58,7 @@
     </div>
     <script>
         function btnXoa(id) {
-            swal("Bạn có thực sự muốn xóa loại sân này?",
+            swal("Bạn có thực sự muốn xóa sản phẩm này?",
                 "Nếu xóa, dữ liệu sẽ không thể khôi phục.",
                 "warning",
                 {
@@ -67,3 +74,4 @@
         }
     </script>
 </asp:Content>
+

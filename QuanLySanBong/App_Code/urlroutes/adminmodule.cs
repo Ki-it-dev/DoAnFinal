@@ -36,7 +36,11 @@ public class adminmodule
         //Quan ly loai san
         list.Add("webQuanLyLoaiSan|quan-ly-loai-san|~/admin_page/QuanLyLoaiSan/module_DanhSachLoaiSan.aspx");
         list.Add("webThemLoaiSan|them-loai-san|~/admin_page/QuanLyLoaiSan/module_ThemLoaiSan.aspx");
-        list.Add("webSuaLoaiSan|sua-loai-san-{id}|~/admin_page/QuanLyLoaiSan/module_SuaLoaiSan.aspx");
+        list.Add("webSuaLoaiSan|sua-loai-san-{idLoaiSan}|~/admin_page/QuanLyLoaiSan/module_SuaLoaiSan.aspx");
+        //Quan ly san pham
+        list.Add("webQuanLySanPham|quan-ly-san-pham|~/admin_page/QuanLySanPham/module_DanhSachSanPham.aspx");
+        list.Add("webThemSanPham|them-san-pham|~/admin_page/QuanLySanPham/module_ThemSanPham.aspx");
+        list.Add("webSuaSanPham|cap-nhat-san-pham-{idSanPham}|~/admin_page/QuanLySanPham/module_SuaSanPham.aspx");
 
         return list;
     }
