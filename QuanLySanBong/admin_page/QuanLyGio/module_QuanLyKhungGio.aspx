@@ -27,15 +27,14 @@
                                             <th scope="row"><%# Container.ItemIndex + 1 %></th>
                                             <td><%#Eval("book_time_type")%></td>
                                             <td>
-                                                <a class="btn btn-secondary" href="/chi-tiet-khung-gio-<%#Eval("book_time_type") %>">
-                                                    <i class="fa-solid fa-pen-to-square">Chi tiết</i>
+                                                <a class="btn btn-secondary" href="/chi-tiet-khung-gio-<%#Eval("book_time_type") %>">Chi tiết
                                                 </a>
                                             </td>
-                                           <%-- <td>
-                                                <a class="btn btn-secondary" href="">
+                                            <td>
+                                                <a class="btn btn-secondary" onclick="btnCapNhat('<%#Eval("book_time_type")%>')">
                                                     <i class="fa-solid fa-pen-to-square"></i>
                                                 </a>
-                                            </td>--%>
+                                            </td>
                                             <td>
                                                 <a class="btn btn-danger" onclick="btnXoa('<%#Eval("book_time_type")%>')">
                                                     <i class="fa-solid fa-xmark"></i>
@@ -54,10 +53,27 @@
     </div>
     <div class="d-none">
         <a href="#" id="btnXoaServer" runat="server" onserverclick="btnXoaServer_ServerClick"></a>
+        <a href="#" id="btnCapNhatStatus" runat="server" onserverclick="btnCapNhatStatus_ServerClick"></a>
 
         <input type="text" runat="server" id="txtTypeBookID" name="name" value="" />
     </div>
     <script>
+        function btnCapNhat(id) {
+            swal("Bạn có thực sự muốn khung giờ này là khung giờ chính?",
+                "",
+                "info",
+                {
+                    buttons: true,
+                    dangerMode: true
+                }).then(function (value) {
+                    if (value == true) {
+                        document.getElementById("<%=txtTypeBookID.ClientID%>").value = id
+                        document.getElementById('<%=btnCapNhatStatus.ClientID%>').click()
+                    }
+                });
+        }
+
+
         function btnXoa(id) {
             swal("Bạn có thực sự muốn xóa khung giờ này?",
                 "Nếu xóa, dữ liệu sẽ không thể khôi phục.",
@@ -68,7 +84,7 @@
                 }).then(function (value) {
                     if (value == true) {
                         document.getElementById("<%=txtTypeBookID.ClientID%>").value = id
-                        var xoa = document.getElementById('<%=txtTypeBookID.ClientID%>')
+                        var xoa = document.getElementById('<%=btnXoaServer.ClientID%>')
                         xoa.click();
                     }
                 });

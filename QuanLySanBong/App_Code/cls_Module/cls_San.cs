@@ -94,6 +94,7 @@ public class cls_San
     public void San_DanhSachKhungGio(Repeater repeater)
     {
         var getBookTime = from bt in db.tbBookTimes
+                          where bt.book_time_status == true
                           select new
                           {
                               bt.book_time_id,
