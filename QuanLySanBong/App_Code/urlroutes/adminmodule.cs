@@ -41,6 +41,11 @@ public class adminmodule
         list.Add("webQuanLySanPham|quan-ly-san-pham|~/admin_page/QuanLySanPham/module_DanhSachSanPham.aspx");
         list.Add("webThemSanPham|them-san-pham|~/admin_page/QuanLySanPham/module_ThemSanPham.aspx");
         list.Add("webSuaSanPham|cap-nhat-san-pham-{idSanPham}|~/admin_page/QuanLySanPham/module_SuaSanPham.aspx");
+        //Quan ly don hang
+        list.Add("webQuanLyDonHang|quan-ly-don-hang|~/admin_page/QuanLyDonHang/module_QuanLyDonHang.aspx");
+        list.Add("webThemDonHang|them-don-hang|~/admin_page/QuanLyDonHang/module_ThemDonHang.aspx");
+        list.Add("webChiTietDonHang|chi-tiet-don-hang-{id}|~/admin_page/QuanLyDonHang/module_ChiTietDonHang.aspx");
+        list.Add("webCapNhatDonHang|sua-don-hang-{id}|~/admin_page/QuanLyDonHang/module_SuaDonHang.aspx");
 
         return list;
     }

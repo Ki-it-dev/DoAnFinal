@@ -280,22 +280,24 @@ public class cls_San
     }
     public bool SanAdmin_Del(string name)
     {
-        var del = db.tbFields.Where(x => x.field_name == name);
+        db.tbFields.Where(x => x.field_name == name).ToList().ForEach(dv => dv.field_status = false);
 
-        var delTrans = (from t in db.tbTempTransactions
-                        join s in db.tbFields on t.field_id equals s.field_id
-                        where s.field_name == name
-                        select t);
+        //var del = db.tbFields.Where(x => x.field_name == name);
 
-        var delAlert = (from t in db.tbTempTransactions
-                        join s in db.tbFields on t.field_id equals s.field_id
-                        join a in db.tbAlerts on t.temp_transaction_id equals a.trans_id
-                        where s.field_name == name
-                        select a);
+        //var delTrans = (from t in db.tbTempTransactions
+        //                join s in db.tbFields on t.field_id equals s.field_id
+        //                where s.field_name == name
+        //                select t);
 
-        db.tbFields.DeleteAllOnSubmit(del);
-        db.tbTempTransactions.DeleteAllOnSubmit(delTrans);
-        db.tbAlerts.DeleteAllOnSubmit(delAlert);
+        //var delAlert = (from t in db.tbTempTransactions
+        //                join s in db.tbFields on t.field_id equals s.field_id
+        //                join a in db.tbAlerts on t.temp_transaction_id equals a.trans_id
+        //                where s.field_name == name
+        //                select a);
+
+        //db.tbFields.DeleteAllOnSubmit(del);
+        //db.tbTempTransactions.DeleteAllOnSubmit(delTrans);
+        //db.tbAlerts.DeleteAllOnSubmit(delAlert);
 
         try
         {

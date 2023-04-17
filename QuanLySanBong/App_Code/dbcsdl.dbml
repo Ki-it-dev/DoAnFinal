@@ -37,15 +37,13 @@
       <Association Name="tbAlertType_tbAlert" Member="tbAlerts" ThisKey="alert_Type_Id" OtherKey="alert_Type_Id" Type="tbAlert" />
     </Type>
   </Table>
-  <Table Name="dbo.tbBill" Member="tbBills">
-    <Type Name="tbBill">
-      <Column Name="bill_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="transaction_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="productsBill_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="bill_datetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
-      <Column Name="temp_transaction_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+  <Table Name="dbo.tbBillInfo" Member="tbBillInfos">
+    <Type Name="tbBillInfo">
+      <Column Name="bill_info_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="data_create" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="trans_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="emp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbProductsBill_tbBill" Member="tbProductsBill" ThisKey="productsBill_id" OtherKey="productsBill_id" Type="tbProductsBill" IsForeignKey="true" />
+      <Association Name="tbBillInfo_tbProductBill" Member="tbProductBills" ThisKey="bill_info_id" OtherKey="bill_info_id" Type="tbProductBill" />
     </Type>
   </Table>
   <Table Name="dbo.tbBookTime" Member="tbBookTimes">
@@ -95,6 +93,16 @@
       <Association Name="tbGroupUser_tbUser" Member="tbUsers" ThisKey="group_user_id" OtherKey="group_user_id" Type="tbUser" />
     </Type>
   </Table>
+  <Table Name="dbo.tbProductBill" Member="tbProductBills">
+    <Type Name="tbProductBill">
+      <Column Name="product_bill_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="product_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="bill_info_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Association Name="tbBillInfo_tbProductBill" Member="tbBillInfo" ThisKey="bill_info_id" OtherKey="bill_info_id" Type="tbBillInfo" IsForeignKey="true" />
+      <Association Name="tbProduct_tbProductBill" Member="tbProduct" ThisKey="product_id" OtherKey="products_id" Type="tbProduct" IsForeignKey="true" />
+    </Type>
+  </Table>
   <Table Name="dbo.tbProducts" Member="tbProducts">
     <Type Name="tbProduct">
       <Column Name="products_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -106,19 +114,8 @@
       <Column Name="producst_picture" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="products_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="typeProducts_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbProduct_tbProductsBill" Member="tbProductsBills" ThisKey="products_id" OtherKey="products_id" Type="tbProductsBill" />
+      <Association Name="tbProduct_tbProductBill" Member="tbProductBills" ThisKey="products_id" OtherKey="product_id" Type="tbProductBill" />
       <Association Name="tbProductsType_tbProduct" Member="tbProductsType" ThisKey="typeProducts_id" OtherKey="typeProducts_id" Type="tbProductsType" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbProductsBill" Member="tbProductsBills">
-    <Type Name="tbProductsBill">
-      <Column Name="productsBill_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="trans_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="date_create" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="products_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="productsBill_quantity" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Association Name="tbProductsBill_tbBill" Member="tbBills" ThisKey="productsBill_id" OtherKey="productsBill_id" Type="tbBill" />
-      <Association Name="tbProduct_tbProductsBill" Member="tbProduct" ThisKey="products_id" OtherKey="products_id" Type="tbProduct" IsForeignKey="true" />
     </Type>
   </Table>
   <Table Name="dbo.tbProductsType" Member="tbProductsTypes">

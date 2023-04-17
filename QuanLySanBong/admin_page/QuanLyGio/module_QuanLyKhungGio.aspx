@@ -5,7 +5,7 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <div id="qldsc">
         <div class="khoangcach">
-            <h1>Quản lý sân</h1>
+            <h1>Quản lý khung giờ</h1>
             <a class="btn btn-primary" runat="server" id="addBookTime" onserverclick="addBookTime_ServerClick">Thêm</a>
             <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">
