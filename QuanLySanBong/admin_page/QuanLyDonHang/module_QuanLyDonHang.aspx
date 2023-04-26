@@ -17,7 +17,7 @@
                                     <th scope="col"><%--Sản phẩm--%> Số lượng</th>
                                     <th scope="col">Tổng tiền</th>
                                     <th scope="col">Ngày tạo</th>
-                                    <th scope="col">Mã sân</th>
+                                    <%--<th scope="col">Mã sân</th>--%>
                                     <th scope="col">Nhân viên</th>
                                 </tr>
                             </thead>
@@ -29,7 +29,7 @@
                                             <td><%--<%#Eval("products_name")%>--%> [<%#Eval("soLuong") %>]</td>
                                             <td><%#Eval("total")%></td>
                                             <td><%#Eval("data_create")%></td>
-                                            <td><%#Eval("field_id")%></td>
+                                            <%--<td><%#Eval("field_id")%></td>--%>
                                             <td><%#Eval("users_fullname")%></td>
                                         </tr>
                                     </ItemTemplate>
@@ -42,7 +42,6 @@
         </div>
         <div style="padding: 8%;"></div>
     </div>
-    <input type="text" runat="server" id="txtTest" name="name" value="" />
     <%--<div class="d-none">
         <a href="#" id="btnXoaServer" runat="server" onserverclick="btnXoaServer_ServerClick"></a>
 

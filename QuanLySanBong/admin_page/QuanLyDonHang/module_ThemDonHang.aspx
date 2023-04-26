@@ -1,69 +1,131 @@
 ﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="module_ThemDonHang.aspx.cs" Inherits="admin_page_QuanLyDonHang_module_ThemDonHang" %>
 
-<asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
+<asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
-<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <button id="btn">+Add input</button>
+<asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
+    <button id="btnAdd" type="button" onclick="btnAddInput()">+Thêm đơn hàng</button>
 
     <formview>
-        <div class="d-flex" id='input-cont'>
-            <input type="time" id="txtStart0" />
-            <input type="time" id="txtEnd0" />
-        </div>
 
         <button type="button" class="btn btn-primary" onclick="btnThem()">Lưu</button>
 
-        <div class="">
+        <div id="bodyCart"></div>
+
+        <input type="text" id="txtTong" />
+
+
+
+        <div class="d-none">
             <button id="save" runat="server" onserverclick="save_ServerClick"></button>
+
+            <input type="text" id="txtIdProductsSelect" runat="server" />
+            <input type="text" id="txtQuantitysProducts" runat="server" />
+            <input type="text" runat="server" id="txtProductsName" />
+            <input type="text" runat="server" id="txtProductsId" />
+            <input type="text" runat="server" id="txtProductsPrice" />
         </div>
+
     </formview>
     <script>
-        const container = document.getElementById('input-cont');
-        var count = 0
-        // Call addInput() function on button click
-        document.getElementById("btn").addEventListener("click", function (event) {
-            event.preventDefault()
+
+        const bodyCart = document.getElementById("bodyCart");
+
+        let count = 0;
+
+        function btnAddInput() {
+
             count += 1;
 
-            let input1 = document.createElement('input');
-            let input2 = document.createElement('input');
+            //Create array of options to be added
+            let arrNameProduct = document.getElementById("<%=txtProductsName.ClientID%>").value.split(',')
+            let arrIdProduct = document.getElementById("<%=txtProductsId.ClientID%>").value.split(',')
 
-            input1.setAttribute("id", "txtStart" + count);
-            input2.setAttribute("id", "txtEnd" + count);
+            var divMain = document.createElement("div")
+            divMain.setAttribute("id", "divSelector_" + count)
+            bodyCart.appendChild(divMain)
+            //Create and append select list
+            var selectList = document.createElement("select");
+            selectList.setAttribute("id", "select_" + count);
+            selectList.setAttribute("onchange", "funcChange(" + count + ")");
+            divMain.appendChild(selectList);
 
-            input1.type = "time";
-            input2.type = "time";
-
-            container.appendChild(input1);
-            container.appendChild(input2);
-        });
-
-        function btnThem() {
-            <%--document.getElementById("<%=timeValueArr.ClientID%>").value = ""
-
-            var arrStart = []
-            var arrEnd = []
-
-            for (var i = 0; i <= count; i++) {
-                var valueTimeStart = document.getElementById("txtStart" + i).value
-                var valueTimeEnd = document.getElementById("txtEnd" + i).value
-
-                if (valueTimeStart == "" || valueTimeEnd == "") return;
-
-                if (i == count) document.getElementById("<%=timeValueArr.ClientID%>").value += valueTimeStart + "|" + valueTimeEnd
-                else document.getElementById("<%=timeValueArr.ClientID%>").value += valueTimeStart + "|" + valueTimeEnd + ","
-
-                arrStart.push(valueTimeStart)
-                arrEnd.push(valueTimeEnd)
+            //Create and append the options
+            for (var i = 0; i < arrNameProduct.length; i++) {
+                var option = document.createElement("option");
+                option.setAttribute("value", arrIdProduct[i]);
+                option.text = arrNameProduct[i];
+                selectList.appendChild(option);
             }
 
-            //console.log(arrStart, arrEnd)
+            var x = document.createElement("input");
+            x.setAttribute("type", "number");
+            x.setAttribute("placeholder", "Số lượng");
+            x.setAttribute("id", "txtSoLuong_" + count);
+            x.setAttribute("min", 1);
+            x.setAttribute("onchange", "funcChange(" + count + ")");
+            divMain.appendChild(x);
 
-            document.getElementById("<%=timeStartArr.ClientID%>").value = arrStart
-            document.getElementById("<%=timeEndArr.ClientID%>").value = arrEnd
-            document.getElementById("<%=txtCount.ClientID%>").value = count
+            var y = document.createElement("input");
+            y.setAttribute("type", "number");
+            y.setAttribute("name", "moneyProducts");
+            y.readOnly = true;
+            y.setAttribute("placeholder", "Thành tiền");
+            y.setAttribute("id", "txtThanhTien_" + count);
+            divMain.appendChild(y);
 
-            document.getElementById('<%=save.ClientID%>').click()--%>
+            var btn = document.createElement("button")
+            btn.innerHTML = "Xóa"
+            btn.setAttribute("id", "btnDel_" + count);
+            btn.setAttribute("onclick", "funcDel(" + count + ")")
+            divMain.appendChild(btn);
+        }
+
+        function funcDel(count) {
+            document.getElementById("divSelector_" + count).remove();
+        }
+
+        function funcChange(count) {
+            let arrPriceProduct = document.getElementById("<%=txtProductsPrice.ClientID%>").value.split(',')
+            let arrIdProduct = document.getElementById("<%=txtProductsId.ClientID%>").value.split(',')
+
+            let elementSoLuong = document.getElementById("txtSoLuong_" + count).value
+            let selectOptions = document.getElementById("select_" + count).value
+
+            var price = 0;
+
+            for (var i = 0; i < arrIdProduct.length; i++) {
+                if (selectOptions == arrIdProduct[i])
+                    price = arrPriceProduct[i]
+            }
+
+
+            document.getElementById("txtThanhTien_" + count).value = price * elementSoLuong
+
+            var arr = document.getElementsByName('moneyProducts');
+            var total = 0;
+            for (var i = 0; i < arr.length; i++) {
+                if (parseInt(arr[i].value))
+                    total += parseInt(arr[i].value);
+            }
+            document.getElementById('txtTong').value = total;
+        }
+
+        function btnThem() {
+
+            var select = document.querySelectorAll('[id ^= "select_"]')
+            var quantity = document.querySelectorAll('[id ^= "txtSoLuong_"]')
+
+            var arrIdProducts = []
+            var arrQuantitys = []
+
+            for (var i = 0; i < select.length; i++) {
+                arrIdProducts.push(select[i].value)
+                arrQuantitys.push(quantity[i].value)
+            }
+
+            document.getElementById("<%=txtQuantitysProducts.ClientID%>").value = arrQuantitys
+            document.getElementById("<%=txtIdProductsSelect.ClientID%>").value = arrIdProducts
+            document.getElementById('<%=save.ClientID%>').click()
         }
     </script>
 </asp:Content>

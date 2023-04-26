@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Runtime.InteropServices.WindowsRuntime;
 using System.Security.Cryptography;
 using System.Web;
 using System.Web.UI;
@@ -20,7 +21,30 @@ public class cls_SanPham
         // TODO: Add constructor logic here
         //
     }
+    public string SanPham_LoadDanhSachTenSanPham()
+    {
+        var getSanPham = (from sp in db.tbProducts select sp.products_name);
 
+        string s = string.Join(",", getSanPham.Select(x => x));
+
+        return s;
+    }
+    public string SanPham_LoadDanhSachIdSanPham()
+    {
+        var getSanPham = (from sp in db.tbProducts select sp.products_id);
+
+        string s = string.Join(",", getSanPham.Select(x => x));
+
+        return s;
+    }
+    public string SanPham_LoadDanhSachGiaSanPham()
+    {
+        var getSanPham = (from sp in db.tbProducts select sp.products_price);
+
+        string s = string.Join(",", getSanPham.Select(x => x));
+
+        return s;
+    }
     public void SanPham_LoadDanhSachSanPham(Repeater repeater)
     {
         var getSanPham = (from sp in db.tbProducts select sp).OrderByDescending(x => x.products_id);
@@ -99,7 +123,7 @@ public class cls_SanPham
         }
         catch { return false; }
     }
-    public bool Update_SanPham(int _id,string name, decimal price, string descrip, string img, int quantity, int _idTypeProdcut, string size, string color)
+    public bool Update_SanPham(int _id, string name, decimal price, string descrip, string img, int quantity, int _idTypeProdcut, string size, string color)
     {
         tbProduct update = db.tbProducts.Where(x => x.products_id == _id).FirstOrDefault();
 

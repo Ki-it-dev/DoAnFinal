@@ -88,8 +88,8 @@ public partial class _Default : System.Web.UI.MasterPage
         //                   notif.alert_content,
         //                   notif.alert_Id,
         //                   t.field_id,
-        //                   t.book_time_id,
-        //                   linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + t.field_id + "-" + t.book_time_id + "-" + notif.alert_Id : "/quan-ly-dat-san-ca-nhan",
+        //                   //t.book_time_id,
+        //                   //linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + t.field_id + "-" + t.book_time_id + "-" + notif.alert_Id : "/quan-ly-dat-san-ca-nhan",
         //                   daXacNhan = "",
         //                   choXacNhan = "",
         //               };
