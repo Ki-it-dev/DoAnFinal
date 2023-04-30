@@ -15,6 +15,7 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Khung giờ</th>
+                                    <th scope="col">Trạng thái</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                     <%--<th scope="col"></th>--%>
@@ -26,6 +27,7 @@
                                         <tr>
                                             <th scope="row"><%# Container.ItemIndex + 1 %></th>
                                             <td><%#Eval("book_time_type")%></td>
+                                            <td><%#Eval("book_time_status")%></td>
                                             <td>
                                                 <a class="btn btn-secondary" href="/chi-tiet-khung-gio-<%#Eval("book_time_type") %>">Chi tiết
                                                 </a>

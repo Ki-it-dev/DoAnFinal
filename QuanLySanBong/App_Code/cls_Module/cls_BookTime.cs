@@ -30,6 +30,8 @@ public class cls_BookTime
                      group t by t.book_time_type into k
                      select new
                      {
+                         book_time_status = (from t in db.tbBookTimes where t.book_time_type == k.Key
+                                             select t.book_time_status).FirstOrDefault() == true ? "Đang hoạt động" : "Không hoạt động",
                          book_time_type = k.Key,
                      };
         if (result.Any())
@@ -73,19 +75,21 @@ public class cls_BookTime
     //Cap nhat thanh khung gio chinh
     public bool BookTime_UpdateStatus(int _idTypeBookTime)
     {
-        var listIdType = from b in db.tbBookTimes where b.book_time_type == _idTypeBookTime select b;
-        string[] arrIdType = string.Join(",", listIdType.Select(x => x.book_time_id)).Split(',');
+        //var listIdType = from b in db.tbBookTimes where b.book_time_type == _idTypeBookTime select b;
+        //string[] arrIdType = string.Join(",", listIdType.Select(x => x.book_time_id)).Split(',');
 
-        var nameField = (from s in db.tbFields
-                         group s by new { s.field_name, s.field_type_id } into k
-                         select new { k.Key.field_name, k.Key.field_type_id });
-
+        //var nameField = (from s in db.tbFields
+        //                 group s by new { s.field_name, s.field_type_id } into k
+        //                 select new { k.Key.field_name, k.Key.field_type_id });
         try
         {
             //foreach (var item in arrIdType)
             //{
             //    db.tbFields.FirstOrDefault().book_time_id = Convert.ToInt32(item);
             //}
+
+            db.tbFields.Where(x => x.book_time_type != _idTypeBookTime).ToList()
+             .ForEach(dv => dv.book_time_type = _idTypeBookTime);
 
             db.tbBookTimes.Where(x => x.book_time_type == _idTypeBookTime).ToList()
             .ForEach(dv => dv.book_time_status = true);
@@ -94,6 +98,7 @@ public class cls_BookTime
             .ForEach(dv => dv.book_time_status = false);
 
             db.SubmitChanges();
+
             return true;
         }
         catch

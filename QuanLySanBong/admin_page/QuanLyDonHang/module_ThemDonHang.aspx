@@ -13,8 +13,6 @@
 
         <input type="text" id="txtTong" />
 
-
-
         <div class="d-none">
             <button id="save" runat="server" onserverclick="save_ServerClick"></button>
 

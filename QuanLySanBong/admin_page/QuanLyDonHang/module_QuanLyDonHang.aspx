@@ -14,11 +14,12 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Mã đơn</th>
-                                    <th scope="col"><%--Sản phẩm--%> Số lượng</th>
+                                    <th scope="col">Số lượng</th>
                                     <th scope="col">Tổng tiền</th>
                                     <th scope="col">Ngày tạo</th>
-                                    <%--<th scope="col">Mã sân</th>--%>
                                     <th scope="col">Nhân viên</th>
+                                    <th scope="col"></th>
+                                    <th scope="col"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -26,11 +27,20 @@
                                     <ItemTemplate>
                                         <tr>
                                             <th scope="row"><%#Eval("bill_info_id") %></th>
-                                            <td><%--<%#Eval("products_name")%>--%> [<%#Eval("soLuong") %>]</td>
+                                            <td><%--<%#Eval("products_name")%>--%> <%#Eval("soLuong") %></td>
                                             <td><%#Eval("total")%></td>
                                             <td><%#Eval("data_create")%></td>
-                                            <%--<td><%#Eval("field_id")%></td>--%>
                                             <td><%#Eval("users_fullname")%></td>
+                                            <td>
+                                                <a class="btn btn-secondary" href="/sua-don-hang-<%#Eval("bill_info_id")%>">
+                                                    <i class="fa-solid fa-pen-to-square"></i>
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <a class="btn btn-danger" onclick="btnXoa('<%#Eval("bill_info_id")%>')">
+                                                    <i class="fa-solid fa-xmark"></i>
+                                                </a>
+                                            </td>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>
@@ -42,12 +52,12 @@
         </div>
         <div style="padding: 8%;"></div>
     </div>
-    <%--<div class="d-none">
+    <div class="d-none">
         <a href="#" id="btnXoaServer" runat="server" onserverclick="btnXoaServer_ServerClick"></a>
 
-        <input type="text" runat="server" id="txtTypeBookID" name="name" value="" />
-    </div>--%>
-    <%--<script>
+        <input type="text" runat="server" id="txtBillInfoId" name="name" value="" />
+    </div>
+    <script>
         function btnXoa(id) {
             swal("Bạn có thực sự muốn xóa đơn hàng này?",
                 "Nếu xóa, dữ liệu sẽ không thể khôi phục.",
@@ -57,12 +67,12 @@
                     dangerMode: true
                 }).then(function (value) {
                     if (value == true) {
-                        document.getElementById("<%=txtTypeBookID.ClientID%>").value = id
+                        document.getElementById("<%=txtBillInfoId.ClientID%>").value = id
                         var xoa = document.getElementById('<%=btnXoaServer.ClientID%>')
                         xoa.click();
                     }
                 });
         }
-    </script>--%>
+    </script>
 </asp:Content>
 

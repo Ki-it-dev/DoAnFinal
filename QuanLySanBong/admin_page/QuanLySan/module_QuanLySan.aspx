@@ -29,7 +29,7 @@
                                             <td><%#Eval("field_name")%></td>
                                             <td><%#Eval("field_status")%></td>
                                             <td>
-                                                <a class="btn btn-secondary" href="/sua-san-<%#Eval("field_type_id") %>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                                <a class="btn btn-secondary" href="/sua-san-<%#Eval("field_id") %>"><i class="fa-solid fa-pen-to-square"></i></a>
                                             </td>
                                             <td>
                                                 <a class="btn btn-danger" onclick="btnXoa('<%#Eval("field_name")%>')"><i class="fa-solid fa-xmark"></i></a>

@@ -21,7 +21,7 @@ public partial class admin_page_QuanLySan_module_SuaSan : System.Web.UI.Page
 
         var field = (from s in db.tbFields
                      join tp in db.tbFieldTypes on s.field_type_id equals tp.field_type_id
-                     where s.field_type_id == int.Parse(_id)
+                     where s.field_id == int.Parse(_id)
                      select new { s.field_name, s.field_status, tp.field_type_name, tp.field_type_id });
 
         cbbLoaiSan.Value = Convert.ToString(field.FirstOrDefault().field_type_name);
@@ -46,10 +46,10 @@ public partial class admin_page_QuanLySan_module_SuaSan : System.Web.UI.Page
 
             if (ddlStatus.Text == "Đang hoạt động") status = true;
 
-            if (san.SanAdmin_Sua(int.Parse(_id), txtField.Value, getTypeId, status))
+            if (san.SanAdmin_Sua(int.Parse(_id), tenSan, getTypeId, status))
             {
-                //alert.alert_Success(Page, "Cập nhật thành công", "");
-                Response.Redirect("/quan-ly-san");
+                ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
+                        "AlertBox", "swal('Cập nhật thành công', '','success').then(function(){window.location = '/quan-ly-san';})", true);
             }
             else
             {

@@ -8,6 +8,9 @@ using System.Web.UI.WebControls;
 public partial class admin_page_QuanLyDonHang_module_QuanLyDonHang : System.Web.UI.Page
 {
     dbcsdlDataContext db = new dbcsdlDataContext();
+
+    cls_HoaDonSanPham _HoaDonSanPham = new cls_HoaDonSanPham();
+    cls_Alert _Alert = new cls_Alert();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack) loadData();
@@ -15,27 +18,6 @@ public partial class admin_page_QuanLyDonHang_module_QuanLyDonHang : System.Web.
 
     protected void loadData()
     {
-        //var priceProduct = (from s in db.tbProducts
-        //                    join p in db.tbProductBills on s.products_id equals p.product_id
-        //                    select new
-        //                    {
-        //                        p.bill_info_id,
-        //                        s.products_price,
-        //                        p.quantity,
-        //                    });
-
-        //string[] arrPrice = string.Join(",", priceProduct.Select(x => x.products_price)).Split(',');
-        //string[] arrQuantity = string.Join(",", priceProduct.Select(x => x.quantity)).Split(',');
-
-        //decimal sum = 0;
-
-        //for (int i = 0; i < arrQuantity.Length; i++)
-        //{
-        //    sum += Convert.ToInt32(arrQuantity[i]) * Convert.ToDecimal(arrPrice[i]);
-        //}
-
-        //txtTest.Value = sum.ToString();
-
         var bills = (from b in db.tbBillInfos
                      join pb in db.tbProductBills on b.bill_info_id equals pb.bill_info_id
                      //join t in db.tbTempTransactions on b.trans_id equals t.temp_transaction_id
@@ -48,7 +30,6 @@ public partial class admin_page_QuanLyDonHang_module_QuanLyDonHang : System.Web.
                          products_name = (from p in db.tbProducts
                                           join ppb in db.tbProductBills on p.products_id equals ppb.product_id
                                           where ppb.bill_info_id == k.Key.bill_info_id
-                                          //p.products_id == k.Key.products_id && ppb.bill_info_id == k.Key.bill_info_id
                                           select p.products_name).FirstOrDefault(),
                          soLuong = (from p in db.tbProducts
                                     join ppb in db.tbProductBills on p.products_id equals ppb.product_id
@@ -83,5 +64,16 @@ public partial class admin_page_QuanLyDonHang_module_QuanLyDonHang : System.Web.
     protected void addDonHang_ServerClick(object sender, EventArgs e)
     {
         Response.Redirect("/them-don-hang");
+    }
+
+    protected void btnXoaServer_ServerClick(object sender, EventArgs e)
+    {
+        string _idBill = txtBillInfoId.Value;
+
+        if (_HoaDonSanPham.del_HoaDon(Convert.ToInt32(_idBill))){
+            _Alert.alert_Success(Page, "Xóa thành công", "");
+        }
+        else _Alert.alert_Warning(Page, "Xóa thất bại", "");
+        loadData();
     }
 }

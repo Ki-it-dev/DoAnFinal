@@ -145,7 +145,7 @@ public class cls_San
     //Load theo khung gio trong san ngay hien tai
     public void San_LoadGioTheoSanNgayHienTai(string idBookTime, Repeater repeater)
     {
-        var getSanDat = from bt in db.tbBookTimes
+        var getSanDat = (from bt in db.tbBookTimes
                             //join t in db.tbTempTransactions on bt.book_time_id equals t.book_time_id
                         join f in db.tbFields on bt.book_time_type equals f.book_time_type
                         where bt.book_time_id == int.Parse(idBookTime) && f.field_status == true
@@ -153,8 +153,9 @@ public class cls_San
                         {
                             bt.book_time_id,
                             f.field_id,
+                            f.field_name,
                             style = Convert.ToInt32(bt.book_time_detail.Substring(0, 2)) < DateTime.Now.Hour ? "pointer-events: none;background:aqua;" + styleDefault : styleDefault,
-                        };
+                        }).OrderBy(x=>x.field_name);
 
         repeater.DataSource = getSanDat;
         repeater.DataBind();
@@ -162,7 +163,7 @@ public class cls_San
     //Load theo khung gio trong san ngay khac
     public void San_LoadGioTheoSanNgayKhac(string idBookTime, Repeater repeater)
     {
-        var getSanDat = from bt in db.tbBookTimes
+        var getSanDat = (from bt in db.tbBookTimes
                             //join s in db.tbTempTransactions on bt.book_time_id equals s.book_time_id
                         join f in db.tbFields on bt.book_time_type equals f.book_time_type
                         where bt.book_time_id == int.Parse(idBookTime) && f.field_status == true
@@ -170,8 +171,9 @@ public class cls_San
                         {
                             bt.book_time_id,
                             f.field_id,
+                            f.field_name,
                             style = styleDefault,
-                        };
+                        }).OrderBy(x=>x.field_name);
 
         repeater.DataSource = getSanDat;
         repeater.DataBind();
@@ -241,11 +243,18 @@ public class cls_San
     //Them xoa sua san ben admin
     public bool SanAdmin_Sua(int _id, string _nameField, int _typeFieldId, bool status)
     {
+        var update = db.tbFields.Where(x=>x.field_id ==  _id).FirstOrDefault();
+
+        update.field_name = _nameField;
+        update.field_type_id = _typeFieldId;
+        update.field_status = status;
+
         try
         {
-            db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_status = status);
-            db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_name = _nameField);
-            db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_type_id = _typeFieldId);
+            
+            //db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_status = status);
+            //db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_name = _nameField);
+            //db.tbFields.Where(x => x.field_type_id == _id).ToList().ForEach(dv => dv.field_type_id = _typeFieldId);
 
             db.SubmitChanges();
             return true;
@@ -257,19 +266,20 @@ public class cls_San
     }
     public bool SanAdmin_Them(string _nameField, int _typeFieldId, int _idTypeTime)
     {
-        var listIdType = from b in db.tbBookTimes where b.book_time_type == _idTypeTime select b;
-        string[] arrIdType = string.Join(",", listIdType.Select(x => x.book_time_id)).Split(',');
+        //var listIdType = from b in db.tbBookTimes where b.book_time_type == _idTypeTime select b;
+        //string[] arrIdType = string.Join(",", listIdType.Select(x => x.book_time_id)).Split(',');
         try
         {
             //for (int i = 0; i < arrIdType.Length; i++)
             //{
-            //    tbField insert = new tbField();
-            //    insert.field_name = _nameField;
-            //    insert.field_status = true;
-            //    insert.field_type_id = _typeFieldId;
-            //    insert.book_time_id = Convert.ToInt32(arrIdType[i]);
-            //    db.tbFields.InsertOnSubmit(insert);
-            //    db.SubmitChanges();
+            tbField insert = new tbField();
+            insert.field_name = _nameField;
+            insert.field_status = true;
+            insert.field_type_id = _typeFieldId;
+            insert.book_time_type = _idTypeTime;
+            //insert.book_time_id = Convert.ToInt32(arrIdType[i]);
+            db.tbFields.InsertOnSubmit(insert);
+            db.SubmitChanges();
             //}
             return true;
         }
@@ -318,6 +328,7 @@ public class cls_San
                        group ls by new { ls.field_name } into k
                        select new
                        {
+                           field_id = (from t in db.tbFields where t.field_name == k.Key.field_name select t.field_id).FirstOrDefault(),
                            field_type_id = (from t in db.tbFields where t.field_name == k.Key.field_name select t.field_type_id).FirstOrDefault(),
                            field_name = k.Key.field_name,
                            field_status = (from s in db.tbFields

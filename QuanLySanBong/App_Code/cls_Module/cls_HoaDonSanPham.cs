@@ -15,6 +15,39 @@ public class cls_HoaDonSanPham
         // TODO: Add constructor logic here
         //
     }
+    public string getAllProductInBill(int _idBillInfor)
+    {
+        var get = (from sp in db.tbProducts
+                   join bill in db.tbProductBills on sp.products_id equals bill.product_id
+                   where bill.bill_info_id == _idBillInfor
+                   select sp);
+
+        string listProducts = string.Join(",", get.Select(x => x.products_name));
+
+        return listProducts;
+    }
+    public string getAllPriceProductInBill(int _idBillInfor)
+    {
+        var get = (from sp in db.tbProducts
+                   join bill in db.tbProductBills on sp.products_id equals bill.product_id
+                   where bill.bill_info_id == _idBillInfor
+                   select sp);
+
+        string listProducts = string.Join(",", get.Select(x => x.products_price));
+
+        return listProducts;
+    }
+    public string getAllQuantityProductInBill(int _idBillInfor)
+    {
+        var get = (from sp in db.tbProducts
+                   join bill in db.tbProductBills on sp.products_id equals bill.product_id
+                   where bill.bill_info_id == _idBillInfor
+                   select bill);
+
+        string listProducts = string.Join(",", get.Select(x => x.quantity));
+
+        return listProducts;
+    }
     public bool insert_ThongTinHoaDon(int _idEmploy, int _idTrans)
     {
         tbBillInfo insert = new tbBillInfo();
@@ -49,7 +82,7 @@ public class cls_HoaDonSanPham
 
         try
         {
-            
+
             return true;
         }
         catch
@@ -57,18 +90,13 @@ public class cls_HoaDonSanPham
             return false;
         }
     }
-    public bool update_HoaDon(int _idEmploy,int _idTrans, string[] _idProduct, string[] _quantity,int _idBillInfo)
+    public bool update_HoaDon(int _idEmploy/*, int _idTrans*/, string[] _idProduct, string[] _quantity, int _idBillInfo)
     {
-        //Cap nhat du lieu
-        tbBillInfo update = db.tbBillInfos.Where(x=>x.bill_info_id == _idBillInfo).FirstOrDefault();
-
-        update.trans_id = _idTrans;
-        update.emp_id = _idEmploy;
         //Xoa het du lieu ton tai vs id bill info bang nhau
         var del = db.tbProductBills.Where(x => x.bill_info_id == _idBillInfo);
         db.tbProductBills.DeleteAllOnSubmit(del);
         //Chen lai du lieu
-        insert_HoaDonChiTiet(_idBillInfo,_idProduct, _quantity);
+        insert_HoaDonChiTiet(_idBillInfo, _idProduct, _quantity);
 
         try
         {
@@ -80,5 +108,22 @@ public class cls_HoaDonSanPham
             return false;
         }
     }
+    public bool del_HoaDon(int _idBillInfo)
+    {
+        var delProductsBill = db.tbProductBills.Where(x=>x.bill_info_id == _idBillInfo);
+        var delBillInfo = db.tbBillInfos.Where(x=>x.bill_info_id== _idBillInfo).FirstOrDefault();
 
+        db.tbProductBills.DeleteAllOnSubmit(delProductsBill);
+        db.tbBillInfos.DeleteOnSubmit(delBillInfo);
+
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

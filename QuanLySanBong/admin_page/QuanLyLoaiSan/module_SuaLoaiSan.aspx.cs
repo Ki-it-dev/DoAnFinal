@@ -34,8 +34,8 @@ public partial class admin_page_QuanLyLoaiSan_module_SuaLoaiSan : System.Web.UI.
         if (_LoaiSan.Update_LoaiSan(Convert.ToInt32(_idTypeTime), txtFieldType.Value, Convert.ToDecimal(txtPrice.Value)))
         {
             txtFieldType.Value = txtPrice.Value = "";
-            alert.alert_Success(Page, "Cập nhật thành công", "");
-            //Response.Redirect("/quan-ly-loai-san");
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
+                        "AlertBox", "swal('Cập nhật thành công', '','success').then(function(){window.location = '/quan-ly-loai-san';})", true);
         }
         else alert.alert_Success(Page, "Cập nhật thất bại", "");
     }
