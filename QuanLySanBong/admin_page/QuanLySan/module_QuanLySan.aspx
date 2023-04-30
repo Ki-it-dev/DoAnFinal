@@ -52,8 +52,8 @@
     </div>
     <script>
         function btnXoa(name) {
-            swal("Bạn có thực sự muốn xóa toàn bộ danh sách sân này?",
-                "Nếu xóa, dữ liệu sẽ không thể khôi phục.",
+            swal("Bạn có thực sự muốn chuyển sân này thành trạng thái không hoạt động?",
+                "",
                 "warning",
                 {
                     buttons: true,

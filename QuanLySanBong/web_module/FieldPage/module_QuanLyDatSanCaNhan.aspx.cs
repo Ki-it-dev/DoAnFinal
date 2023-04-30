@@ -36,7 +36,9 @@ public partial class web_module_module_QuanLyDatSanCaNhan : System.Web.UI.Page
 
             if (cls_San.San_HuySan(idTrans))
                 alert.alert_Success(Page, "Hủy thành công", "");
-            else alert.alert_Warning(Page, "Hủy thất bại", "");
+            else 
+                alert.alert_Warning(Page, "Hủy thất bại", "");
+
             cls_San.San_ShowAcc(idUser, rpDanhSachDatSan);
         }
         catch

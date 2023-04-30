@@ -69,6 +69,7 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
   partial void UpdatetbTempTransaction(tbTempTransaction instance);
   partial void DeletetbTempTransaction(tbTempTransaction instance);
     #endregion
+
     public dbcsdlDataContext() :
             base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString"].ConnectionString, mappingSource)
     {
@@ -1176,8 +1177,6 @@ public partial class tbBookTime : INotifyPropertyChanging, INotifyPropertyChange
 	
 	private System.Nullable<bool> _book_time_status;
 	
-	private EntitySet<tbField> _tbFields;
-	
     #region Extensibility Method Definitions
     partial void OnLoaded();
     partial void OnValidate(System.Data.Linq.ChangeAction action);
@@ -1194,7 +1193,6 @@ public partial class tbBookTime : INotifyPropertyChanging, INotifyPropertyChange
 	
 	public tbBookTime()
 	{
-		this._tbFields = new EntitySet<tbField>(new Action<tbField>(this.attach_tbFields), new Action<tbField>(this.detach_tbFields));
 		OnCreated();
 	}
 	
@@ -1278,19 +1276,6 @@ public partial class tbBookTime : INotifyPropertyChanging, INotifyPropertyChange
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbBookTime_tbField", Storage="_tbFields", ThisKey="book_time_id", OtherKey="book_time_id")]
-	public EntitySet<tbField> tbFields
-	{
-		get
-		{
-			return this._tbFields;
-		}
-		set
-		{
-			this._tbFields.Assign(value);
-		}
-	}
-	
 	public event PropertyChangingEventHandler PropertyChanging;
 	
 	public event PropertyChangedEventHandler PropertyChanged;
@@ -1309,18 +1294,6 @@ public partial class tbBookTime : INotifyPropertyChanging, INotifyPropertyChange
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
-	}
-	
-	private void attach_tbFields(tbField entity)
-	{
-		this.SendPropertyChanging();
-		entity.tbBookTime = this;
-	}
-	
-	private void detach_tbFields(tbField entity)
-	{
-		this.SendPropertyChanging();
-		entity.tbBookTime = null;
 	}
 }
 
@@ -1537,11 +1510,9 @@ public partial class tbField : INotifyPropertyChanging, INotifyPropertyChanged
 	
 	private System.Nullable<bool> _field_status;
 	
-	private System.Nullable<int> _book_time_id;
+	private System.Nullable<int> _book_time_type;
 	
 	private EntitySet<tbTempTransaction> _tbTempTransactions;
-	
-	private EntityRef<tbBookTime> _tbBookTime;
 	
 	private EntityRef<tbFieldType> _tbFieldType;
 	
@@ -1557,14 +1528,13 @@ public partial class tbField : INotifyPropertyChanging, INotifyPropertyChanged
     partial void Onfield_type_idChanged();
     partial void Onfield_statusChanging(System.Nullable<bool> value);
     partial void Onfield_statusChanged();
-    partial void Onbook_time_idChanging(System.Nullable<int> value);
-    partial void Onbook_time_idChanged();
+    partial void Onbook_time_typeChanging(System.Nullable<int> value);
+    partial void Onbook_time_typeChanged();
     #endregion
 	
 	public tbField()
 	{
 		this._tbTempTransactions = new EntitySet<tbTempTransaction>(new Action<tbTempTransaction>(this.attach_tbTempTransactions), new Action<tbTempTransaction>(this.detach_tbTempTransactions));
-		this._tbBookTime = default(EntityRef<tbBookTime>);
 		this._tbFieldType = default(EntityRef<tbFieldType>);
 		OnCreated();
 	}
@@ -1653,26 +1623,22 @@ public partial class tbField : INotifyPropertyChanging, INotifyPropertyChanged
 		}
 	}
 	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_book_time_id", DbType="Int")]
-	public System.Nullable<int> book_time_id
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_book_time_type", DbType="Int")]
+	public System.Nullable<int> book_time_type
 	{
 		get
 		{
-			return this._book_time_id;
+			return this._book_time_type;
 		}
 		set
 		{
-			if ((this._book_time_id != value))
+			if ((this._book_time_type != value))
 			{
-				if (this._tbBookTime.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Onbook_time_idChanging(value);
+				this.Onbook_time_typeChanging(value);
 				this.SendPropertyChanging();
-				this._book_time_id = value;
-				this.SendPropertyChanged("book_time_id");
-				this.Onbook_time_idChanged();
+				this._book_time_type = value;
+				this.SendPropertyChanged("book_time_type");
+				this.Onbook_time_typeChanged();
 			}
 		}
 	}
@@ -1687,40 +1653,6 @@ public partial class tbField : INotifyPropertyChanging, INotifyPropertyChanged
 		set
 		{
 			this._tbTempTransactions.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbBookTime_tbField", Storage="_tbBookTime", ThisKey="book_time_id", OtherKey="book_time_id", IsForeignKey=true)]
-	public tbBookTime tbBookTime
-	{
-		get
-		{
-			return this._tbBookTime.Entity;
-		}
-		set
-		{
-			tbBookTime previousValue = this._tbBookTime.Entity;
-			if (((previousValue != value) 
-						|| (this._tbBookTime.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._tbBookTime.Entity = null;
-					previousValue.tbFields.Remove(this);
-				}
-				this._tbBookTime.Entity = value;
-				if ((value != null))
-				{
-					value.tbFields.Add(this);
-					this._book_time_id = value.book_time_id;
-				}
-				else
-				{
-					this._book_time_id = default(Nullable<int>);
-				}
-				this.SendPropertyChanged("tbBookTime");
-			}
 		}
 	}
 	
@@ -2742,6 +2674,8 @@ public partial class tbTempTransaction : INotifyPropertyChanging, INotifyPropert
 	
 	private System.Nullable<int> _emp_id;
 	
+	private System.Nullable<int> _book_time_id;
+	
 	private EntitySet<tbAlert> _tbAlerts;
 	
 	private EntitySet<tbFeedback> _tbFeedbacks;
@@ -2770,6 +2704,8 @@ public partial class tbTempTransaction : INotifyPropertyChanging, INotifyPropert
     partial void Ontransaction_datetimeChanged();
     partial void Onemp_idChanging(System.Nullable<int> value);
     partial void Onemp_idChanged();
+    partial void Onbook_time_idChanging(System.Nullable<int> value);
+    partial void Onbook_time_idChanged();
     #endregion
 	
 	public tbTempTransaction()
@@ -2945,6 +2881,26 @@ public partial class tbTempTransaction : INotifyPropertyChanging, INotifyPropert
 				this._emp_id = value;
 				this.SendPropertyChanged("emp_id");
 				this.Onemp_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_book_time_id", DbType="Int")]
+	public System.Nullable<int> book_time_id
+	{
+		get
+		{
+			return this._book_time_id;
+		}
+		set
+		{
+			if ((this._book_time_id != value))
+			{
+				this.Onbook_time_idChanging(value);
+				this.SendPropertyChanging();
+				this._book_time_id = value;
+				this.SendPropertyChanged("book_time_id");
+				this.Onbook_time_idChanged();
 			}
 		}
 	}

@@ -23,8 +23,8 @@ public partial class admin_page_module_QuanLySan : System.Web.UI.Page
     }
     protected void btnXoaServer_ServerClick(object sender, EventArgs e)
     {
-        if (san.SanAdmin_Del(txtName.Value)) alert.alert_Success(Page, "Xóa thành công", "");
-        else alert.alert_Warning(Page, "Xóa thất bại", "");
+        if (san.SanAdmin_Del(txtName.Value)) alert.alert_Success(Page, "Cập nhật trạng thái thành công", "");
+        else alert.alert_Warning(Page, "Cập nhật trạng thái thất bại", "");
         loadData();
     }
     protected void addField_ServerClick(object sender, EventArgs e)

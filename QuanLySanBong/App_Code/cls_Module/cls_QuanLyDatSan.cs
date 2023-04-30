@@ -22,7 +22,7 @@ public class cls_QuanLyDatSan
         var getData = (from f in db.tbFields
                        join tf in db.tbFieldTypes on f.field_type_id equals tf.field_type_id
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
-                       join bt in db.tbBookTimes on f.book_time_id equals bt.book_time_id
+                       join bt in db.tbBookTimes on f.book_time_type equals bt.book_time_type
                        join u in db.tbUsers on t.users_id equals u.users_id
                        select new
                        {
@@ -45,7 +45,7 @@ public class cls_QuanLyDatSan
     {
         var getData = (from f in db.tbFields
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
-                       join bt in db.tbBookTimes on f.book_time_id equals bt.book_time_id
+                       join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
                        join u in db.tbUsers on t.users_id equals u.users_id
                        where t.transaction_status == 0
                        select new
@@ -74,12 +74,12 @@ public class cls_QuanLyDatSan
     {
         var getData = (from f in db.tbFields
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
-                       join bt in db.tbBookTimes on f.book_time_id equals bt.book_time_id
+                       join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
                        join a in db.tbAlerts on t.temp_transaction_id equals a.trans_id
                        join u in db.tbUsers on t.users_id equals u.users_id
-                       where 
+                       where
                        t.transaction_status == 0
-                       && a.alert_Id == idAlert && t.field_id == idField && f.book_time_id == idBookTime
+                       && a.alert_Id == idAlert && t.field_id == idField && bt.book_time_id == idBookTime
                        && bt.book_time_id == idBookTime && f.field_id == idField
                        select new
                        {
@@ -89,7 +89,7 @@ public class cls_QuanLyDatSan
                            u.users_fullname,
                            transaction_datetime = DateTime.Parse(t.transaction_datetime.ToString()).ToString("dd-MM-yyyy"),
                            transaction_bookdate = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd-MM-yyyy"),
-                           f.book_time_id,
+                           bt.book_time_id,
                            t.field_id,
                            a.alert_Id,
                        });

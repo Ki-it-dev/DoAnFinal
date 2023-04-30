@@ -7,8 +7,6 @@ using System.Web.UI.WebControls;
 
 public partial class admin_page_employee_page_module_XacNhanDatSanChung : System.Web.UI.Page
 {
-    dbcsdlDataContext db = new dbcsdlDataContext();
-
     cls_Alert alert = new cls_Alert();
     cls_User cls_User = new cls_User();
     cls_QuanLyDatSan cls_QuanLyDatSan = new cls_QuanLyDatSan();

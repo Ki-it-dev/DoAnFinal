@@ -109,15 +109,15 @@ public class cls_San
     {
         var getTimeBook = (from st in db.tbTempTransactions
                            join ss in db.tbFields on st.field_id equals ss.field_id
-                           //join bt in db.tbBookTimes on ss.book_time_id equals bt.book_time_id
+                           join bt in db.tbBookTimes on st.book_time_id equals bt.book_time_id
                            where
                            st.transaction_status == trangThaiSan
                            && st.transaction_bookdate == dateBook
                            && ss.field_status == true
                            select new
                            {
-                               ss.book_time_id,
-                               ss.field_id,
+                               st.book_time_id,
+                               st.field_id,
                            });
         if (returnType == 1)
             return string.Join(",", getTimeBook.Select(x => x.field_id));//id san
@@ -128,17 +128,17 @@ public class cls_San
     {
         var getData = (from st in db.tbTempTransactions
                        join ss in db.tbFields on st.field_id equals ss.field_id
-                       //join bt in db.tbBookTimes on st.book_time_id equals bt.book_time_id
+                       join bt in db.tbBookTimes on st.book_time_id equals bt.book_time_id
                        where
                        st.field_id == idSan
-                       && ss.book_time_id == idGio
+                       && bt.book_time_id == idGio
                        && st.transaction_status == 0
                        && ss.field_status == true
                        && st.transaction_bookdate == dateBook
                        select new
                        {
                            st.field_id,
-                           ss.book_time_id,
+                           st.book_time_id,
                        }).Count();
         return getData;
     }
@@ -147,7 +147,7 @@ public class cls_San
     {
         var getSanDat = from bt in db.tbBookTimes
                             //join t in db.tbTempTransactions on bt.book_time_id equals t.book_time_id
-                        join f in db.tbFields on bt.book_time_id equals f.book_time_id
+                        join f in db.tbFields on bt.book_time_type equals f.book_time_type
                         where bt.book_time_id == int.Parse(idBookTime) && f.field_status == true
                         select new
                         {
@@ -164,7 +164,7 @@ public class cls_San
     {
         var getSanDat = from bt in db.tbBookTimes
                             //join s in db.tbTempTransactions on bt.book_time_id equals s.book_time_id
-                        join f in db.tbFields on bt.book_time_id equals f.book_time_id
+                        join f in db.tbFields on bt.book_time_type equals f.book_time_type
                         where bt.book_time_id == int.Parse(idBookTime) && f.field_status == true
                         select new
                         {
@@ -196,7 +196,7 @@ public class cls_San
         //Lay ra toan bo san da dat
         var getData = (from t in db.tbTempTransactions
                        join f in db.tbFields on t.field_id equals f.field_id
-                       join bt in db.tbBookTimes on f.book_time_id equals bt.book_time_id
+                       join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
                        where t.users_id == userId && f.field_status == true
                        select new
                        {
@@ -261,16 +261,16 @@ public class cls_San
         string[] arrIdType = string.Join(",", listIdType.Select(x => x.book_time_id)).Split(',');
         try
         {
-            for (int i = 0; i < arrIdType.Length; i++)
-            {
-                tbField insert = new tbField();
-                insert.field_name = _nameField;
-                insert.field_status = true;
-                insert.field_type_id = _typeFieldId;
-                insert.book_time_id = Convert.ToInt32(arrIdType[i]);
-                db.tbFields.InsertOnSubmit(insert);
-                db.SubmitChanges();
-            }
+            //for (int i = 0; i < arrIdType.Length; i++)
+            //{
+            //    tbField insert = new tbField();
+            //    insert.field_name = _nameField;
+            //    insert.field_status = true;
+            //    insert.field_type_id = _typeFieldId;
+            //    insert.book_time_id = Convert.ToInt32(arrIdType[i]);
+            //    db.tbFields.InsertOnSubmit(insert);
+            //    db.SubmitChanges();
+            //}
             return true;
         }
         catch

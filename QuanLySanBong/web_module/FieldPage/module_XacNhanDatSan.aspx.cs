@@ -70,13 +70,12 @@ public partial class web_module_module_XacNhanDatSan : System.Web.UI.Page
         else
         {
             if (cls_Transaction.Transaction_Insert(
-                    int.Parse(txtIdSan.Value), getUserId, getPrice, Convert.ToDateTime(txtTime.Value)
+                    int.Parse(txtIdSan.Value), getUserId, Convert.ToDateTime(txtTime.Value), Convert.ToInt32(txtIdGio.Value)
                 ))
             {
                 int _idTrans = cls_Transaction.Transaction_Id(getUserId, int.Parse(txtIdSan.Value), int.Parse(txtIdGio.Value), Convert.ToDateTime(txtTime.Value));
                 if (_Notification.Notification_Insert_Field(contentAlert, linkToAlert, _idTrans))
                     Response.Redirect("/quan-ly-dat-san-ca-nhan");
-                //alert.alert_Success(Page, "Xác nhận thành công Vui lòng chờ nhân viên xác nhận", "");
                 else alert.alert_Warning(Page, "Lỗi gửi thông báo!!!", "");
             }
         }

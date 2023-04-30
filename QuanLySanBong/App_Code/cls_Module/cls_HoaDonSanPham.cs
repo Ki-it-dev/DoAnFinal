@@ -36,19 +36,20 @@ public class cls_HoaDonSanPham
     }
     public bool insert_HoaDonChiTiet(int _idBillInfo, string[] _idProduct, string[] _quantity)
     {
-        tbProductBill insert = new tbProductBill();
-
         for (int i = 0; i < _idProduct.Length; i++)
         {
+            tbProductBill insert = new tbProductBill();
+
             insert.bill_info_id = _idBillInfo;
             insert.product_id = Convert.ToInt32(_idProduct[i]);
             insert.quantity = Convert.ToInt32(_quantity[i]);
             db.tbProductBills.InsertOnSubmit(insert);
+            db.SubmitChanges();
         }
 
         try
         {
-            db.SubmitChanges();
+            
             return true;
         }
         catch

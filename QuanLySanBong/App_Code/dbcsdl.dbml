@@ -52,7 +52,6 @@
       <Column Name="book_time_detail" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
       <Column Name="book_time_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="book_time_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Association Name="tbBookTime_tbField" Member="tbFields" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbField" />
     </Type>
   </Table>
   <Table Name="dbo.tbFeedback" Member="tbFeedbacks">
@@ -71,9 +70,8 @@
       <Column Name="field_name" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
       <Column Name="field_type_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="field_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="book_time_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="book_time_type" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="tbField_tbTempTransaction" Member="tbTempTransactions" ThisKey="field_id" OtherKey="field_id" Type="tbTempTransaction" />
-      <Association Name="tbBookTime_tbField" Member="tbBookTime" ThisKey="book_time_id" OtherKey="book_time_id" Type="tbBookTime" IsForeignKey="true" />
       <Association Name="tbFieldType_tbField" Member="tbFieldType" ThisKey="field_type_id" OtherKey="field_type_id" Type="tbFieldType" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
@@ -135,6 +133,7 @@
       <Column Name="transaction_bookdate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="transaction_datetime" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="emp_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="book_time_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="tbTempTransaction_tbAlert" Member="tbAlerts" ThisKey="temp_transaction_id" OtherKey="trans_id" Type="tbAlert" />
       <Association Name="tbTempTransaction_tbFeedback" Member="tbFeedbacks" ThisKey="temp_transaction_id" OtherKey="trans_id" Type="tbFeedback" />
       <Association Name="tbField_tbTempTransaction" Member="tbField" ThisKey="field_id" OtherKey="field_id" Type="tbField" IsForeignKey="true" DeleteRule="CASCADE" />

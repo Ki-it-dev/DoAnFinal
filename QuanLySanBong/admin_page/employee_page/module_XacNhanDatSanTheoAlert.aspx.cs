@@ -31,50 +31,56 @@ public partial class admin_page_employee_page_module_XacNhanDatSanTheoAlert : Sy
 
     protected void btnServerHuy_ServerClick(object sender, EventArgs e)
     {
-        //var getIDSanAD = from s in db.tbTempTransactions
-        //                 where s.book_time_id == Convert.ToInt32(txtIdGio.Value) && s.field_id == Convert.ToInt32(txtIdSan.Value)
-        //                 orderby s.temp_transaction_id
-        //                 select s.temp_transaction_id;
+        var getIDSanAD = from s in db.tbTempTransactions
+                         where s.book_time_id == Convert.ToInt32(txtIdGio.Value) && s.field_id == Convert.ToInt32(txtIdSan.Value)
+                         orderby s.temp_transaction_id
+                         select s.temp_transaction_id;
 
-        //tbTempTransaction del = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
-        //tbAlert delAlert = db.tbAlerts.Where(x => x.alert_Id == int.Parse(txtIdAlert.Value)).FirstOrDefault();
+        tbTempTransaction del = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
+        tbAlert delAlert = db.tbAlerts.Where(x => x.alert_Id == int.Parse(txtIdAlert.Value)).FirstOrDefault();
 
-        //db.tbTempTransactions.DeleteOnSubmit(del);
-        //db.tbAlerts.DeleteOnSubmit(delAlert);
+        db.tbTempTransactions.DeleteOnSubmit(del);
+        db.tbAlerts.DeleteOnSubmit(delAlert);
 
-        //db.SubmitChanges();
+        db.SubmitChanges();
 
-        //alert.alert_Success(Page, "Hủy thành công", "");
+        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
+                        "AlertBox", "swal('Hủy thành công', '','success').then(function(){window.location = '/xac-nhan-dat-san-chung';})", true);
+
         //Response.Redirect("/xac-nhan-dat-san-chung");
     }
 
     protected void btnServerXacNhan_ServerClick(object sender, EventArgs e)
     {
-        //string[] listId = Request.Url.Segments.Last().Split('-');
-        //int idAlert = int.Parse(listId[6]);
+        string[] listId = Request.Url.Segments.Last().Split('-');
+        int idAlert = int.Parse(listId[6]);
 
-        //var getIDSanAD = from s in db.tbTempTransactions
-        //                 where s.book_time_id == Convert.ToInt32(txtIdGio.Value) && s.field_id == Convert.ToInt32(txtIdSan.Value)
-        //                 && s.transaction_status == 0
-        //                 orderby s.temp_transaction_id
-        //                 select s.temp_transaction_id;
+        var getIDSanAD = from s in db.tbTempTransactions
+                         where s.book_time_id == Convert.ToInt32(txtIdGio.Value) && s.field_id == Convert.ToInt32(txtIdSan.Value)
+                         && s.transaction_status == 0
+                         orderby s.temp_transaction_id
+                         select s.temp_transaction_id;
 
-        //string nameField = cls_San.San_TenSan(int.Parse(txtIdSan.Value));
-        //string timeDetail = cls_BookTime.BookTime_GetBookTimeDetail(int.Parse(txtIdGio.Value));
+        string nameField = cls_San.San_TenSan(int.Parse(txtIdSan.Value));
+        string timeDetail = cls_BookTime.BookTime_GetBookTimeDetail(int.Parse(txtIdGio.Value));
 
-        //var bookDate = (from s in db.tbAlerts where s.alert_Id == idAlert 
-        //                join t in db.tbTempTransactions on s.trans_id equals t.temp_transaction_id
-        //                select t.transaction_bookdate).FirstOrDefault();
+        var bookDate = (from s in db.tbAlerts
+                        where s.alert_Id == idAlert
+                        join t in db.tbTempTransactions on s.trans_id equals t.temp_transaction_id
+                        select t.transaction_bookdate).FirstOrDefault();
 
-        //tbTempTransaction update = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
-        //update.transaction_status = 1;
+        tbTempTransaction update = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
+        update.transaction_status = 1;
 
-        //tbAlert updateStatus = db.tbAlerts.Where(x => x.alert_Id == idAlert).FirstOrDefault();
-        //updateStatus.alert_status = true;
-        //updateStatus.alert_content = nameField + " đá vào lúc " + timeDetail + " ngày " + bookDate + " đã được xác nhận!!!";
+        tbAlert updateStatus = db.tbAlerts.Where(x => x.alert_Id == idAlert).FirstOrDefault();
+        updateStatus.alert_status = true;
+        updateStatus.alert_content = nameField + " đá vào lúc " + timeDetail + " ngày " + bookDate + " đã được xác nhận!!!";
 
-        //db.SubmitChanges();
-        //alert.alert_Success(Page, "Xác nhận thành công", "");
+        db.SubmitChanges();
+
+        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
+                        "AlertBox", "swal('Xác nhận thành công', '','success').then(function(){window.location = '/xac-nhan-dat-san-chung';})", true);
+
         //Response.Redirect("/xac-nhan-dat-san-chung");
     }
 }

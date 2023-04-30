@@ -78,7 +78,7 @@ public class cls_BookTime
 
         var nameField = (from s in db.tbFields
                          group s by new { s.field_name, s.field_type_id } into k
-                         select new { field_name = k.Key.field_name, field_type_id = k.Key.field_type_id });
+                         select new { k.Key.field_name, k.Key.field_type_id });
 
         try
         {
@@ -105,17 +105,17 @@ public class cls_BookTime
     public bool BookTime_Delete(int _idTypeBookTime)
     {
         var del = db.tbBookTimes.Where(x => x.book_time_type == _idTypeBookTime);
-        var updateId = (from s in db.tbFields
-                        join t in db.tbBookTimes on s.book_time_id equals t.book_time_id
-                        where t.book_time_type == _idTypeBookTime
-                        select s.book_time_id);
+        //var updateId = (from s in db.tbFields
+        //                join t in db.tbBookTimes on s.book_time_type equals t.book_time_type
+        //                where t.book_time_type == _idTypeBookTime
+        //                select s.book_time_id);
 
-        foreach (var item in updateId)
-        {
-            tbField update = db.tbFields.Where(x => x.book_time_id == item).FirstOrDefault();
+        //foreach (var item in updateId)
+        //{
+        //    tbField update = db.tbFields.Where(x => x.book_time_id == item).FirstOrDefault();
 
-            update.book_time_id = null;
-        }
+        //    update.book_time_id = null;
+        //}
 
         db.tbBookTimes.DeleteAllOnSubmit(del);
 
