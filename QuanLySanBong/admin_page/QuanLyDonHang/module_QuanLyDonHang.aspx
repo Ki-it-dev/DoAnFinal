@@ -14,7 +14,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">Mã đơn</th>
-                                    <th scope="col">Số lượng</th>
+                                    <%--<th scope="col">Số lượng</th>--%>
                                     <th scope="col">Tổng tiền</th>
                                     <th scope="col">Ngày tạo</th>
                                     <th scope="col">Nhân viên</th>
@@ -27,7 +27,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <th scope="row"><%#Eval("bill_info_id") %></th>
-                                            <td><%--<%#Eval("products_name")%>--%> <%#Eval("soLuong") %></td>
+                                            <%--<td><%#Eval("soLuong") %></td>--%>
                                             <td><%#Eval("total")%></td>
                                             <td><%#Eval("data_create")%></td>
                                             <td><%#Eval("users_fullname")%></td>

@@ -61,6 +61,26 @@ public class cls_User
     {
         var getUserList = from u in db.tbUsers
                           join pq in db.tbGroupUsers on u.group_user_id equals pq.group_user_id
+                          where u.group_user_id == 3
+                          select new
+                          {
+                              u.users_phoneNumber,
+                              u.users_fullname,
+                              u.users_account,
+                              u.users_password,
+                              u.users_address,
+                              u.users_id,
+                              users_status = u.users_status == true ? "Đã kích hoạt" : "Chưa kích hoạt",
+                              pq.group_user_name,
+                          };
+        repeater.DataSource = getUserList;
+        repeater.DataBind();
+    }
+    public void User_getEmployList(Repeater repeater)
+    {
+        var getUserList = from u in db.tbUsers
+                          join pq in db.tbGroupUsers on u.group_user_id equals pq.group_user_id
+                          where u.group_user_id == 2
                           select new
                           {
                               u.users_phoneNumber,
