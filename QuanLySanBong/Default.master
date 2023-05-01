@@ -128,9 +128,11 @@
 
                                 <div class="col-lg-2 col-md-1 col-sm-1">
                                     <div class="container-4">
-                                        <input class="form-control mr-sm-2" type="search" id="txtTimKiem" runat="server"
+                                        <formview>
+                                            <input class="form-control mr-sm-2" type="search" id="txtTimKiem" runat="server"
                                             placeholder="Nhập sân hoặc sản phẩm bất kỳ..." aria-label="search" />
-                                        <button class="icon" id="btnTimKiem" runat="server" onserverclick="btnTimKiem_ServerClick" type="submit"><i style="color: #000000" class="fa-brands fa-searchengin"></i></button>
+                                        <button class="icon" id="btnTimKiem" runat="server" onserverclick="btnTimKiem_ServerClick" type="button"><i style="color: #000000" class="fa-brands fa-searchengin"></i></button>
+                                        </formview>
                                     </div>
                                 </div>
 
