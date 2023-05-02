@@ -12,7 +12,7 @@
 
         <div id="bodyCart"></div>
 
-        <input type="text" id="txtTong" />
+        <input type="text" id="txtTong" runat="server"/>
 
         <div class="d-none">
             <button id="save" runat="server" onserverclick="save_ServerClick"></button>
@@ -97,7 +97,7 @@
                 if (parseInt(arr[i].value))
                     total += parseInt(arr[i].value);
             }
-            document.getElementById('txtTong').value = total;
+            document.getElementById("<%=txtTong.ClientID%>").value = total;
         })
 
         function btnAddInput() {
@@ -174,7 +174,7 @@
                 if (parseInt(arr[i].value))
                     total += parseInt(arr[i].value);
             }
-            document.getElementById('txtTong').value = total;
+            document.getElementById("<%=txtTong.ClientID%>").value = total;
         }
 
         function btnSua() {

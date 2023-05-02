@@ -13,24 +13,32 @@ public partial class admin_page_module_ThongKe : System.Web.UI.Page
     {
         if (!IsPostBack)
         {
-            loadDataSanTheoThangVaNamHienTai();
+            loadData();
             _LoaiSan.Load_DDLDanhSachLoaiSan(ddlLoaiSan);
         }
     }
-    protected void loadDataSanTheoThangVaNamHienTai()
+    protected void loadData()
     {
         txtSoLuongDatSanTheoThangVaNam.Value = _ThongKe.GetSoLuongDatSanTheoThangVaNam(DateTime.Now.Year, 0);
+        txtSoLuongNguoiDungDaDatSan.Value = _ThongKe.GetSoLuongNguoiDungDatSanTrongNam(DateTime.Now.Year);
+        txtSoLuongDatHang.Value = _ThongKe.GetSoLuongDatHangTheoThangVaNam(DateTime.Now.Year);
     }
 
     protected void btnXemThongKeDatSanTheoThangVaNam_ServerClick(object sender, EventArgs e)
     {
+        //Thong ke dat san
         if (ddlLoaiSan.SelectedValue == "Chọn loại sân")
         {
             txtSoLuongDatSanTheoThangVaNam.Value = _ThongKe.GetSoLuongDatSanTheoThangVaNam(Convert.ToInt32(ddlYear.SelectedValue), 0);
         }
         else
         {
+            //Thong ke dat san
             txtSoLuongDatSanTheoThangVaNam.Value = _ThongKe.GetSoLuongDatSanTheoThangVaNam(Convert.ToInt32(ddlYear.SelectedValue), Convert.ToInt32(ddlLoaiSan.SelectedValue));
+            //Thong ke nguoi dung
+            txtSoLuongNguoiDungDaDatSan.Value = _ThongKe.GetSoLuongNguoiDungDatSanTrongNam(Convert.ToInt32(ddlYear.SelectedValue));
+            //Thong ke don hang
+            txtSoLuongDatHang.Value = _ThongKe.GetSoLuongDatHangTheoThangVaNam(Convert.ToInt32(ddlYear.SelectedValue));
         }
     }
 }

@@ -48,13 +48,14 @@ public class cls_HoaDonSanPham
 
         return listProducts;
     }
-    public bool insert_ThongTinHoaDon(int _idEmploy, int _idTrans)
+    public bool insert_ThongTinHoaDon(int _idEmploy, int _idTrans,decimal total)
     {
         tbBillInfo insert = new tbBillInfo();
 
         insert.data_create = DateTime.Now;
         insert.trans_id = _idTrans;
         insert.emp_id = _idEmploy;
+        insert.total = total;
 
         db.tbBillInfos.InsertOnSubmit(insert);
         try
@@ -90,11 +91,15 @@ public class cls_HoaDonSanPham
             return false;
         }
     }
-    public bool update_HoaDon(int _idEmploy/*, int _idTrans*/, string[] _idProduct, string[] _quantity, int _idBillInfo)
+    public bool update_HoaDon(int _idEmploy/*, int _idTrans*/, string[] _idProduct, string[] _quantity, int _idBillInfo,decimal total)
     {
         //Xoa het du lieu ton tai vs id bill info bang nhau
         var del = db.tbProductBills.Where(x => x.bill_info_id == _idBillInfo);
         db.tbProductBills.DeleteAllOnSubmit(del);
+        //Update
+        var update = db.tbBillInfos.Where(x=>x.bill_info_id==_idBillInfo).FirstOrDefault();
+        update.total = total;
+
         //Chen lai du lieu
         insert_HoaDonChiTiet(_idBillInfo, _idProduct, _quantity);
 

@@ -69,9 +69,8 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
   partial void UpdatetbTempTransaction(tbTempTransaction instance);
   partial void DeletetbTempTransaction(tbTempTransaction instance);
     #endregion
-
     public dbcsdlDataContext() :
-            base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString"].ConnectionString, mappingSource)
+            base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString2"].ConnectionString, mappingSource)
     {
         OnCreated();
     }
@@ -1015,6 +1014,8 @@ public partial class tbBillInfo : INotifyPropertyChanging, INotifyPropertyChange
 	
 	private System.Nullable<int> _emp_id;
 	
+	private System.Nullable<decimal> _total;
+	
 	private EntitySet<tbProductBill> _tbProductBills;
 	
     #region Extensibility Method Definitions
@@ -1029,6 +1030,8 @@ public partial class tbBillInfo : INotifyPropertyChanging, INotifyPropertyChange
     partial void Ontrans_idChanged();
     partial void Onemp_idChanging(System.Nullable<int> value);
     partial void Onemp_idChanged();
+    partial void OntotalChanging(System.Nullable<decimal> value);
+    partial void OntotalChanged();
     #endregion
 	
 	public tbBillInfo()
@@ -1113,6 +1116,26 @@ public partial class tbBillInfo : INotifyPropertyChanging, INotifyPropertyChange
 				this._emp_id = value;
 				this.SendPropertyChanged("emp_id");
 				this.Onemp_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_total", DbType="Decimal(18,0)")]
+	public System.Nullable<decimal> total
+	{
+		get
+		{
+			return this._total;
+		}
+		set
+		{
+			if ((this._total != value))
+			{
+				this.OntotalChanging(value);
+				this.SendPropertyChanging();
+				this._total = value;
+				this.SendPropertyChanged("total");
+				this.OntotalChanged();
 			}
 		}
 	}

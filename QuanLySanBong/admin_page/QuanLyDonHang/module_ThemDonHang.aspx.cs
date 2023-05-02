@@ -26,10 +26,12 @@ public partial class admin_page_QuanLyDonHang_module_ThemDonHang : System.Web.UI
     {
         int _idUser = _User.User_getUserId(Request.Cookies["UserName"].Value);
 
+        decimal total = Convert.ToDecimal(txtTong.Value);
+
         string[] arrIdProducts = txtIdProductsSelect.Value.Split(',');
         string[] arrQuantitys = txtQuantitysProducts.Value.Split(',');
 
-        if (_HoaDonSanPham.insert_ThongTinHoaDon(_idUser, 0))
+        if (_HoaDonSanPham.insert_ThongTinHoaDon(_idUser, 0, total))
         {
             int _idLastBill = (from b in db.tbBillInfos orderby b.bill_info_id descending select b.bill_info_id).FirstOrDefault();
             if (_HoaDonSanPham.insert_HoaDonChiTiet(_idLastBill, arrIdProducts, arrQuantitys))

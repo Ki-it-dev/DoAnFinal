@@ -34,13 +34,15 @@ public partial class admin_page_QuanLyDonHang_module_SuaDonHang : System.Web.UI.
         int _idUser = _User.User_getUserId(Request.Cookies["UserName"].Value);
         string _idBill = Request.Url.Segments.Last().Replace("-", "").Substring(10);
 
+        decimal total = Convert.ToDecimal(txtTong.Value);
+
         string[] arrIdProducts = txtIdProductsSelect.Value.Split(',');
         string[] arrQuantitys = txtQuantitysProducts.Value.Split(',');
 
-        if (_HoaDonSanPham.insert_ThongTinHoaDon(_idUser, 0))
+        if (_HoaDonSanPham.insert_ThongTinHoaDon(_idUser, 0, total))
         {
             int _idLastBill = (from b in db.tbBillInfos orderby b.bill_info_id descending select b.bill_info_id).FirstOrDefault();
-            if (_HoaDonSanPham.update_HoaDon(_idUser, arrIdProducts, arrQuantitys, Convert.ToInt32(_idBill)))
+            if (_HoaDonSanPham.update_HoaDon(_idUser, arrIdProducts, arrQuantitys, Convert.ToInt32(_idBill), total))
             {
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
                         "AlertBox", "swal('Cập nhật thành công', '','success').then(function(){window.location = '/quan-ly-don-hang';})", true);
