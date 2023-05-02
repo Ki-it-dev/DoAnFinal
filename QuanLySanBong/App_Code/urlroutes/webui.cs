@@ -37,6 +37,8 @@ public class webui
         //Quên mật khẩu
         list.Add("webXacNhanMatKhau|quen-mat-khau-{value}|~/web_module/LoginPage/module_XacNhanMatKhau.aspx");
         list.Add("webCapNhatMatKhau|cap-nhat-mat-khau-{value}|~/web_module/LoginPage/module_CapNhatMatKhau.aspx");
+        //Chat box
+        list.Add("webChatBox|chat-box|~/web_module/module_Chat.aspx");
 
         return list;
 
