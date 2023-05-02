@@ -22,7 +22,7 @@ public class cls_QuanLyDatSan
         var getData = (from f in db.tbFields
                        join tf in db.tbFieldTypes on f.field_type_id equals tf.field_type_id
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
-                       join bt in db.tbBookTimes on f.book_time_type equals bt.book_time_type
+                       join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
                        join u in db.tbUsers on t.users_id equals u.users_id
                        select new
                        {

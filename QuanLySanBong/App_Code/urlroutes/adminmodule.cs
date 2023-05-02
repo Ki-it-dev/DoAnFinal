@@ -46,6 +46,8 @@ public class adminmodule
         list.Add("webThemDonHang|them-don-hang|~/admin_page/QuanLyDonHang/module_ThemDonHang.aspx");
         list.Add("webChiTietDonHang|chi-tiet-don-hang-{id}|~/admin_page/QuanLyDonHang/module_ChiTietDonHang.aspx");
         list.Add("webCapNhatDonHang|sua-don-hang-{id}|~/admin_page/QuanLyDonHang/module_SuaDonHang.aspx");
+        //Thong ke
+        list.Add("webThongKe|thong-ke|~/admin_page/module_ThongKe.aspx");
 
         return list;
     }

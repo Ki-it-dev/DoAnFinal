@@ -18,7 +18,17 @@ public class cls_LoaiSan
         // TODO: Add constructor logic here
         //
     }
-
+    public void Load_DDLDanhSachLoaiSan(DropDownList ddl)
+    {
+        var listLS = from nv in db.tbFieldTypes select nv;
+        ddl.Items.Clear();
+        ddl.Items.Insert(0, "Chọn loại sân");
+        ddl.AppendDataBoundItems = true;
+        ddl.DataTextField = "field_type_name";
+        ddl.DataValueField = "field_type_id";
+        ddl.DataSource = listLS;
+        ddl.DataBind();
+    }
     public void Load_DanhSachLoaiSan(Repeater repeater)
     {
         var result = (from t in db.tbFieldTypes select t);
