@@ -67,14 +67,14 @@ public partial class admin_page_employee_page_module_XacNhanDatSanTheoAlert : Sy
         var bookDate = (from s in db.tbAlerts
                         where s.alert_Id == idAlert
                         join t in db.tbTempTransactions on s.trans_id equals t.temp_transaction_id
-                        select t.transaction_bookdate).FirstOrDefault();
+                        select new { date = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd/MM/yyyy") });
 
         tbTempTransaction update = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
         update.transaction_status = 1;
 
         tbAlert updateStatus = db.tbAlerts.Where(x => x.alert_Id == idAlert).FirstOrDefault();
         updateStatus.alert_status = true;
-        updateStatus.alert_content = nameField + " đá vào lúc " + timeDetail + " ngày " + bookDate + " đã được xác nhận!!!";
+        updateStatus.alert_content = nameField + " đá vào lúc " + timeDetail + " ngày " + bookDate.FirstOrDefault().date + " đã được xác nhận!!!";
 
         db.SubmitChanges();
 

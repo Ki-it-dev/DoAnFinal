@@ -13,6 +13,7 @@ public partial class _Default : System.Web.UI.MasterPage
     cls_User cls_User = new cls_User();
 
     protected string styleNone, txtNone, adminNone;
+    protected int countAlert;
     protected void Page_Load(object sender, EventArgs e)
     {
         if (Request.Cookies["UserName"] != null)
@@ -70,6 +71,7 @@ public partial class _Default : System.Web.UI.MasterPage
 
         if (getNotif.Any())
         {
+            countAlert = getNotif.Count();
             rpNotif.DataSource = getNotif;
             rpNotif.DataBind();
         }
@@ -96,6 +98,8 @@ public partial class _Default : System.Web.UI.MasterPage
 
         if (getNotif.Any())
         {
+            countAlert = getNotif.Count();
+
             rpNotif.DataSource = getNotif;
             rpNotif.DataBind();
         }

@@ -156,7 +156,7 @@
                                         <div class="dropdown">
                                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Thông báo <span>1</span>
+                                                Thông báo <span><%=countAlert%></span>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <asp:Repeater runat="server" ID="rpNotif">
