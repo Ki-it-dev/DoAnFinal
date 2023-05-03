@@ -17,8 +17,10 @@
                                 <div class="p-2">Ngày đá  : <%#Eval("transaction_bookdate") %></div>
                                 <div class="d-flex">
                                     <div class="p-2"><span class="badge badge-success" style="<%#Eval("daXacNhan")%>">Đã xác nhận</span></div>
+                                    <div class="p-2"><a href="/phan-hoi-<%#Eval("temp_transaction_id") %>" class="badge badge-success" style="<%#Eval("daXacNhan")%>">Phản hồi</a></div>
+
                                     <div class="p-2"><span class="badge badge-warning" style="<%#Eval("choXacNhan")%>">Chờ xác nhận</span></div>
-                                    <div class="p-2"><span class="badge badge-secondary" style="<%#Eval("daHuy")%>">Đã hủy</span></div>
+                                    <%--<div class="p-2"><span class="badge badge-secondary" style="<%#Eval("daHuy")%>">Đã hủy</span></div>--%>
                                     <div class="p-2">
                                         <a href="#"><span class="badge badge-danger"
                                             onclick="myBtnHuy('<%#Eval("temp_transaction_id") %>')" style="<%#Eval("huy")%>">Hủy</span></a>

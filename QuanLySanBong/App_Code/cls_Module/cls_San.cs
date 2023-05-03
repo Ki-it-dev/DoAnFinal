@@ -212,8 +212,10 @@ public class cls_San
                            t.temp_transaction_id,
 
                            daXacNhan = t.transaction_status == 1 ? "display:block" : "display:none",
+
                            choXacNhan = t.transaction_status == 0 ? "display:block" : "display:none",
                            huy = t.transaction_status == 0 ? "display:block" : "display:none",
+
                            chinhSua = t.transaction_status == 0 ? "display:block" : "display:none",
                            daHuy = t.transaction_status == -1 ? "display:block" : "display:none",
                        });

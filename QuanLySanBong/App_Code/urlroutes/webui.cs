@@ -26,6 +26,10 @@ public class webui
         list.Add("webXacNhanDatSan|xac-nhan-dat-san|~/web_module/FieldPage/module_XacNhanDatSan.aspx");
         list.Add("webQuanLyDatSanCaNhan|quan-ly-dat-san-ca-nhan|~/web_module/FieldPage/module_QuanLyDatSanCaNhan.aspx");
         list.Add("webSan|danh-sach-san|~/web_module/FieldPage/module_San.aspx");
+        //Phan hoi
+        list.Add("webPhanHoi|phan-hoi-{id}|~/web_module/FieldPage/module_PhanHoiDatSan.aspx");
+        list.Add("webDanhSachPhanHoi|danh-sach-phan-hoi-khach|~/web_module/FieldPage/module_DanhSachDaPhanHoi.aspx");
+
         //Danh sach san pham
         list.Add("webSanPham|san-pham|~/web_module/ProductsPage/module_SanPham.aspx");
         //Nguoi dung

@@ -8,13 +8,13 @@ using System.Web;
 /// </summary>
 public class adminmodule
 {
-	public adminmodule()
-	{
-		//
-		// TODO: Add constructor logic here
-		//
-	}
-    
+    public adminmodule()
+    {
+        //
+        // TODO: Add constructor logic here
+        //
+    }
+
     public List<string> UrlRoutes()
     {
         List<string> list = new List<string>();
@@ -48,6 +48,9 @@ public class adminmodule
         list.Add("webCapNhatDonHang|sua-don-hang-{id}|~/admin_page/QuanLyDonHang/module_SuaDonHang.aspx");
         //Thong ke
         list.Add("webThongKe|thong-ke|~/admin_page/module_ThongKe.aspx");
+        //Quan ly phan hoi
+        list.Add("webQuanLyPhanHoi|danh-sach-phan-hoi|~/admin_page/employee_page/module_DanhSachPhanHoi.aspx");
+        list.Add("webCapNhatPhanHoi|cap-nhat-phan-hoi-{idPhanHoi}|~/admin_page/employee_page/module_CapNhatPhanHoi.aspx");
 
         return list;
     }

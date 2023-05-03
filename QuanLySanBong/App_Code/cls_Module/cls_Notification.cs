@@ -10,7 +10,6 @@ public class cls_Notification
 {
     dbcsdlDataContext db = new dbcsdlDataContext();
 
-    cls_User user = new cls_User();
     public cls_Notification()
     {
         //
