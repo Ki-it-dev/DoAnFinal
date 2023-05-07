@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IdentityModel.Protocols.WSTrust;
+//using System.IdentityModel.Protocols.WSTrust;
 using System.Linq;
 using System.Web;
 using System.Web.UI.WebControls;
@@ -20,6 +20,24 @@ public class cls_feedback
     public void GetAllFeedBackFromUser(Repeater repeater)
     {
         var getData = (from f in db.tbFeedbacks
+                       select new
+                       {
+                           f.feedback_id,
+                           f.feedback_content,
+                           status = f.feedback_content_reply.Length > 0 ? "Đã phản hồi" : "Chưa phản hồi",
+                       });
+
+        if (getData.Count() > 0)
+        {
+            repeater.DataSource = getData;
+            repeater.DataBind();
+        }
+    }
+    public void GetAllFeedBackForUser(Repeater repeater,int idUser)
+    {
+        var getData = (from f in db.tbFeedbacks
+                       join t in db.tbTempTransactions on f.trans_id equals t.temp_transaction_id
+                       where t.users_id == idUser
                        select new
                        {
                            f.feedback_id,

@@ -43,6 +43,8 @@ public class webui
         list.Add("webCapNhatMatKhau|cap-nhat-mat-khau-{value}|~/web_module/LoginPage/module_CapNhatMatKhau.aspx");
         //Chat box
         list.Add("webChatBox|chat-box|~/web_module/module_Chat.aspx");
+        //Phan hoi
+        //list.Add("webPhanHoi|phan-hoi|~/web_module/module_DanhSachPhanHoiChoNguoiDung.aspx.aspx");
 
         return list;
 
