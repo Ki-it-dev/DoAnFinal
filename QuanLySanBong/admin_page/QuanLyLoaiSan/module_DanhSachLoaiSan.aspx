@@ -3,9 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="qldsc">
         <div class="khoangcach">
-            <h1>Quản lý sân</h1>
+            <h1>Quản lý loại sân</h1>
             <a class="btn btn-secondary" id="addLoaiSan" runat="server" onserverclick="addLoaiSan_ServerClick">Thêm</a>
             <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">
@@ -43,7 +42,6 @@
             </div>
         </div>
         <div style="padding: 8%;"></div>
-    </div>
     <div class="d-none">
         <a href="#" id="btnXoaServer" runat="server" onserverclick="btnXoaServer_ServerClick"></a>
 

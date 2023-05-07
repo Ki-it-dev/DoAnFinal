@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div id="index">
         <div class="d-flex flex-column " style="height: 100vh">
             <div class="p-2">
 
@@ -49,7 +48,6 @@
                 </table>
 
             </div>
-        </div>
 
         <div style="display: none;">
             <%--<input type="text" id="txtTrangThaiSan" runat="server" name="name" />--%>

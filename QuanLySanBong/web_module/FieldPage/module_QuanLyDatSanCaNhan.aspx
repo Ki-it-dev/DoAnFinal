@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div id="qldscn">
         <div class="khoangcach">
             <h1>Quản lý đơn đặt sân của tôi</h1>
             <div class="d-flex flex-wrap ">
@@ -35,7 +34,6 @@
             </div>
         </div>
         <div style="padding: 8%;"></div>
-    </div>
     <a href="#" id="btnHuy" runat="server" onserverclick="btnHuy_ServerClick"></a>
     <div style="display: none;">
         <input type="text" name="name" value="" id="txtIdTrans" runat="server" />

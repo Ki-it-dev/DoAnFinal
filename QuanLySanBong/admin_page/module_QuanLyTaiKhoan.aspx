@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="qldsc">
         <div class="khoangcach">
             <h1>Quản lý tài khoản</h1>
             <div style="margin-top: 50px;">
@@ -20,7 +19,6 @@
                                     <%--<th scope="col">CMND</th>--%>
                                     <th scope="col">Địa chỉ</th>
                                     <th scope="col">Trạng thái</th>
-                                    <th scope="col">Quyền</th>
                                     <th scope="col"></th>
                                     <th scope="col"></th>
                                 </tr>
@@ -37,7 +35,6 @@
                                             <%--<td><%#Eval("users_identity") %></td>--%>
                                             <td><%#Eval("users_address") %></td>
                                             <td><%#Eval("users_status")%></td>
-                                            <td><%#Eval("group_user_name")%></td>
                                             <td>
                                                 <a class="btn btn-secondary" onclick="btnSua('<%#Eval("users_id")%>')"><i class="fa-solid fa-pen-to-square"></i></a>
                                             </td>
@@ -54,7 +51,6 @@
             </div>
         </div>
         <div style="padding:8%;"></div>
-    </div>
     <div class="d-none">
         <a href="#" id="btnXoaServer" runat="server" onserverclick="btnXoaServer_ServerClick"></a>
         <a href="#" id="btnSuaServer" runat="server" onserverclick="btnSuaServer_ServerClick"></a>

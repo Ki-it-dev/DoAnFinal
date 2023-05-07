@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div id="qlttcn">
         <div class="khoangcach">
             <h2 style="color: white">THÔNG TIN CÁ NHÂN</h2>
             <div class="d-flex justify-content-start">
@@ -59,6 +58,5 @@
             </div>
             <div style="padding: 8%;"></div>
         </div>
-    </div>
 </asp:Content>
 

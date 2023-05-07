@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div id="qlttcn">
         <div class="khoangcach">
             <h1>THÔNG TIN <%=txtTenTaiKhoan%></h1>
             <div class="d-flex justify-content-center">
@@ -92,7 +91,6 @@
             </div>
         </div>
         <div style="padding: 8%;"></div>
-    </div>
 
     <div style="display: none;">
         <input type="text" runat="server" id="txtIdUser" name="name" value="" />

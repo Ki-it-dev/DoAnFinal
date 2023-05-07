@@ -3,9 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <div id="qldsc">
         <div class="khoangcach">
-            <h1>Quản lý giao dịch</h1>
+            <h1>Quản lý phản hồi</h1>
             <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">
                     <div class="p-2">
@@ -40,6 +39,5 @@
             </div>
         </div>
         <div style="padding:8%;"></div>
-    </div>
 </asp:Content>
 

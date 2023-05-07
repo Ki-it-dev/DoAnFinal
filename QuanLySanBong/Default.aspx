@@ -3,7 +3,6 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <div id="index">
         <div class="d-flex flex-column ">
             <div class="p-2">
                 <div class="d-flex flex-row justify-content-center align-items-center">
@@ -40,5 +39,4 @@
                 </div>
             </div>
         </div>
-    </div>
 </asp:Content>

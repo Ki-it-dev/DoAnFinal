@@ -118,11 +118,21 @@
                                     <li class="nav-item">
                                         <a class="nav-link" href="https://www.facebook.com/vanhau1997">Liên hệ</a>
                                     </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" style="<%=txtNone%>; <%=styleNone%>" href="/quan-ly-dat-san-chung">Quản lý đặt sân chung</a>
-                                    </li>
-                                    <li class="nav-item">
-                                        <a class="nav-link" style="<%=adminNone%>; <%=styleNone%>" href="/quan-ly-tai-khoan">Quản lý tài khoản chung</a>
+                                    <li class="nav-item dropdown">
+                                        <div class="dropdown" style="<%=txtNone%>; <%=styleNone%>">
+                                            <a class="nav-link" href="" id="A2" runat="server">Quản lý</a>
+                                            <div class="dropdown-content" style="<%=styleNone%>">
+                                                <a style="<%=adminNone%>; <%=styleNone%>" href="/quan-ly-tai-khoan">Quản lý tài khoản chung</a>
+                                                <a href="/quan-ly-loai-san">Quản lý loại sân</a>
+                                                <a href="/quan-ly-san">Quản lý sân</a>
+                                                <a href="/quan-ly-khung-gio">Quản lý khung giờ</a>
+                                                <a href="/thong-ke">Thống kê</a>
+
+                                                <a href="/quan-ly-dat-san-chung">Quản lý đặt sân chung</a>
+                                                <a href="/quan-ly-san-pham">Quản lý sản phẩm</a>
+                                                <a href="/danh-sach-phan-hoi">Quản lý phản hồi</a>
+                                            </div>
+                                        </div>
                                     </li>
                                 </ul>
 
@@ -152,11 +162,20 @@
                                         </div>
                                     </li>
 
-                                    <li class="nav-item">
+                                    <li class="nav-item dropdown">
+                                        <i class="fa-regular fa-bell"></i> <span><%=countAlert%></span>
                                         <div class="dropdown">
-                                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
+                                            <div class="dropdown-content">
+                                                <asp:Repeater runat="server" ID="rpNotif">
+                                                    <ItemTemplate>
+                                                        <a class="dropdown-item" style="<%#Eval("daXacNhan")%>;<%#Eval("choXacNhan")%>" 
+                                                            href="<%#Eval("linkTo") %>""><%#Eval("alert_content") %></a>
+                                                    </ItemTemplate>
+                                                </asp:Repeater>
+                                            </div>
+                                            <%--<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" 
                                                 data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                                Thông báo <span><%=countAlert%></span>
+                                                <i class="fa-regular fa-bell"></i> <span><%=countAlert%></span>
                                             </button>
                                             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                                                 <asp:Repeater runat="server" ID="rpNotif">
@@ -165,7 +184,7 @@
                                                             href="<%#Eval("linkTo") %>""><%#Eval("alert_content") %></a>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
-                                            </div>
+                                            </div>--%>
                                         </div>
                                     </li>
                                     <li class="nav-item dropdown" style="margin-left: 20px">
@@ -186,8 +205,10 @@
                 </div>
                 <div class="p-2" style="height: 100%">
                     <div class="main" style="height: 100%">
+                        <div id="index">
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                         </asp:ContentPlaceHolder>
+                        </div>
                     </div>
                 </div>
             </div>

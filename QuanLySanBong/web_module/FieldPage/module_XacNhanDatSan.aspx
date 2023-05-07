@@ -4,7 +4,6 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
 
-    <div id="xn">
         <div class="khoangcach">
             <h1>Xác nhận đặt sân</h1>
             <div class="d-flex justify-content-center">
@@ -62,7 +61,6 @@
 
         </div>
         <div style="padding: 8%;"></div>
-    </div>
 
 </asp:Content>
 
