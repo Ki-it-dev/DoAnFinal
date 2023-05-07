@@ -7,9 +7,8 @@
     <%--Thong ke don dat san / don hang / nguoi dung /--%>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <div>
-
+    <div class="row align-items-start">
+    <div class="col">
         <asp:DropDownList runat="server" ID="ddlYear">
             <asp:ListItem Text="2021" />
             <asp:ListItem Text="2022" />
@@ -33,13 +32,16 @@
         <canvas id="thongKeDonHang"></canvas>
 
     </div>
-
-    <div class="d-none">
-        <input type="text" id="txtSoLuongDatHang" runat="server" />
-        <input type="text" id="txtSoLuongNguoiDungDaDatSan" runat="server" />
-        <input type="text" id="txtSoLuongDatSanTheoThangVaNam" runat="server" />
+    <div class="col">
+         <div class="d-none">
+            <input type="text" id="txtSoLuongDatHang" runat="server" />
+            <input type="text" id="txtSoLuongNguoiDungDaDatSan" runat="server" />
+            <input type="text" id="txtSoLuongDatSanTheoThangVaNam" runat="server" />
+        </div>
     </div>
+  </div>
 
+    
     <script>
         const ctx = document.getElementById('thongKeDatSan');
 
