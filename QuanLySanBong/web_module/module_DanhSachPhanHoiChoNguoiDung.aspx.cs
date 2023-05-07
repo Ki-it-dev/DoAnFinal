@@ -5,7 +5,7 @@ using System.Web;
 using System.Web.UI;
 using System.Web.UI.WebControls;
 
-public partial class web_module_module_DanhSachPhanHoi : System.Web.UI.Page
+public partial class web_module_module_DanhSachPhanHoiChoNguoiDung : System.Web.UI.Page
 {
     cls_feedback _Feedback = new cls_feedback();
     cls_User _User = new cls_User();

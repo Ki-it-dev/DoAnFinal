@@ -16,6 +16,48 @@ public class cls_Notification
         // TODO: Add constructor logic here
         //
     }
+    public bool Notification_Insert_FeedBack(string content,int idTrans)
+    {
+        tbAlert insert = new tbAlert();
+
+        insert.trans_id = idTrans;
+        insert.alert_Type_Id = 2;
+        insert.alert_status = false;
+        insert.alert_content = content;
+        insert.isRead = false;
+        insert.alert_datetime = DateTime.Now;
+
+        db.tbAlerts.InsertOnSubmit(insert);
+
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
+    public bool Notification_Update_FeedBack(string content,int idAlert)
+    {
+        var update = db.tbAlerts.Where(x=>x.alert_Id == idAlert).FirstOrDefault();
+
+        update.alert_content = content;
+        update.alert_status = true;
+
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
+
     public bool Notification_Insert_Field(string content, string linkTo, int idTrans)
     {
         tbAlert insert = new tbAlert();

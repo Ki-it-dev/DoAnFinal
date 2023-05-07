@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="module_DanhSachPhanHoiChoNguoiDung.aspx.cs" Inherits="web_module_module_DanhSachPhanHoi" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Default.master" AutoEventWireup="true" CodeFile="module_DanhSachPhanHoiChoNguoiDung.aspx.cs" Inherits="web_module_module_DanhSachPhanHoiChoNguoiDung" %>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
@@ -28,9 +28,9 @@
                                             <td><%#Eval("feedback_id") %></td>
                                             <td><%#Eval("feedback_content") %></td>
                                             <td><%#Eval("status")%></td>
-                                            <td>
+                                            <%--<td>
                                                 <a href="/cap-nhat-phan-hoi-<%#Eval("feedback_id") %>" class="btn btn-success">Sửa</a>
-                                            </td>
+                                            </td>--%>
                                         </tr>
                                     </ItemTemplate>
                                 </asp:Repeater>

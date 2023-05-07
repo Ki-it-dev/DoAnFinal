@@ -44,7 +44,7 @@ public class webui
         //Chat box
         list.Add("webChatBox|chat-box|~/web_module/module_Chat.aspx");
         //Phan hoi
-        //list.Add("webPhanHoi|phan-hoi|~/web_module/module_DanhSachPhanHoiChoNguoiDung.aspx.aspx");
+        list.Add("webPhanHoiChoNguoiDung|phan-hoi|~/web_module/module_DanhSachPhanHoiChoNguoiDung.aspx");
 
         return list;
 

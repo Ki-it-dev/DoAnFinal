@@ -64,7 +64,7 @@ public partial class _Default : System.Web.UI.MasterPage
                             notif.alert_datetime,
                             t.transaction_bookdate,
                             t.transaction_datetime,
-                            linkTo = idGroupUser == 2 ? /*"/xac-nhan-dat-san-" + t.field_id + "-" + t.book_time_id + "-"*/notif.alert_link_to + "-" + notif.alert_Id : "/xac-nhan-dat-san-chung",
+                            linkTo = idGroupUser == 2 && notif.alert_Type_Id == 1 ? notif.alert_link_to + "-" + notif.alert_Id : /*"/xac-nhan-dat-san-chung"*/"",
                             daXacNhan = notif.alert_status == true ? "color:#000" : "",
                             choXacNhan = notif.alert_status == false ? "color:red" : "",
                         }).OrderByDescending(x => x.transaction_datetime);
@@ -91,7 +91,7 @@ public partial class _Default : System.Web.UI.MasterPage
                            notif.alert_Id,
                            t.field_id,
                            t.book_time_id,
-                           linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + t.field_id + "-" + t.book_time_id + "-" + notif.alert_Id : "/quan-ly-dat-san-ca-nhan",
+                           linkTo = idGroupUser == 2 ? "/xac-nhan-dat-san-" + t.field_id + "-" + t.book_time_id + "-" + notif.alert_Id : /*"/quan-ly-dat-san-ca-nhan"*/"",
                            daXacNhan = "",
                            choXacNhan = "",
                        };

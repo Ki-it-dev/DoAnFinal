@@ -8,9 +8,12 @@ using System.Web.UI.WebControls;
 
 public partial class admin_page_employee_page_module_CapNhatPhanHoi : System.Web.UI.Page
 {
+    dbcsdlDataContext db = new dbcsdlDataContext();
+
     cls_feedback _Feedback = new cls_feedback();
     cls_User _User = new cls_User();
     cls_Alert _Alert = new cls_Alert();
+    cls_Notification _Notification = new cls_Notification();
     protected void Page_Load(object sender, EventArgs e)
     {
         if (!IsPostBack)
@@ -30,7 +33,17 @@ public partial class admin_page_employee_page_module_CapNhatPhanHoi : System.Web
             string idFeedBack = Request.Url.Segments.Last().Replace("-", "").Substring(14);
             int _idUser = _User.User_getUserId(Request.Cookies["UserName"].Value);
 
-            if (_Feedback.Update_FeedBack(Convert.ToInt32(idFeedBack), content, _idUser))
+            var get = (from t in db.tbTempTransactions
+                       join f in db.tbFields on t.field_id equals f.field_id
+                       join b in db.tbBookTimes on t.book_time_id equals b.book_time_id
+                       join fb in db.tbFeedbacks on t.temp_transaction_id equals fb.trans_id
+                       join a in db.tbAlerts on t.temp_transaction_id equals a.trans_id
+                       where fb.feedback_id == Convert.ToInt32(idFeedBack)
+                       select new { f.field_name, b.book_time_detail, t.transaction_bookdate,a.alert_Id }).FirstOrDefault();
+
+
+            if (_Feedback.Update_FeedBack(Convert.ToInt32(idFeedBack), content, _idUser) && 
+                _Notification.Notification_Update_FeedBack("Phản hồi của bạn đã được trả lời (sân " + get.field_name + " lúc " + get.book_time_detail + " vào ngày " + get.transaction_bookdate+")", get.alert_Id))
             {
                 ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
                         "AlertBox", "swal('Phản hồi thành công', '','success').then(function(){window.location = '/danh-sach-phan-hoi';})", true);
