@@ -8,40 +8,47 @@
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <div class="row align-items-start">
-    <div class="col">
-        <asp:DropDownList runat="server" ID="ddlYear">
-            <asp:ListItem Text="2021" />
-            <asp:ListItem Text="2022" />
-            <asp:ListItem Text="2023" Selected />
-        </asp:DropDownList>
-        <asp:DropDownList ID="ddlLoaiSan" CssClass="form-control" runat="server" Width="30%">
-        </asp:DropDownList>
+        <div>
+            <asp:DropDownList runat="server" ID="ddlYear">
+                <asp:ListItem Text="2021" />
+                <asp:ListItem Text="2022" />
+                <asp:ListItem Text="2023" Selected />
+            </asp:DropDownList>
+            <asp:DropDownList ID="ddlLoaiSan" CssClass="form-control" runat="server" Width="30%">
+            </asp:DropDownList>
 
-        <button id="btnXemThongKeDatSanTheoThangVaNam" runat="server"
-            onserverclick="btnXemThongKeDatSanTheoThangVaNam_ServerClick">
-            Xem</button>
+            <button id="btnXemThongKeDatSanTheoThangVaNam" runat="server"
+                onserverclick="btnXemThongKeDatSanTheoThangVaNam_ServerClick">
+                Xem</button>
 
-        <span>Thống kê đơn đặt sân</span>
-        <canvas id="thongKeDatSan"></canvas>
+            <div class="row">
+                <div class="col-6">
+                    <span>Thống kê đơn đặt sân</span>
+                    <canvas id="thongKeDatSan"></canvas>
+                </div>
 
-        <span>Thống kê người dùng đặt sân</span>
-        <canvas id="thongKeNguoiDung"></canvas>
+                <div class="col-6">
+                    <span>Thống kê đơn hàng</span>
+                    <canvas id="thongKeDonHang"></canvas>
+                </div>
 
+                <div class="col-6">
+                    <span>Thống kê người dùng đặt sân</span>
+                    <canvas id="thongKeNguoiDung"></canvas>
+                </div>
+            </div>
 
-        <span>Thống kê đơn hàng</span>
-        <canvas id="thongKeDonHang"></canvas>
-
-    </div>
-    <div class="col">
-         <div class="d-none">
-            <input type="text" id="txtSoLuongDatHang" runat="server" />
-            <input type="text" id="txtSoLuongNguoiDungDaDatSan" runat="server" />
-            <input type="text" id="txtSoLuongDatSanTheoThangVaNam" runat="server" />
+        </div>
+        <div class="col">
+            <div class="d-none">
+                <input type="text" id="txtSoLuongDatHang" runat="server" />
+                <input type="text" id="txtSoLuongNguoiDungDaDatSan" runat="server" />
+                <input type="text" id="txtSoLuongDatSanTheoThangVaNam" runat="server" />
+            </div>
         </div>
     </div>
-  </div>
 
-    
+
     <script>
         const ctx = document.getElementById('thongKeDatSan');
 
