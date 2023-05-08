@@ -13,9 +13,11 @@
                                 <tr>
                                     <th scope="col">#</th>
                                     <th scope="col">Mã phản hồi</th>
+                                    <th scope="col">Mã đặt sân</th>
                                     <th scope="col">Nội dung phản hồi</th>
+                                    <th scope="col">Ngày gửi</th>
                                     <th scope="col">Trạng thái</th>
-                                    <th scope="col"></th>
+                                    <%--<th scope="col"></th>--%>
                                 </tr>
                             </thead>
                             <tbody>
@@ -24,7 +26,9 @@
                                         <tr>
                                             <th scope="row"><%# Container.ItemIndex + 1 %></th>
                                             <td><%#Eval("feedback_id") %></td>
+                                            <td><%#Eval("field_id") %></td>
                                             <td><%#Eval("feedback_content") %></td>
+                                            <td><%#Eval("feedback_dateCreate") %></td>
                                             <td><%#Eval("status")%></td>
                                             <%--<td>
                                                 <a href="/cap-nhat-phan-hoi-<%#Eval("feedback_id") %>" class="btn btn-success">Sửa</a>

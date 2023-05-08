@@ -16,7 +16,7 @@ public class cls_Notification
         // TODO: Add constructor logic here
         //
     }
-    public bool Notification_Insert_FeedBack(string content,int idTrans)
+    public bool Notification_Insert_FeedBack(string content, int idTrans)
     {
         tbAlert insert = new tbAlert();
 
@@ -40,9 +40,9 @@ public class cls_Notification
         }
     }
 
-    public bool Notification_Update_FeedBack(string content,int idAlert)
+    public bool Notification_Update_FeedBack(string content, int idAlert)
     {
-        var update = db.tbAlerts.Where(x=>x.alert_Id == idAlert).FirstOrDefault();
+        var update = db.tbAlerts.Where(x => x.alert_Id == idAlert).FirstOrDefault();
 
         update.alert_content = content;
         update.alert_status = true;
@@ -86,5 +86,20 @@ public class cls_Notification
             return false;
         }
     }
+    public bool Notification_Update_Field(int idAlert, string nameField, string timeDetail, DateTime bookDate)
+    {
+        tbAlert updateStatus = db.tbAlerts.Where(x => x.alert_Id == idAlert).FirstOrDefault();
+        updateStatus.alert_status = true;
+        updateStatus.alert_content = nameField + " đá vào lúc " + timeDetail + " ngày " + bookDate + " đã được xác nhận!!!";
 
+        try
+        {
+            db.SubmitChanges();
+            return true;
+        }
+        catch
+        {
+            return false;
+        }
+    }
 }

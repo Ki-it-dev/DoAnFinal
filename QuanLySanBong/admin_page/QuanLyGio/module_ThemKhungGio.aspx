@@ -7,7 +7,7 @@
     <button id="btn">+Add input</button>
 
     <formview>
-        <div class="d-flex" id='input-cont'>
+        <div id='input-cont'>
             <input type="time" id="txtStart0" />
             <input type="time" id="txtEnd0" />
         </div>
@@ -24,10 +24,14 @@
     </formview>
     <script>
         const container = document.getElementById('input-cont');
+
         var count = 0
         // Call addInput() function on button click
         document.getElementById("btn").addEventListener("click", function (event) {
             event.preventDefault()
+
+            const div = document.createElement('div')
+
             count += 1;
 
             let input1 = document.createElement('input');
@@ -39,8 +43,11 @@
             input1.type = "time";
             input2.type = "time";
 
-            container.appendChild(input1);
-            container.appendChild(input2);
+            div.appendChild(input1);
+            div.appendChild(input2);
+
+            container.appendChild(div)
+
         });
 
         function btnThem() {

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.EnterpriseServices.CompensatingResourceManager;
 using System.Linq;
 using System.Web;
 using System.Web.UI;
@@ -11,8 +12,15 @@ public partial class web_module_module_DanhSachPhanHoiChoNguoiDung : System.Web.
     cls_User _User = new cls_User();
     protected void Page_Load(object sender, EventArgs e)
     {
-        int _idUser = _User.User_getUserId(Request.Cookies["UserName"].Value);
+        if (Request.Cookies["UserName"] != null)
+        {
+            int _idUser = _User.User_getUserId(Request.Cookies["UserName"].Value);
 
-        if (!IsPostBack) { _Feedback.GetAllFeedBackForUser(rpPhanHoi, _idUser); }
+            if (!IsPostBack) { _Feedback.GetAllFeedBackForUser(rpPhanHoi, _idUser); }
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
+        }
     }
 }

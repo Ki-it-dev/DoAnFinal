@@ -97,7 +97,19 @@ public partial class web_module_module_DangNhap : System.Web.UI.Page
             //string s = ck.Value;
             ck.Value = account;
             Response.Cookies.Add(ck);
-            Response.Redirect("/trang-chu");
+
+            int result = Convert.ToInt32(viewUserName.FirstOrDefault().group_user_id);
+
+            switch (result)
+            {
+                case 1:
+                    Response.Redirect("/thong-ke");
+                    break;
+                default:
+                    Response.Redirect("/trang-chu");
+                    break;
+            }
+            
         }
         else
         {

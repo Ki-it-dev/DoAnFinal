@@ -47,6 +47,7 @@ public class cls_QuanLyDatSan
                        join t in db.tbTempTransactions on f.field_id equals t.field_id
                        join bt in db.tbBookTimes on t.book_time_id equals bt.book_time_id
                        join u in db.tbUsers on t.users_id equals u.users_id
+                       join a in db.tbAlerts on t.temp_transaction_id equals a.trans_id
                        where t.transaction_status == 0
                        select new
                        {
@@ -56,7 +57,7 @@ public class cls_QuanLyDatSan
                            u.users_fullname,
                            bt.book_time_detail,
                            bt.book_time_id,
-
+                           a.alert_Id,
                            t.temp_transaction_id,
 
                            transaction_datetime = DateTime.Parse(t.transaction_datetime.ToString()).ToString("dd-MM-yyyy"),
@@ -121,10 +122,10 @@ public class cls_QuanLyDatSan
         tbTempTransaction del = 
             db.tbTempTransactions.Where(x => x.temp_transaction_id == idTrans).FirstOrDefault();
         //Xoa thong tin san da dat trong bang thong bao
-        tbAlert delAlert = db.tbAlerts.Where(x=>x.trans_id == idTrans).FirstOrDefault();
+        var delAlert = db.tbAlerts.Where(x=>x.trans_id == idTrans);
 
         db.tbTempTransactions.DeleteOnSubmit(del);
-        db.tbAlerts.DeleteOnSubmit(delAlert);
+        db.tbAlerts.DeleteAllOnSubmit(delAlert);
         try
         {
             db.SubmitChanges();

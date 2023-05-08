@@ -13,7 +13,15 @@ public partial class admin_page_QuanLySan_module_SuaSan : System.Web.UI.Page
     cls_San san = new cls_San();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if(!IsPostBack) loadData();
+        if (Request.Cookies["UserName"] != null)
+        {
+            if (!IsPostBack) loadData();
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
+        }
+        
     }
     protected void loadData()
     {

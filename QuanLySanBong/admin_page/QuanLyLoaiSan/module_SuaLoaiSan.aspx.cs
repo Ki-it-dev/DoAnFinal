@@ -12,7 +12,14 @@ public partial class admin_page_QuanLyLoaiSan_module_SuaLoaiSan : System.Web.UI.
     cls_LoaiSan _LoaiSan = new cls_LoaiSan();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) loadData();
+        if (Request.Cookies["UserName"] != null)
+        {
+            if (!IsPostBack) loadData();
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
+        }
     }
     protected void loadData()
     {

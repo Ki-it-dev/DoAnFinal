@@ -15,17 +15,24 @@ public partial class admin_page_QuanLyDonHang_module_SuaDonHang : System.Web.UI.
     cls_User _User = new cls_User();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Request.Cookies["UserName"] != null)
         {
-            string _idBill = Request.Url.Segments.Last().Replace("-", "").Substring(10);
+            if (!IsPostBack)
+            {
+                string _idBill = Request.Url.Segments.Last().Replace("-", "").Substring(10);
 
-            txtProductsName.Value = _SanPham.SanPham_LoadDanhSachTenSanPham();
-            txtProductsId.Value = _SanPham.SanPham_LoadDanhSachIdSanPham();
-            txtProductsPrice.Value = _SanPham.SanPham_LoadDanhSachGiaSanPham();
+                txtProductsName.Value = _SanPham.SanPham_LoadDanhSachTenSanPham();
+                txtProductsId.Value = _SanPham.SanPham_LoadDanhSachIdSanPham();
+                txtProductsPrice.Value = _SanPham.SanPham_LoadDanhSachGiaSanPham();
 
-            txtQuantityOnServer.Value = _HoaDonSanPham.getAllQuantityProductInBill(Convert.ToInt32(_idBill));
-            txtProductsNameOnServer.Value = _HoaDonSanPham.getAllProductInBill(Convert.ToInt32(_idBill));
-            txtPriceOnServer.Value = _HoaDonSanPham.getAllPriceProductInBill(Convert.ToInt32(_idBill));
+                txtQuantityOnServer.Value = _HoaDonSanPham.getAllQuantityProductInBill(Convert.ToInt32(_idBill));
+                txtProductsNameOnServer.Value = _HoaDonSanPham.getAllProductInBill(Convert.ToInt32(_idBill));
+                txtPriceOnServer.Value = _HoaDonSanPham.getAllPriceProductInBill(Convert.ToInt32(_idBill));
+            }
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
         }
     }
 

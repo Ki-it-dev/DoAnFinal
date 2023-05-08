@@ -10,7 +10,14 @@ public partial class admin_page_QuanLyGio_module_ChiTietKhungGio : System.Web.UI
     cls_BookTime _BookTime = new cls_BookTime();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) loadData();
+        if (Request.Cookies["UserName"] != null)
+        {
+            if (!IsPostBack) loadData();
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
+        }
     }
 
     protected void loadData()

@@ -15,11 +15,18 @@ public partial class admin_page_QuanLyDonHang_module_ThemDonHang : System.Web.UI
     cls_User _User = new cls_User();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Request.Cookies["UserName"] != null)
         {
-            txtProductsName.Value = _SanPham.SanPham_LoadDanhSachTenSanPham();
-            txtProductsId.Value = _SanPham.SanPham_LoadDanhSachIdSanPham();
-            txtProductsPrice.Value = _SanPham.SanPham_LoadDanhSachGiaSanPham();
+            if (!IsPostBack)
+            {
+                txtProductsName.Value = _SanPham.SanPham_LoadDanhSachTenSanPham();
+                txtProductsId.Value = _SanPham.SanPham_LoadDanhSachIdSanPham();
+                txtProductsPrice.Value = _SanPham.SanPham_LoadDanhSachGiaSanPham();
+            }
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
         }
     }
     protected void save_ServerClick(object sender, EventArgs e)

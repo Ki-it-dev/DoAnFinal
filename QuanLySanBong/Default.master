@@ -157,6 +157,7 @@
                                             <div class="dropdown-content" style="<%=styleNone%>">
                                                 <a href="/thong-tin-ca-nhan">Quản lý tài khoản</a>
                                                 <a href="/quan-ly-dat-san-ca-nhan">Quản lý đặt sân</a>
+                                                <a href="/phan-hoi">Nội dung phản hồi</a>
                                                 <a href="#" runat="server" onserverclick="btnLogOut_ServerClick" id="btnLogOut">Đăng xuất</a>
                                             </div>
                                         </div>

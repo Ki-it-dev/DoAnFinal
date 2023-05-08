@@ -11,7 +11,10 @@ public partial class admin_page_QuanLyLoaiSan_module_ThemLoaiSan : System.Web.UI
     cls_Alert alert = new cls_Alert();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Request.Cookies["UserName"] == null)
+        {
+            Response.Redirect("/dang-nhap");
+        }
     }
 
     protected void save_ServerClick(object sender, EventArgs e)

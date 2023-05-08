@@ -14,7 +14,7 @@ public partial class web_module_FieldPage_module_PhanHoiDatSan : System.Web.UI.P
     cls_Notification _Notification = new cls_Notification();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Request.Cookies["UserName"] == null) Response.Redirect("/dang-nhap");
     }
 
     protected void send_ServerClick(object sender, EventArgs e)

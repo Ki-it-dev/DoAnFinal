@@ -20,28 +20,35 @@ public partial class web_module_module_XacNhanDatSan : System.Web.UI.Page
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Request.Cookies["UserName"] != null)
         {
-            if (Context.Items["_idSan"] == null && Context.Items["_idGio"] == null && Context.Items["_idTime"] == null)
+            if (!IsPostBack)
             {
-                Response.Redirect("/trang-chu");
-            }
-            else
-            {
-                string _idSan = Context.Items["_idSan"].ToString();
-                string _idGio = Context.Items["_idGio"].ToString();
-                string _idTime = Context.Items["_idTime"].ToString();
+                if (Context.Items["_idSan"] == null && Context.Items["_idGio"] == null && Context.Items["_idTime"] == null)
+                {
+                    Response.Redirect("/trang-chu");
+                }
+                else
+                {
+                    string _idSan = Context.Items["_idSan"].ToString();
+                    string _idGio = Context.Items["_idGio"].ToString();
+                    string _idTime = Context.Items["_idTime"].ToString();
 
-                txtIdGio.Value = _idGio;
-                txtIdSan.Value = _idSan;
-                txtTime.Value = _idTime;
+                    txtIdGio.Value = _idGio;
+                    txtIdSan.Value = _idSan;
+                    txtTime.Value = _idTime;
 
-                txtDateTimeNow = _idTime;
-                field_name = cls_San.San_TenSan(Convert.ToInt32(_idSan));
-                book_time_detail = cls_BookTime.BookTime_GetBookTimeDetail(Convert.ToInt32(_idGio));
-                txtusers_fullname = cls_User.User_getUserFullName(Request.Cookies["UserName"].Value);
-                price = cls_San.San_GiaTienTheoSan(Convert.ToInt32(txtIdSan.Value)).ToString();
+                    txtDateTimeNow = _idTime;
+                    field_name = cls_San.San_TenSan(Convert.ToInt32(_idSan));
+                    book_time_detail = cls_BookTime.BookTime_GetBookTimeDetail(Convert.ToInt32(_idGio));
+                    txtusers_fullname = cls_User.User_getUserFullName(Request.Cookies["UserName"].Value);
+                    price = cls_San.San_GiaTienTheoSan(Convert.ToInt32(txtIdSan.Value)).ToString();
+                }
             }
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
         }
     }
 

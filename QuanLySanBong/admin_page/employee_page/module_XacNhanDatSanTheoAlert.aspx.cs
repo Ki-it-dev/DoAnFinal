@@ -14,18 +14,26 @@ public partial class admin_page_employee_page_module_XacNhanDatSanTheoAlert : Sy
     cls_QuanLyDatSan _QuanLyDatSan = new cls_QuanLyDatSan();
     cls_San cls_San = new cls_San();
     cls_BookTime cls_BookTime = new cls_BookTime();
+    cls_Notification _Notification = new cls_Notification();
 
     protected void Page_Load(object sender, EventArgs e)
     {
-        string[] listId = Request.Url.Segments.Last().Split('-');
-        //{field}-{bookTime}-{idAlert}
-        int idField = int.Parse(listId[4]);
-        int idBookTime = int.Parse(listId[5]);
-        int idAlert = int.Parse(listId[6]);
-
-        if (!IsPostBack)
+        if (Request.Cookies["UserName"] != null)
         {
-            _QuanLyDatSan.Load_XacNhanTheoAlert(idField, idBookTime, idAlert, rpXacNhan);
+            string[] listId = Request.Url.Segments.Last().Split('-');
+            //{field}-{bookTime}-{idAlert}
+            int idField = int.Parse(listId[4]);
+            int idBookTime = int.Parse(listId[5]);
+            int idAlert = int.Parse(listId[6]);
+
+            if (!IsPostBack)
+            {
+                _QuanLyDatSan.Load_XacNhanTheoAlert(idField, idBookTime, idAlert, rpXacNhan);
+            }
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
         }
     }
 
@@ -36,16 +44,18 @@ public partial class admin_page_employee_page_module_XacNhanDatSanTheoAlert : Sy
                          orderby s.temp_transaction_id
                          select s.temp_transaction_id;
 
-        tbTempTransaction del = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
-        tbAlert delAlert = db.tbAlerts.Where(x => x.alert_Id == int.Parse(txtIdAlert.Value)).FirstOrDefault();
+        //tbTempTransaction del = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
+        //tbAlert delAlert = db.tbAlerts.Where(x => x.alert_Id == int.Parse(txtIdAlert.Value)).FirstOrDefault();
 
-        db.tbTempTransactions.DeleteOnSubmit(del);
-        db.tbAlerts.DeleteOnSubmit(delAlert);
+        //db.tbTempTransactions.DeleteOnSubmit(del);
+        //db.tbAlerts.DeleteOnSubmit(delAlert);
 
-        db.SubmitChanges();
+        //db.SubmitChanges();
 
-        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
+        if (_QuanLyDatSan.Delete_SanChung(Convert.ToInt32(getIDSanAD.FirstOrDefault())))
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
                         "AlertBox", "swal('Hủy thành công', '','success').then(function(){window.location = '/xac-nhan-dat-san-chung';})", true);
+        else alert.alert_Warning(Page, "Hủy thất bại", "");
 
         //Response.Redirect("/xac-nhan-dat-san-chung");
     }
@@ -69,18 +79,22 @@ public partial class admin_page_employee_page_module_XacNhanDatSanTheoAlert : Sy
                         join t in db.tbTempTransactions on s.trans_id equals t.temp_transaction_id
                         select new { date = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd/MM/yyyy") });
 
-        tbTempTransaction update = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
-        update.transaction_status = 1;
+        //tbTempTransaction update = db.tbTempTransactions.Where(x => x.temp_transaction_id == Convert.ToInt32(getIDSanAD.FirstOrDefault())).FirstOrDefault();
+        //update.transaction_status = 1;
 
-        tbAlert updateStatus = db.tbAlerts.Where(x => x.alert_Id == idAlert).FirstOrDefault();
-        updateStatus.alert_status = true;
-        updateStatus.alert_content = nameField + " đá vào lúc " + timeDetail + " ngày " + bookDate.FirstOrDefault().date + " đã được xác nhận!!!";
+        //tbAlert updateStatus = db.tbAlerts.Where(x => x.alert_Id == idAlert).FirstOrDefault();
+        //updateStatus.alert_status = true;
+        //updateStatus.alert_content = nameField + " đá vào lúc " + timeDetail + " ngày " + bookDate.FirstOrDefault().date + " đã được xác nhận!!!";
 
-        db.SubmitChanges();
+        //db.SubmitChanges();
 
-        ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
+        if(_Notification.Notification_Update_Field(idAlert,nameField,timeDetail, Convert.ToDateTime(bookDate.FirstOrDefault().date)) 
+            && _QuanLyDatSan.Update_TrangThaiSan(Convert.ToInt32(getIDSanAD.FirstOrDefault())))
+        {
+            ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
                         "AlertBox", "swal('Xác nhận thành công', '','success').then(function(){window.location = '/xac-nhan-dat-san-chung';})", true);
-
+        }
+        else alert.alert_Success(Page, "Xác nhận thất bại", "");
         //Response.Redirect("/xac-nhan-dat-san-chung");
     }
 }

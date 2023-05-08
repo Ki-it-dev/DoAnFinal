@@ -11,7 +11,15 @@ public partial class admin_page_QuanLySanPham_module_DanhSachSanPham : System.We
     cls_Alert _Alert = new cls_Alert();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) _SanPham.SanPham_LoadDanhSachSanPham(rpSanPham);
+        if (Request.Cookies["UserName"] != null)
+        {
+            if (!IsPostBack) _SanPham.SanPham_LoadDanhSachSanPham(rpSanPham);
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
+        }
+        
     }
 
     protected void btnXoaServer_ServerClick(object sender, EventArgs e)

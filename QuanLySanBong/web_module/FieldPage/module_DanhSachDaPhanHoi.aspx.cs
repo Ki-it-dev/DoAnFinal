@@ -11,11 +11,18 @@ public partial class web_module_FieldPage_module_DanhSachDaPhanHoi : System.Web.
     cls_User _User = new cls_User();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Request.Cookies["UserName"] != null)
         {
-            int _idUser = _User.User_getUserId(Request.Cookies["UserName"].Value);
+            if (!IsPostBack)
+            {
+                int _idUser = _User.User_getUserId(Request.Cookies["UserName"].Value);
 
-            _Feedback.GetALlFeedBackFromEmploy(_idUser, rpPhanHoi);
+                _Feedback.GetALlFeedBackFromEmploy(_idUser, rpPhanHoi);
+            }
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
         }
     }
 }

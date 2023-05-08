@@ -68,15 +68,13 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
   partial void InserttbTempTransaction(tbTempTransaction instance);
   partial void UpdatetbTempTransaction(tbTempTransaction instance);
   partial void DeletetbTempTransaction(tbTempTransaction instance);
-  #endregion
-	
-	public dbcsdlDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString4"].ConnectionString, mappingSource)
-	{
-		OnCreated();
-	}
-	
-	public dbcsdlDataContext(string connection) : 
+    #endregion
+    public dbcsdlDataContext() :
+            base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString"].ConnectionString, mappingSource)
+    {
+        OnCreated();
+    }
+    public dbcsdlDataContext(string connection) : 
 			base(connection, mappingSource)
 	{
 		OnCreated();
@@ -1338,6 +1336,8 @@ public partial class tbFeedback : INotifyPropertyChanging, INotifyPropertyChange
 	
 	private System.Nullable<int> _trans_id;
 	
+	private System.Nullable<System.DateTime> _feedback_dateCreate;
+	
 	private EntityRef<tbTempTransaction> _tbTempTransaction;
 	
     #region Extensibility Method Definitions
@@ -1354,6 +1354,8 @@ public partial class tbFeedback : INotifyPropertyChanging, INotifyPropertyChange
     partial void Onemp_idChanged();
     partial void Ontrans_idChanging(System.Nullable<int> value);
     partial void Ontrans_idChanged();
+    partial void Onfeedback_dateCreateChanging(System.Nullable<System.DateTime> value);
+    partial void Onfeedback_dateCreateChanged();
     #endregion
 	
 	public tbFeedback()
@@ -1462,6 +1464,26 @@ public partial class tbFeedback : INotifyPropertyChanging, INotifyPropertyChange
 				this._trans_id = value;
 				this.SendPropertyChanged("trans_id");
 				this.Ontrans_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_feedback_dateCreate", DbType="DateTime")]
+	public System.Nullable<System.DateTime> feedback_dateCreate
+	{
+		get
+		{
+			return this._feedback_dateCreate;
+		}
+		set
+		{
+			if ((this._feedback_dateCreate != value))
+			{
+				this.Onfeedback_dateCreateChanging(value);
+				this.SendPropertyChanging();
+				this._feedback_dateCreate = value;
+				this.SendPropertyChanged("feedback_dateCreate");
+				this.Onfeedback_dateCreateChanged();
 			}
 		}
 	}

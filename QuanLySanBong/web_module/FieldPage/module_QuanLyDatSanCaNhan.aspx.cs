@@ -22,7 +22,7 @@ public partial class web_module_module_QuanLyDatSanCaNhan : System.Web.UI.Page
         }
         else
         {
-            alert.alert_Warning(Page, "Vui lòng đăng nhập để tiếp tục", "");
+            Response.Redirect("/dang-nhap");
         }
     }
 

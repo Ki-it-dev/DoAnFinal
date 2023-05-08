@@ -11,10 +11,17 @@ public partial class admin_page_module_ThongKe : System.Web.UI.Page
     cls_ThongKe _ThongKe = new cls_ThongKe();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Request.Cookies["UserName"] != null)
         {
-            loadData();
-            _LoaiSan.Load_DDLDanhSachLoaiSan(ddlLoaiSan);
+            if (!IsPostBack)
+            {
+                loadData();
+                _LoaiSan.Load_DDLDanhSachLoaiSan(ddlLoaiSan);
+            }
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
         }
     }
     protected void loadData()

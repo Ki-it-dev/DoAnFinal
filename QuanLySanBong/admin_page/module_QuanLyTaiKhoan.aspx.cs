@@ -21,7 +21,7 @@ public partial class admin_page_module_QuanLyTaiKhoan : System.Web.UI.Page
         }
         else
         {
-            Response.Redirect("/trang-chu");
+            Response.Redirect("/dang-nhap");
         }
     }
     protected void loadData()

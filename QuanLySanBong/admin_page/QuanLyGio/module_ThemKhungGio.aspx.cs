@@ -12,7 +12,10 @@ public partial class admin_page_QuanLyGio_module_ThemKhungGio : System.Web.UI.Pa
     cls_BookTime _BookTime = new cls_BookTime();
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        if (Request.Cookies["UserName"] == null)
+        {
+            Response.Redirect("/dang-nhap");
+        }
     }
 
     protected void save_ServerClick(object sender, EventArgs e)

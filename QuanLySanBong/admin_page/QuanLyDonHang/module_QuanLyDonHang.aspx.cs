@@ -13,7 +13,14 @@ public partial class admin_page_QuanLyDonHang_module_QuanLyDonHang : System.Web.
     cls_Alert _Alert = new cls_Alert();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) loadData();
+        if (Request.Cookies["UserName"] != null)
+        {
+            if (!IsPostBack) loadData();
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
+        }
     }
 
     protected void loadData()

@@ -23,7 +23,7 @@
                                     </div>
                                     <div class="p-2">
                                         <a href="#"
-                                            onclick="btnXacNhan('<%#Eval("temp_transaction_id") %>')">
+                                            onclick="btnXacNhan('<%#Eval("temp_transaction_id") %>','<%#Eval("alert_Id") %>')">
                                             <span class="badge badge-success">Xác nhận</span></a>
                                     </div>
                                 </div>
@@ -37,6 +37,7 @@
 
     <div style="display: none;">
         <input type="text" name="name" value="" runat="server" id="txtIdTrans" />
+        <input type="text" name="name" value="" runat="server" id="txtIdAlert" />
         <a href="#" id="btnServerHuy" runat="server" onserverclick="btnServerHuy_ServerClick">content</a>
         <a href="#" id="btnServerXacNhan" runat="server" onserverclick="btnServerXacNhan_ServerClick">content</a>
     </div>
@@ -57,8 +58,9 @@
                 });
 
         }
-        function btnXacNhan(idTrans) {
+        function btnXacNhan(idTrans,idAlert) {
             document.getElementById("<%=txtIdTrans.ClientID%>").value = idTrans
+            document.getElementById("<%=txtIdAlert.ClientID%>").value = idAlert
             document.getElementById("<%=btnServerXacNhan.ClientID%>").click()
         }
     </script>

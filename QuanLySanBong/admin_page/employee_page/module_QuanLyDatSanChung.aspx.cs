@@ -35,7 +35,7 @@ public partial class admin_page_employee_page_module_QuanLyDatSanChung : System.
         }
         else
         {
-            Response.Redirect("/trang-chu");
+            Response.Redirect("/dang-nhap");
         }
     }
 }

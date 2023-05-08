@@ -35,7 +35,7 @@ public partial class admin_page_module_CapNhatThongTin : System.Web.UI.Page
         }
         else
         {
-            alert.alert_Warning(Page, "Vui lòng đăng nhập để tiếp tục", "");
+            Response.Redirect("/dang-nhap");
         }
     }
     protected void loadData(int id)

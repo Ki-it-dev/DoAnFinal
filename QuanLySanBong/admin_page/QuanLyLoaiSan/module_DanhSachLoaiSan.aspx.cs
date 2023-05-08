@@ -11,7 +11,14 @@ public partial class admin_page_QuanLyLoaiSan_module_DanhSachLoaiSan : System.We
     cls_Alert alert = new cls_Alert();
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack) loadData();
+        if (Request.Cookies["UserName"] != null)
+        {
+            if (!IsPostBack) loadData();
+        }
+        else
+        {
+            Response.Redirect("/dang-nhap");
+        }
     }
     protected void loadData()
     {

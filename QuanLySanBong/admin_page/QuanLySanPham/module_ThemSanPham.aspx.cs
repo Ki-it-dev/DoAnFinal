@@ -15,11 +15,19 @@ public partial class admin_page_QuanLySanPham_module_ThemSanPham : System.Web.UI
     protected string style1, style2, mainStyle, urlImg;
     protected void Page_Load(object sender, EventArgs e)
     {
-        if (!IsPostBack)
+        if (Request.Cookies["UserName"] != null)
         {
-            loadData();
-            mainStyle = "display:none !important";
+            if (!IsPostBack)
+            {
+                loadData();
+                mainStyle = "display:none !important";
+            }
         }
+        else
+        {
+            Response.Redirect("/dang-nhap");
+        }
+        
     }
     protected void loadData()
     {

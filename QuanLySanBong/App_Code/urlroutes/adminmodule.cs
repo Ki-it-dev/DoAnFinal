@@ -50,7 +50,7 @@ public class adminmodule
         list.Add("webThongKe|thong-ke|~/admin_page/module_ThongKe.aspx");
         //Quan ly phan hoi
         list.Add("webQuanLyPhanHoi|danh-sach-phan-hoi|~/admin_page/employee_page/module_DanhSachPhanHoi.aspx");
-        list.Add("webCapNhatPhanHoi|cap-nhat-phan-hoi-{idPhanHoi}|~/admin_page/employee_page/module_CapNhatPhanHoi.aspx");
+        list.Add("webCapNhatPhanHoi|cap-nhat-phan-hoi-{idPhanHoi}-{idAlert}|~/admin_page/employee_page/module_CapNhatPhanHoi.aspx");
 
         return list;
     }

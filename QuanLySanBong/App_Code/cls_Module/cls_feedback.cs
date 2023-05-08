@@ -20,11 +20,17 @@ public class cls_feedback
     public void GetAllFeedBackFromUser(Repeater repeater)
     {
         var getData = (from f in db.tbFeedbacks
+                       join t in db.tbTempTransactions on f.trans_id equals t.temp_transaction_id
+                       join a in db.tbAlerts on f.trans_id equals a.trans_id
+                       where a.alert_Type_Id == 2
                        select new
                        {
                            f.feedback_id,
                            f.feedback_content,
                            status = f.feedback_content_reply.Length > 0 ? "Đã phản hồi" : "Chưa phản hồi",
+                           t.field_id,
+                           f.feedback_dateCreate,
+                           a.alert_Id,
                        });
 
         if (getData.Count() > 0)
@@ -40,6 +46,8 @@ public class cls_feedback
                        where t.users_id == idUser
                        select new
                        {
+                           t.field_id,
+                           f.feedback_dateCreate,
                            f.feedback_id,
                            f.feedback_content,
                            status = f.feedback_content_reply.Length > 0 ? "Đã phản hồi" : "Chưa phản hồi",
@@ -95,6 +103,7 @@ public class cls_feedback
 
         insert.feedback_content = content;
         insert.trans_id = _idTrans;
+        insert.feedback_dateCreate = DateTime.Now;
 
         db.tbFeedbacks.InsertOnSubmit(insert);
 
