@@ -29,6 +29,7 @@ public class webui
         //Phan hoi
         list.Add("webPhanHoi|phan-hoi-{id}|~/web_module/FieldPage/module_PhanHoiDatSan.aspx");
         list.Add("webDanhSachPhanHoi|danh-sach-phan-hoi-khach|~/web_module/FieldPage/module_DanhSachDaPhanHoi.aspx");
+        list.Add("webPhanHoiChoNguoiDung|phan-hoi|~/web_module/module_DanhSachPhanHoiChoNguoiDung.aspx");
 
         //Danh sach san pham
         list.Add("webSanPham|san-pham|~/web_module/ProductsPage/module_SanPham.aspx");
@@ -41,10 +42,8 @@ public class webui
         //Quên mật khẩu
         list.Add("webXacNhanMatKhau|quen-mat-khau-{value}|~/web_module/LoginPage/module_XacNhanMatKhau.aspx");
         list.Add("webCapNhatMatKhau|cap-nhat-mat-khau-{value}|~/web_module/LoginPage/module_CapNhatMatKhau.aspx");
-        //Chat box
-        list.Add("webChatBox|chat-box|~/web_module/module_Chat.aspx");
-        //Phan hoi
-        list.Add("webPhanHoiChoNguoiDung|phan-hoi|~/web_module/module_DanhSachPhanHoiChoNguoiDung.aspx");
+        //PayPal
+        list.Add("webPayPal|payPal|~/web_module/FieldPage/PaymentWithPayPal.aspx");
 
         return list;
 

@@ -63,10 +63,11 @@ public partial class admin_page_employee_page_module_XacNhanDatSanChung : System
         var bookDate = (from s in db.tbAlerts
                         where s.alert_Id == Convert.ToInt32(txtIdAlert.Value)
                         join t in db.tbTempTransactions on s.trans_id equals t.temp_transaction_id
-                        select new { date = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd/MM/yyyy") });
+                        select new { t.transaction_bookdate });
 
-        if (cls_Notification.Notification_Update_Field(Convert.ToInt32(txtIdAlert.Value), get.field_name, get.book_time_detail, Convert.ToDateTime(bookDate.FirstOrDefault().date))
-            && cls_QuanLyDatSan.Update_TrangThaiSan(Convert.ToInt32(txtIdTrans.Value)))
+        if (cls_Notification.Notification_Update_Field(Convert.ToInt32(txtIdAlert.Value), get.field_name, get.book_time_detail, Convert.ToDateTime(bookDate.FirstOrDefault().transaction_bookdate))
+            && cls_QuanLyDatSan.Update_TrangThaiSan(Convert.ToInt32(txtIdTrans.Value))
+            )
         {
             ScriptManager.RegisterClientScriptBlock(this.Page, this.Page.GetType(),
                         "AlertBox", "swal('Xác nhận thành công', '','success').then(function(){window.location = '/xac-nhan-dat-san-chung';})", true);
