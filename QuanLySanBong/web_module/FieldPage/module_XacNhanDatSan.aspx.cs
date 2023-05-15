@@ -81,19 +81,18 @@ public partial class web_module_module_XacNhanDatSan : System.Web.UI.Page
         {
             Context.Items["price"] = txtPrice.Value;
             Context.Items["fieldName"] = txtFieldName.Value;
-            Server.Transfer("module_PayPal.aspx");
+            //Server.Transfer("module_PayPal.aspx");
 
-
-            //if (cls_Transaction.Transaction_Insert(
-            //        int.Parse(txtIdSan.Value), getUserId, Convert.ToDateTime(txtTime.Value), Convert.ToInt32(txtIdGio.Value)
-            //    ))
-            //{
-            //    int _idTrans = cls_Transaction.Transaction_Id(getUserId, int.Parse(txtIdSan.Value), int.Parse(txtIdGio.Value), Convert.ToDateTime(txtTime.Value));
-            //    if (_Notification.Notification_Insert_Field(contentAlert, linkToAlert, _idTrans))
-            //        //Response.Redirect("/quan-ly-dat-san-ca-nhan");
-            //        Server.Transfer("module_PayPal.aspx");
-            //    else alert.alert_Warning(Page, "Lỗi", "");
-            //}
+            if (cls_Transaction.Transaction_Insert(
+                    int.Parse(txtIdSan.Value), getUserId, Convert.ToDateTime(txtTime.Value), Convert.ToInt32(txtIdGio.Value)
+                ))
+            {
+                int _idTrans = cls_Transaction.Transaction_Id(getUserId, int.Parse(txtIdSan.Value), int.Parse(txtIdGio.Value), Convert.ToDateTime(txtTime.Value));
+                if (_Notification.Notification_Insert_Field(contentAlert, linkToAlert, _idTrans))
+                    //Response.Redirect("/quan-ly-dat-san-ca-nhan");
+                    Server.Transfer("module_PayPal.aspx");
+                else alert.alert_Warning(Page, "Lỗi", "");
+            }
         }
     }
 }
