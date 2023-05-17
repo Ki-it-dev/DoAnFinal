@@ -40,7 +40,9 @@
                                 <button class="btn btn-danger" runat="server" id="btnReturn" onserverclick="btnReturn_ServerClick" style="font-size: 1rem; border-radius: 10px;"><i class="fa-solid fa-xmark"></i></button>
                             </div>
                             <div class="p-2">
-                                <button class="btn btn-success" runat="server" id="btnXacNhan" onserverclick="btnXacNhan_ServerClick" style="font-size: 1rem; border-radius: 10px;"><i class="fa-solid fa-check"></i></button>
+                                <div id="paypal-payment-button">
+                                </div>
+                                <%--<button class="btn btn-success" runat="server" id="btnXacNhan" onserverclick="btnXacNhan_ServerClick" style="font-size: 1rem; border-radius: 10px;"><i class="fa-solid fa-check"></i></button>--%>
                             </div>
                             <div class="p-2">
                                 <div class="d-flex flex-column justify-content-center">
@@ -64,6 +66,33 @@
 
     </div>
     <div style="padding: 8%;"></div>
-
+    
+    <script src="https://www.paypal.com/sdk/js?client-id=AYWhG8KH4Fv1ELpvTYj-cDbrT_O2n3gDjx9jR7aS95VgrBaB_k7dNxJ6qbfJOlQsKMeG3avVC_yaAFuH&disable-funding=credit,card"></script>
+    <script>
+        paypal.Buttons({
+            style: {
+                color: 'blue',
+                shape: 'pill'
+            },
+            createOrder: function (data, actions) {
+                return actions.order.create({
+                    purchase_units: [{
+                        amount: {
+                            value: '0.1'
+                        }
+                    }]
+                });
+            },
+            onApprove: function (data, actions) {
+                return actions.order.capture().then(function (details) {
+                    //console.log(details)
+                    window.location.replace("http://localhost:52425/thanh-toan-thanh-cong")
+                })
+            },
+            onCancel: function (data) {
+                window.location.replace("http://localhost:52425/thanh-toan-that-bai")
+            }
+        }).render('#paypal-payment-button');
+    </script>
 </asp:Content>
 

@@ -7,7 +7,7 @@ using System.Web;
 /// <summary>
 /// Summary description for PaypalConfiguration
 /// </summary>
-public class PaypalConfiguration
+public static class PaypalConfiguration
 {
     //Variables for storing the clientID and clientSecret key  
     public readonly static string ClientId;
@@ -22,7 +22,7 @@ public class PaypalConfiguration
     // getting properties from the web.config  
     public static Dictionary<string, string> GetConfig()
     {
-        return PayPal.Api.ConfigManager.Instance.GetProperties();
+        return ConfigManager.Instance.GetProperties();
     }
     private static string GetAccessToken()
     {
