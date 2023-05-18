@@ -43,7 +43,7 @@ public class webui
         list.Add("webXacNhanMatKhau|quen-mat-khau-{value}|~/web_module/LoginPage/module_XacNhanMatKhau.aspx");
         list.Add("webCapNhatMatKhau|cap-nhat-mat-khau-{value}|~/web_module/LoginPage/module_CapNhatMatKhau.aspx");
         //PayPal
-        list.Add("webPayPalThanhToanThanhCong|thanh-toan-thanh-cong|~/web_module/FieldPage/PayPal/module_ThanhToanThanhCong.aspx");
+        list.Add("webPayPalThanhToanThanhCong|thanhToanThanhCong|~/web_module/FieldPage/PayPal/module_ThanhToanThanhCong.aspx");
         list.Add("webPayPalThanhToanThatBai|thanh-toan-that-bai|~/web_module/FieldPage/PayPal/module_ThanhToanThatBai.aspx");
 
         return list;
