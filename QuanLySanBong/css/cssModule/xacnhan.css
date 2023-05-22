@@ -10,12 +10,12 @@
     border: solid 2px yellow;
     background-color: gainsboro;
     border-radius: 10px;
-    background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(155,168,57,0.700717787114846) 100%, rgba(255,175,0,0.7987570028011204) 100%);
+    background: linear-gradient(90deg, rgb(62 120 111) 0%, rgba(155,168,57,0.700717787114846) 100%, rgba(255,175,0,0.7987570028011204) 100%);
     opacity: 0.8;
 }
 
 .xn p {
-    font-size:15px;
+    font-size:16px;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     color:white;
 }

@@ -68,13 +68,15 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
   partial void InserttbTempTransaction(tbTempTransaction instance);
   partial void UpdatetbTempTransaction(tbTempTransaction instance);
   partial void DeletetbTempTransaction(tbTempTransaction instance);
-    #endregion
-    public dbcsdlDataContext() :
-            base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString"].ConnectionString, mappingSource)
-    {
-        OnCreated();
-    }
-    public dbcsdlDataContext(string connection) : 
+  #endregion
+	
+	public dbcsdlDataContext() : 
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString1"].ConnectionString, mappingSource)
+	{
+		OnCreated();
+	}
+	
+	public dbcsdlDataContext(string connection) : 
 			base(connection, mappingSource)
 	{
 		OnCreated();

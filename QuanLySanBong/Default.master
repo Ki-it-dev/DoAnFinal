@@ -30,6 +30,7 @@
     <link href="../css/cssModule/xndsc.css" rel="stylesheet" type="text/css">
     <link href="../css/cssModule/qldsc.css" rel="stylesheet" type="text/css">
     <link href="../css/cssModule/login.css" rel="stylesheet" type="text/css">
+    <link href="../css/cssModule/long.css" rel="stylesheet" type="text/css">
 
     <script src="../admin_js/sweetalert.min.js"></script>
 
