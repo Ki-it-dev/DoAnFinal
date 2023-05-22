@@ -122,15 +122,15 @@
                                         <div class="dropdown" style="<%=txtNone%>; <%=styleNone%>">
                                             <a class="nav-link" href="" id="A2" runat="server">Quản lý</a>
                                             <div class="dropdown-content" style="<%=styleNone%>">
-                                                <a style="<%=adminNone%>; <%=styleNone%>" href="/quan-ly-tai-khoan">Quản lý tài khoản chung</a>
-                                                <a href="/quan-ly-loai-san">Quản lý loại sân</a>
-                                                <a href="/quan-ly-san">Quản lý sân</a>
-                                                <a href="/quan-ly-khung-gio">Quản lý khung giờ</a>
-                                                <a href="/thong-ke">Thống kê</a>
+                                                <a style="<%=styleNone%>" href="/quan-ly-tai-khoan">Quản lý tài khoản chung</a>
+                                                <a style="<%=adminNone%>" href="/quan-ly-loai-san">Quản lý loại sân</a>
+                                                <a style="<%=adminNone%>" href="/quan-ly-san">Quản lý sân</a>
+                                                <a style="<%=adminNone%>" href="/quan-ly-khung-gio">Quản lý khung giờ</a>
+                                                <a style="<%=adminNone%>" href="/thong-ke">Thống kê</a>
 
-                                                <a href="/quan-ly-dat-san-chung">Quản lý đặt sân chung</a>
-                                                <a href="/quan-ly-san-pham">Quản lý sản phẩm</a>
-                                                <a href="/danh-sach-phan-hoi">Quản lý phản hồi</a>
+                                                <a style="<%=txtEmploy%>" href="/quan-ly-dat-san-chung">Quản lý đặt sân chung</a>
+                                                <a style="<%=txtEmploy%>" href="/quan-ly-san-pham">Quản lý sản phẩm</a>
+                                                <a style="<%=txtEmploy%>" href="/danh-sach-phan-hoi">Quản lý phản hồi</a>
                                             </div>
                                         </div>
                                     </li>

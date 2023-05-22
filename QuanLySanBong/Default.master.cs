@@ -12,7 +12,7 @@ public partial class _Default : System.Web.UI.MasterPage
     //cls_Alert alert = new cls_Alert();
     cls_User cls_User = new cls_User();
 
-    protected string styleNone, txtNone, adminNone;
+    protected string styleNone, txtNone, adminNone, txtEmploy;
     protected int countAlert;
     protected void Page_Load(object sender, EventArgs e)
     {
@@ -28,6 +28,7 @@ public partial class _Default : System.Web.UI.MasterPage
                 case 1:
                     adminNone = "display:block";
                     txtNone = "display:block";
+                    txtEmploy = "display: none";
                     break;
                 //Employ
                 case 2:

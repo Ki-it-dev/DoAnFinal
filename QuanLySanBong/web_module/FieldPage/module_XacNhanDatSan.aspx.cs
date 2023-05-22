@@ -95,7 +95,7 @@ public partial class web_module_module_XacNhanDatSan : System.Web.UI.Page
                 int _idTrans = cls_Transaction.Transaction_Id(getUserId, int.Parse(txtIdSan.Value), int.Parse(txtIdGio.Value), Convert.ToDateTime(txtTime.Value));
 
                 if (_Notification.Notification_Insert_Field(contentAlert, linkToAlert, _idTrans))
-                    Response.Redirect("https://sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + txtAmount.Value + "&business=sb-w3tgq26030242@business.example.com&item_name=" + txtFieldName.Value + "-" + _idTrans + "&return=http://localhost:52425/thanhToanThanhCong");
+                    Response.Redirect("https://sandbox.paypal.com/cgi-bin/webscr?cmd=_xclick&amount=" + txtAmount.Value + "&business=sb-w3tgq26030242@business.example.com&item_name=" + txtFieldName.Value + "-" + _idTrans + "&return=http://localhost:52425/");
                 alert.alert_Warning(Page, "Lỗi", "");
                 //Response.Redirect("/quan-ly-dat-san-ca-nhan");
                 //Server.Transfer("module_PayPal.aspx");
