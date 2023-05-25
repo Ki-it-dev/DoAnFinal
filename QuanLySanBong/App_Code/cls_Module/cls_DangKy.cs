@@ -20,7 +20,7 @@ public class cls_DangKy
         string email, string fullName,string add)
     {
         if (/*userName == "" ||*/ email == "" ||
-            /*identity.Value == "" || */fullName == "" || phoneNumber == "" || add == "") return false;
+            /*identity.Value == "" || */fullName == "" || phoneNumber == "" ) return false;
         return true;
     }
     public bool DangKy_KiemTraNhap(string phoneNumber,

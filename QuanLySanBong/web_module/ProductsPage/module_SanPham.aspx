@@ -24,11 +24,12 @@
                             <div class="row">
                                 <asp:Repeater runat="server" ID="rpSanPham">
                                     <ItemTemplate>
+                                        <%# (Container.ItemIndex + 4) % 4 == 0 ? "<tr>" : string.Empty %>
                                         <div class="col-lg-2 col-md-1 col-sm-1 mb-3">
                                             <div class="card">
                                                 <img class="card-img-top" src="<%#Eval("producst_picture")%>" alt="Card image cap">
                                                 <div class="card-body">
-                                                    <div class="d-flex align-items-center flex-column" style="height: 200px;">
+                                                    <div class="d-flex align-items-center flex-column" style="height: 180px;">
                                                         <div class=" p-2">
                                                             <h4 class="card-title"><%#Eval("products_name") %></h4>
                                                         </div>
@@ -54,6 +55,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <%# (Container.ItemIndex + 4) % 4 == 3 ? "</tr>" : string.Empty %>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>

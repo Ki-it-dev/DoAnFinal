@@ -57,7 +57,6 @@
                 </div>
             </div>
         </div>
-        <div style="padding: 8%;"></div>
     </div>
 
     <div style="display: none;">

@@ -6,10 +6,9 @@
         <div class="khoangcach">
             <h1>Quản lý sản phẩm</h1>
             <a class="btn btn-secondary" id="addSanPham" runat="server" onserverclick="addSanPham_ServerClick">Thêm</a>
-            <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">
-                    <div class="p-2">
-                        <table class="table table-dark">
+                    <div class="p-2" style="margin:auto">
+                        <table class="table table-dark   table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -47,8 +46,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="padding: 8%;"></div>
     <div class="d-none">
         <a href="#" id="btnXoaServer" runat="server" onserverclick="btnXoaServer_ServerClick"></a>
 

@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
-    <formview>
+    <div id="cont">
+        <formview id="cont2">
         <div class="form-group">
             <label for="txtField">Nhập tên sản phẩm</label>
             <input type="text" class="form-control" id="txtTenSanPham" runat="server" placeholder="Nhập tên sản phẩm">
@@ -50,5 +51,7 @@
         <button type="button" class="btn btn-primary" id="save" runat="server" onserverclick="save_ServerClick">Lưu</button>
         <a href="/quan-ly-san-pham" class="btn btn-primary">Quay lại</a>
     </formview>
+    </div>
+    
 </asp:Content>
 

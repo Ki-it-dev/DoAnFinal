@@ -30,6 +30,7 @@
     <link href="../css/cssModule/xndsc.css" rel="stylesheet" type="text/css">
     <link href="../css/cssModule/qldsc.css" rel="stylesheet" type="text/css">
     <link href="../css/cssModule/login.css" rel="stylesheet" type="text/css">
+    <link href="../css/cssModule/long.css" rel="stylesheet" type="text/css">
 
     <script src="../admin_js/sweetalert.min.js"></script>
 
@@ -130,6 +131,7 @@
 
                                                 <a style="<%=txtEmploy%>" href="/quan-ly-dat-san-chung">Quản lý đặt sân chung</a>
                                                 <a style="<%=txtEmploy%>" href="/quan-ly-san-pham">Quản lý sản phẩm</a>
+                                                <a style="<%=txtEmploy%>" href="/quan-ly-don-hang">Quản lý đơn hàng</a>
                                                 <a style="<%=txtEmploy%>" href="/danh-sach-phan-hoi">Quản lý phản hồi</a>
                                             </div>
                                         </div>
@@ -157,7 +159,7 @@
                                             <div class="dropdown-content" style="<%=styleNone%>">
                                                 <a href="/thong-tin-ca-nhan">Quản lý tài khoản</a>
                                                 <a href="/quan-ly-dat-san-ca-nhan">Quản lý đặt sân</a>
-                                                <a href="/phan-hoi">Nội dung phản hồi</a>
+                                                <a href="/phan-hoi">Danh sách phản hồi</a>
                                                 <a href="#" runat="server" onserverclick="btnLogOut_ServerClick" id="btnLogOut">Đăng xuất</a>
                                             </div>
                                         </div>
@@ -165,11 +167,12 @@
 
                                     <li class="nav-item dropdown">
                                         <i class="fa-regular fa-bell"></i> <span><%=countAlert%></span>
-                                        <div class="dropdown">
+                                        <div class="dropdown" style="right:25vw">
                                             <div class="dropdown-content">
                                                 <asp:Repeater runat="server" ID="rpNotif">
                                                     <ItemTemplate>
-                                                        <a class="dropdown-item" style="<%#Eval("daXacNhan")%>;<%#Eval("choXacNhan")%>" 
+                                                        <a class="dropdown-item" 
+                                                            style="<%#Eval("daXacNhan")%>;<%#Eval("choXacNhan")%>" 
                                                             href="<%#Eval("linkTo") %>""><%#Eval("alert_content") %></a>
                                                     </ItemTemplate>
                                                 </asp:Repeater>
@@ -209,7 +212,11 @@
                         <div id="index">
                         <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
                         </asp:ContentPlaceHolder>
+                            <%--<div class="footer" style="background-color: blue">
+                               aaaaaa
+                            </div>--%>
                         </div>
+                        
                     </div>
                 </div>
             </div>

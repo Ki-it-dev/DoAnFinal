@@ -6,18 +6,18 @@
         <div class="d-flex flex-column " style="height: 100vh">
             <div class="p-2">
 
-                <div class="d-flex float-right" style="margin-right: 300px">
-                    <div style="text-align: center; padding-top: 17px; margin-right: 50px; width: 6.5vh; height: 2vh; border: 1px solid #dee2e6; border-radius: 5px; background-color: aqua; font-size: 12px">QUÁ GIỜ ĐẶT</div>
-                    <div style="text-align: center; padding-top: 17px; margin-right: 50px; width: 6.5vh; height: 2vh; border: 1px solid #dee2e6; border-radius: 5px; background-color: #0d6efd; font-size: 12px">SẴN SÀNG ĐẶT</div>
-                    <div style="text-align: center; padding-top: 17px; margin-right: 50px; width: 6.5vh; height: 2vh; border: 1px solid #dee2e6; border-radius: 5px; background-color: yellow; font-size: 12px">CHỜ XÁC NHẬN</div>
-                    <div style="text-align: center; padding-top: 17px; margin-right: 50px; width: 6.5vh; height: 2vh; border: 1px solid #dee2e6; border-radius: 5px; background-color: red; font-size: 12px">ĐÃ ĐẶT</div>
+                <div class="d-flex float-right" style="margin-top:20px">
+                    <div class="pic-note" style=" background-color: aqua"><p id="note">QUÁ GIỜ ĐẶT</p></div>
+                    <div class="pic-note" style=" background-color: #0d6efd;"><p id="note">SẴN SÀNG ĐẶT</p></div>
+                    <div class="pic-note" style=" background-color: yellow;"><p id="note">CHỜ XÁC NHẬN</p></div>
+                    <div class="pic-note" style=" background-color: red;"><p id="note">ĐÃ ĐẶT</p></div>
                 </div>
             </div>
-            <div class="p-2" style="height: 100%">
+            <div class="p-2">
                 <input type="date" name="name" value="" id="dteNgayBatDau" runat="server" onchange="myFunChange()" />
                 <h2 style="color: snow"><%#Eval("field_type_name") %></h2>
                 <table class="table table-bordered">
-                    <thead>
+                    <thead style="text-align:center">
                         <tr>
                             <th scope="col">Giờ / Sân</th>
                             <asp:Repeater runat="server" ID="rpDanhSachSan">
@@ -27,15 +27,15 @@
                             </asp:Repeater>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="height: 55px;line-height:3;text-align:center">
                         <asp:Repeater runat="server" ID="rpKhungGio" OnItemDataBound="rpKhungGio_ItemDataBound">
                             <ItemTemplate>
-                                <tr>
+                                <tr style="margin:10px">
                                     <th scope="row"><%#Eval("book_time_detail") %></th>
                                     <asp:Repeater runat="server" ID="rpSanDat">
                                         <ItemTemplate>
                                             <td>
-                                                <a href="#" class="btn btn-primary cursor-poiter" style='<%#Eval("style")%>'
+                                                <a href="#" class="btn btn-primary cursor-poiter" style='<%#Eval("style")%>min-width: 110px;min-height: 30px;'
                                                     id="btnSan_<%#Eval("book_time_id") %>_<%#Eval("field_id") %>"
                                                     onclick="btnTimes('<%#Eval("book_time_id") %>','<%#Eval("field_id") %>')"></a>
                                             </td>

@@ -80,7 +80,7 @@ public class cls_User
     {
         var getUserList = from u in db.tbUsers
                           join pq in db.tbGroupUsers on u.group_user_id equals pq.group_user_id
-                          where u.group_user_id == 2
+                          where u.group_user_id == 2 || u.group_user_id == 3
                           select new
                           {
                               u.users_phoneNumber,

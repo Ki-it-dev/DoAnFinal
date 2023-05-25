@@ -1,0 +1,43 @@
+#tkh {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    text-align: center;
+    font-size: 18px;
+    background-color: none;
+}
+#cont {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+}
+#cont2{
+    width: 600px;
+    margin-top: 5%;
+    line-height: 30px;
+}
+#ContentPlaceHolder1_addField {
+    background-color: #0a7c38;
+    border: 2px solid #d9e448;
+}
+#cont-tk{
+    margin: 20px 40px;
+    display:flex;
+}
+a{
+    text-decoration:none;
+}
+#note {
+    margin-top:8px;
+}
+.pic-note {
+    text-align: center;
+    padding-top: 19px;
+    margin-right: 50px;
+    width: 13.5vh;
+    height: 2.1vh;
+    border: 1px solid #dee2e6;
+    border-radius: 5px;
+    font-size: 12px;
+}

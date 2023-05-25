@@ -4,7 +4,7 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
         <div class="khoangcach">
-            <h1>THÔNG TIN <%=txtTenTaiKhoan%></h1>
+            <h1>THÔNG TIN:   <%=txtTenTaiKhoan%></h1>
             <div class="d-flex justify-content-center">
                 <section class="xn" style="padding: 20px 30px;">
                     <div class="d-flex flex-column">
@@ -91,7 +91,6 @@
                 </section>
             </div>
         </div>
-        <div style="padding: 8%;"></div>
 
     <div style="display: none;">
         <input type="text" runat="server" id="txtIdUser" name="name" value="" />
