@@ -64,7 +64,6 @@
         </div>
 
     </div>
-    <div style="padding: 8%;"></div>
     
    <%-- <script src="https://www.paypal.com/sdk/js?client-id=AYWhG8KH4Fv1ELpvTYj-cDbrT_O2n3gDjx9jR7aS95VgrBaB_k7dNxJ6qbfJOlQsKMeG3avVC_yaAFuH&disable-funding=credit,card"></script>
     <script>

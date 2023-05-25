@@ -6,9 +6,8 @@
     <div id="qldsc">
         <div class="khoangcach">
             <h1>Quản lý giao dịch</h1>
-            <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">
-                    <div class="p-2">
+                    <div class="p-2" style="margin:auto">
                         <table class="table table-dark">
                             <thead>
                                 <tr>
@@ -34,8 +33,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="padding:8%;"></div>
     </div>
 </asp:Content>
 

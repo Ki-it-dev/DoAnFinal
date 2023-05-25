@@ -33,7 +33,6 @@
                 </asp:Repeater>
             </div>
         </div>
-        <div style="padding: 8%;"></div>
     <a href="#" id="btnHuy" runat="server" onserverclick="btnHuy_ServerClick"></a>
     <div style="display: none;">
         <input type="text" name="name" value="" id="txtIdTrans" runat="server" />

@@ -4,7 +4,9 @@
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <button id="btnAdd" type="button" onclick="btnAddInput()">+Thêm đơn hàng</button>
+    <div id="cont">
 
+    </div>
     <formview>
 
         <button type="button" class="btn btn-primary" onclick="btnThem()">Lưu</button>

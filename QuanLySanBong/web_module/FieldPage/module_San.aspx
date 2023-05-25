@@ -13,7 +13,7 @@
                     <div class="pic-note" style=" background-color: red;"><p id="note">ĐÃ ĐẶT</p></div>
                 </div>
             </div>
-            <div class="p-2" style="height: 100%;">
+            <div class="p-2">
                 <input type="date" name="name" value="" id="dteNgayBatDau" runat="server" onchange="myFunChange()" />
                 <h2 style="color: snow"><%#Eval("field_type_name") %></h2>
                 <table class="table table-bordered">

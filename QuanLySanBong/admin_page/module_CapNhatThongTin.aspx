@@ -90,7 +90,6 @@
                 </section>
             </div>
         </div>
-        <div style="padding: 8%;"></div>
 
     <div style="display: none;">
         <input type="text" runat="server" id="txtIdUser" name="name" value="" />

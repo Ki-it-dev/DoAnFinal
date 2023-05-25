@@ -24,6 +24,7 @@
                             <div class="row">
                                 <asp:Repeater runat="server" ID="rpSanPham">
                                     <ItemTemplate>
+                                        <%# (Container.ItemIndex + 4) % 4 == 0 ? "<tr>" : string.Empty %>
                                         <div class="col-lg-2 col-md-1 col-sm-1 mb-3">
                                             <div class="card">
                                                 <img class="card-img-top" src="<%#Eval("producst_picture")%>" alt="Card image cap">
@@ -54,6 +55,7 @@
                                                 </div>
                                             </div>
                                         </div>
+                                        <%# (Container.ItemIndex + 4) % 4 == 3 ? "</tr>" : string.Empty %>
                                     </ItemTemplate>
                                 </asp:Repeater>
                             </div>

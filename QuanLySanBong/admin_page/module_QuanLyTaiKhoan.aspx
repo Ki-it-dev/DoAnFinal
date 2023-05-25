@@ -5,9 +5,8 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
         <div class="khoangcach">
             <h1>Quản lý tài khoản</h1>
-            <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">
-                    <div class="p-2">
+                    <div class="p-2" style="margin:auto">
                         <table class="table table-dark">
                             <thead>
                                 <tr>
@@ -49,8 +48,6 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="padding:8%;"></div>
     <div class="d-none">
         <a href="#" id="btnXoaServer" runat="server" onserverclick="btnXoaServer_ServerClick"></a>
         <a href="#" id="btnSuaServer" runat="server" onserverclick="btnSuaServer_ServerClick"></a>

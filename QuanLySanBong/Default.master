@@ -131,6 +131,7 @@
 
                                                 <a style="<%=txtEmploy%>" href="/quan-ly-dat-san-chung">Quản lý đặt sân chung</a>
                                                 <a style="<%=txtEmploy%>" href="/quan-ly-san-pham">Quản lý sản phẩm</a>
+                                                <a style="<%=txtEmploy%>" href="/quan-ly-don-hang">Quản lý đơn hàng</a>
                                                 <a style="<%=txtEmploy%>" href="/danh-sach-phan-hoi">Quản lý phản hồi</a>
                                             </div>
                                         </div>
@@ -166,7 +167,7 @@
 
                                     <li class="nav-item dropdown">
                                         <i class="fa-regular fa-bell"></i> <span><%=countAlert%></span>
-                                        <div class="dropdown">
+                                        <div class="dropdown" style="right:25vw">
                                             <div class="dropdown-content">
                                                 <asp:Repeater runat="server" ID="rpNotif">
                                                     <ItemTemplate>
