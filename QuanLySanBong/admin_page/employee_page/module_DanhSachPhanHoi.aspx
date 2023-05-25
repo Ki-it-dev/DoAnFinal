@@ -31,7 +31,7 @@
                                             <td><%#Eval("feedback_dateCreate") %></td>
                                             <td><%#Eval("status")%></td>
                                             <td>
-                                                <a href="/cap-nhat-phan-hoi-<%#Eval("feedback_id") %>-<%#Eval("alert_Id") %>" class="btn btn-success">Sửa</a>
+                                                <a href="/cap-nhat-phan-hoi-<%#Eval("feedback_id") %>-<%#Eval("alert_Id") %>" class="btn btn-success">TRẢ LỜI</a>
                                             </td>
                                         </tr>
                                     </ItemTemplate>

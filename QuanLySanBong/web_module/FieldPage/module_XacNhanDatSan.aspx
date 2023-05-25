@@ -43,7 +43,7 @@
                             </div>
                             <div class="p-2">
                                 <div class="d-flex flex-column justify-content-center">
-                                    <span style="margin-top: 10px; margin-right: 10px; color: red; font-style: italic;">Tổng tiền: <%=price%></span>
+                                    <span style="font-size:25px;font-weight: bold;margin-top: 10px; margin-right: 10px; color: #d4f025; font-style: italic;">Tổng tiền: <%=price%></span>
                                 </div>
                             </div>
                         </div>

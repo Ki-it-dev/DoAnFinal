@@ -28,7 +28,7 @@
                                             <div class="card">
                                                 <img class="card-img-top" src="<%#Eval("producst_picture")%>" alt="Card image cap">
                                                 <div class="card-body">
-                                                    <div class="d-flex align-items-center flex-column" style="height: 200px;">
+                                                    <div class="d-flex align-items-center flex-column" style="height: 180px;">
                                                         <div class=" p-2">
                                                             <h4 class="card-title"><%#Eval("products_name") %></h4>
                                                         </div>
