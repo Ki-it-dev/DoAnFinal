@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="dbQLSB" Class="dbcsdlDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Connection Mode="WebSettings" ConnectionString="Data Source=DUC-LONG\SQLEXPRESS;Initial Catalog=dbQLSB;Integrated Security=True" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="dbQLSBConnectionString1" Provider="System.Data.SqlClient" />
+  <Connection Mode="WebSettings" ConnectionString="Data Source=DESKTOP-723RCR8\MSSQLSERVER11;Initial Catalog=dbQLSB;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="dbQLSBConnectionString2" Provider="System.Data.SqlClient" />
   <Table Name="dbo.tbAlert" Member="tbAlerts">
     <Type Name="tbAlert">
       <Column Name="alert_Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -12,23 +12,6 @@
       <Column Name="trans_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Association Name="tbAlertType_tbAlert" Member="tbAlertType" ThisKey="alert_Type_Id" OtherKey="alert_Type_Id" Type="tbAlertType" IsForeignKey="true" />
       <Association Name="tbTempTransaction_tbAlert" Member="tbTempTransaction" ThisKey="trans_id" OtherKey="temp_transaction_id" Type="tbTempTransaction" IsForeignKey="true" />
-    </Type>
-  </Table>
-  <Table Name="dbo.tbUsers" Member="tbUsers">
-    <Type Name="tbUser">
-      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="users_fullname" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="users_phoneNumber" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
-      <Column Name="users_email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="users_address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="users_account" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="users_password" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
-      <Column Name="group_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="users_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="users_img" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
-      <Column Name="users_codeActivityEmail" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
-      <Association Name="tbUser_tbTempTransaction" Member="tbTempTransactions" ThisKey="users_id" OtherKey="users_id" Type="tbTempTransaction" />
-      <Association Name="tbGroupUser_tbUser" Member="tbGroupUser" ThisKey="group_user_id" OtherKey="group_user_id" Type="tbGroupUser" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
   <Table Name="dbo.tbAlertType" Member="tbAlertTypes">
@@ -141,6 +124,23 @@
       <Association Name="tbTempTransaction_tbFeedback" Member="tbFeedbacks" ThisKey="temp_transaction_id" OtherKey="trans_id" Type="tbFeedback" />
       <Association Name="tbField_tbTempTransaction" Member="tbField" ThisKey="field_id" OtherKey="field_id" Type="tbField" IsForeignKey="true" DeleteRule="CASCADE" />
       <Association Name="tbUser_tbTempTransaction" Member="tbUser" ThisKey="users_id" OtherKey="users_id" Type="tbUser" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.tbUsers" Member="tbUsers">
+    <Type Name="tbUser">
+      <Column Name="users_id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="users_fullname" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="users_phoneNumber" Type="System.String" DbType="VarChar(13)" CanBeNull="true" />
+      <Column Name="users_email" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="users_address" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="users_account" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="users_password" Type="System.String" DbType="VarChar(MAX)" CanBeNull="true" />
+      <Column Name="group_user_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="users_status" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="users_img" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="users_codeActivityEmail" Type="System.String" DbType="NChar(10)" CanBeNull="true" />
+      <Association Name="tbUser_tbTempTransaction" Member="tbTempTransactions" ThisKey="users_id" OtherKey="users_id" Type="tbTempTransaction" />
+      <Association Name="tbGroupUser_tbUser" Member="tbGroupUser" ThisKey="group_user_id" OtherKey="group_user_id" Type="tbGroupUser" IsForeignKey="true" DeleteRule="CASCADE" />
     </Type>
   </Table>
 </Database>

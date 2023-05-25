@@ -35,7 +35,7 @@
                                     <asp:Repeater runat="server" ID="rpSanDat">
                                         <ItemTemplate>
                                             <td>
-                                                <a href="#" class="btn btn-primary cursor-poiter" style="min-width: 110px;min-height: 30px;"
+                                                <a href="#" class="btn btn-primary cursor-poiter" style='<%#Eval("style")%>min-width: 110px;min-height: 30px;'
                                                     id="btnSan_<%#Eval("book_time_id") %>_<%#Eval("field_id") %>"
                                                     onclick="btnTimes('<%#Eval("book_time_id") %>','<%#Eval("field_id") %>')"></a>
                                             </td>

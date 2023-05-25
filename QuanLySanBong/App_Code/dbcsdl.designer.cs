@@ -32,9 +32,6 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
   partial void InserttbAlert(tbAlert instance);
   partial void UpdatetbAlert(tbAlert instance);
   partial void DeletetbAlert(tbAlert instance);
-  partial void InserttbUser(tbUser instance);
-  partial void UpdatetbUser(tbUser instance);
-  partial void DeletetbUser(tbUser instance);
   partial void InserttbAlertType(tbAlertType instance);
   partial void UpdatetbAlertType(tbAlertType instance);
   partial void DeletetbAlertType(tbAlertType instance);
@@ -68,10 +65,13 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
   partial void InserttbTempTransaction(tbTempTransaction instance);
   partial void UpdatetbTempTransaction(tbTempTransaction instance);
   partial void DeletetbTempTransaction(tbTempTransaction instance);
+  partial void InserttbUser(tbUser instance);
+  partial void UpdatetbUser(tbUser instance);
+  partial void DeletetbUser(tbUser instance);
   #endregion
 	
 	public dbcsdlDataContext() : 
-			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString1"].ConnectionString, mappingSource)
+			base(global::System.Configuration.ConfigurationManager.ConnectionStrings["dbQLSBConnectionString2"].ConnectionString, mappingSource)
 	{
 		OnCreated();
 	}
@@ -105,14 +105,6 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<tbAlert>();
-		}
-	}
-	
-	public System.Data.Linq.Table<tbUser> tbUsers
-	{
-		get
-		{
-			return this.GetTable<tbUser>();
 		}
 	}
 	
@@ -201,6 +193,14 @@ public partial class dbcsdlDataContext : System.Data.Linq.DataContext
 		get
 		{
 			return this.GetTable<tbTempTransaction>();
+		}
+	}
+	
+	public System.Data.Linq.Table<tbUser> tbUsers
+	{
+		get
+		{
+			return this.GetTable<tbUser>();
 		}
 	}
 }
@@ -514,377 +514,6 @@ public partial class tbAlert : INotifyPropertyChanging, INotifyPropertyChanged
 		{
 			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 		}
-	}
-}
-
-[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbUsers")]
-public partial class tbUser : INotifyPropertyChanging, INotifyPropertyChanged
-{
-	
-	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-	
-	private int _users_id;
-	
-	private string _users_fullname;
-	
-	private string _users_phoneNumber;
-	
-	private string _users_email;
-	
-	private string _users_address;
-	
-	private string _users_account;
-	
-	private string _users_password;
-	
-	private System.Nullable<int> _group_user_id;
-	
-	private System.Nullable<bool> _users_status;
-	
-	private string _users_img;
-	
-	private string _users_codeActivityEmail;
-	
-	private EntitySet<tbTempTransaction> _tbTempTransactions;
-	
-	private EntityRef<tbGroupUser> _tbGroupUser;
-	
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void Onusers_idChanging(int value);
-    partial void Onusers_idChanged();
-    partial void Onusers_fullnameChanging(string value);
-    partial void Onusers_fullnameChanged();
-    partial void Onusers_phoneNumberChanging(string value);
-    partial void Onusers_phoneNumberChanged();
-    partial void Onusers_emailChanging(string value);
-    partial void Onusers_emailChanged();
-    partial void Onusers_addressChanging(string value);
-    partial void Onusers_addressChanged();
-    partial void Onusers_accountChanging(string value);
-    partial void Onusers_accountChanged();
-    partial void Onusers_passwordChanging(string value);
-    partial void Onusers_passwordChanged();
-    partial void Ongroup_user_idChanging(System.Nullable<int> value);
-    partial void Ongroup_user_idChanged();
-    partial void Onusers_statusChanging(System.Nullable<bool> value);
-    partial void Onusers_statusChanged();
-    partial void Onusers_imgChanging(string value);
-    partial void Onusers_imgChanged();
-    partial void Onusers_codeActivityEmailChanging(string value);
-    partial void Onusers_codeActivityEmailChanged();
-    #endregion
-	
-	public tbUser()
-	{
-		this._tbTempTransactions = new EntitySet<tbTempTransaction>(new Action<tbTempTransaction>(this.attach_tbTempTransactions), new Action<tbTempTransaction>(this.detach_tbTempTransactions));
-		this._tbGroupUser = default(EntityRef<tbGroupUser>);
-		OnCreated();
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-	public int users_id
-	{
-		get
-		{
-			return this._users_id;
-		}
-		set
-		{
-			if ((this._users_id != value))
-			{
-				this.Onusers_idChanging(value);
-				this.SendPropertyChanging();
-				this._users_id = value;
-				this.SendPropertyChanged("users_id");
-				this.Onusers_idChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_fullname", DbType="NVarChar(MAX)")]
-	public string users_fullname
-	{
-		get
-		{
-			return this._users_fullname;
-		}
-		set
-		{
-			if ((this._users_fullname != value))
-			{
-				this.Onusers_fullnameChanging(value);
-				this.SendPropertyChanging();
-				this._users_fullname = value;
-				this.SendPropertyChanged("users_fullname");
-				this.Onusers_fullnameChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_phoneNumber", DbType="VarChar(13)")]
-	public string users_phoneNumber
-	{
-		get
-		{
-			return this._users_phoneNumber;
-		}
-		set
-		{
-			if ((this._users_phoneNumber != value))
-			{
-				this.Onusers_phoneNumberChanging(value);
-				this.SendPropertyChanging();
-				this._users_phoneNumber = value;
-				this.SendPropertyChanged("users_phoneNumber");
-				this.Onusers_phoneNumberChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_email", DbType="NVarChar(50)")]
-	public string users_email
-	{
-		get
-		{
-			return this._users_email;
-		}
-		set
-		{
-			if ((this._users_email != value))
-			{
-				this.Onusers_emailChanging(value);
-				this.SendPropertyChanging();
-				this._users_email = value;
-				this.SendPropertyChanged("users_email");
-				this.Onusers_emailChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_address", DbType="NVarChar(MAX)")]
-	public string users_address
-	{
-		get
-		{
-			return this._users_address;
-		}
-		set
-		{
-			if ((this._users_address != value))
-			{
-				this.Onusers_addressChanging(value);
-				this.SendPropertyChanging();
-				this._users_address = value;
-				this.SendPropertyChanged("users_address");
-				this.Onusers_addressChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_account", DbType="VarChar(MAX)")]
-	public string users_account
-	{
-		get
-		{
-			return this._users_account;
-		}
-		set
-		{
-			if ((this._users_account != value))
-			{
-				this.Onusers_accountChanging(value);
-				this.SendPropertyChanging();
-				this._users_account = value;
-				this.SendPropertyChanged("users_account");
-				this.Onusers_accountChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_password", DbType="VarChar(MAX)")]
-	public string users_password
-	{
-		get
-		{
-			return this._users_password;
-		}
-		set
-		{
-			if ((this._users_password != value))
-			{
-				this.Onusers_passwordChanging(value);
-				this.SendPropertyChanging();
-				this._users_password = value;
-				this.SendPropertyChanged("users_password");
-				this.Onusers_passwordChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_user_id", DbType="Int")]
-	public System.Nullable<int> group_user_id
-	{
-		get
-		{
-			return this._group_user_id;
-		}
-		set
-		{
-			if ((this._group_user_id != value))
-			{
-				if (this._tbGroupUser.HasLoadedOrAssignedValue)
-				{
-					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-				}
-				this.Ongroup_user_idChanging(value);
-				this.SendPropertyChanging();
-				this._group_user_id = value;
-				this.SendPropertyChanged("group_user_id");
-				this.Ongroup_user_idChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_status", DbType="Bit")]
-	public System.Nullable<bool> users_status
-	{
-		get
-		{
-			return this._users_status;
-		}
-		set
-		{
-			if ((this._users_status != value))
-			{
-				this.Onusers_statusChanging(value);
-				this.SendPropertyChanging();
-				this._users_status = value;
-				this.SendPropertyChanged("users_status");
-				this.Onusers_statusChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_img", DbType="NVarChar(MAX)")]
-	public string users_img
-	{
-		get
-		{
-			return this._users_img;
-		}
-		set
-		{
-			if ((this._users_img != value))
-			{
-				this.Onusers_imgChanging(value);
-				this.SendPropertyChanging();
-				this._users_img = value;
-				this.SendPropertyChanged("users_img");
-				this.Onusers_imgChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_codeActivityEmail", DbType="NChar(10)")]
-	public string users_codeActivityEmail
-	{
-		get
-		{
-			return this._users_codeActivityEmail;
-		}
-		set
-		{
-			if ((this._users_codeActivityEmail != value))
-			{
-				this.Onusers_codeActivityEmailChanging(value);
-				this.SendPropertyChanging();
-				this._users_codeActivityEmail = value;
-				this.SendPropertyChanged("users_codeActivityEmail");
-				this.Onusers_codeActivityEmailChanged();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbTempTransaction", Storage="_tbTempTransactions", ThisKey="users_id", OtherKey="users_id")]
-	public EntitySet<tbTempTransaction> tbTempTransactions
-	{
-		get
-		{
-			return this._tbTempTransactions;
-		}
-		set
-		{
-			this._tbTempTransactions.Assign(value);
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbGroupUser_tbUser", Storage="_tbGroupUser", ThisKey="group_user_id", OtherKey="group_user_id", IsForeignKey=true, DeleteRule="CASCADE")]
-	public tbGroupUser tbGroupUser
-	{
-		get
-		{
-			return this._tbGroupUser.Entity;
-		}
-		set
-		{
-			tbGroupUser previousValue = this._tbGroupUser.Entity;
-			if (((previousValue != value) 
-						|| (this._tbGroupUser.HasLoadedOrAssignedValue == false)))
-			{
-				this.SendPropertyChanging();
-				if ((previousValue != null))
-				{
-					this._tbGroupUser.Entity = null;
-					previousValue.tbUsers.Remove(this);
-				}
-				this._tbGroupUser.Entity = value;
-				if ((value != null))
-				{
-					value.tbUsers.Add(this);
-					this._group_user_id = value.group_user_id;
-				}
-				else
-				{
-					this._group_user_id = default(Nullable<int>);
-				}
-				this.SendPropertyChanged("tbGroupUser");
-			}
-		}
-	}
-	
-	public event PropertyChangingEventHandler PropertyChanging;
-	
-	public event PropertyChangedEventHandler PropertyChanged;
-	
-	protected virtual void SendPropertyChanging()
-	{
-		if ((this.PropertyChanging != null))
-		{
-			this.PropertyChanging(this, emptyChangingEventArgs);
-		}
-	}
-	
-	protected virtual void SendPropertyChanged(String propertyName)
-	{
-		if ((this.PropertyChanged != null))
-		{
-			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
-		}
-	}
-	
-	private void attach_tbTempTransactions(tbTempTransaction entity)
-	{
-		this.SendPropertyChanging();
-		entity.tbUser = this;
-	}
-	
-	private void detach_tbTempTransactions(tbTempTransaction entity)
-	{
-		this.SendPropertyChanging();
-		entity.tbUser = null;
 	}
 }
 
@@ -3090,6 +2719,377 @@ public partial class tbTempTransaction : INotifyPropertyChanging, INotifyPropert
 	{
 		this.SendPropertyChanging();
 		entity.tbTempTransaction = null;
+	}
+}
+
+[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.tbUsers")]
+public partial class tbUser : INotifyPropertyChanging, INotifyPropertyChanged
+{
+	
+	private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
+	
+	private int _users_id;
+	
+	private string _users_fullname;
+	
+	private string _users_phoneNumber;
+	
+	private string _users_email;
+	
+	private string _users_address;
+	
+	private string _users_account;
+	
+	private string _users_password;
+	
+	private System.Nullable<int> _group_user_id;
+	
+	private System.Nullable<bool> _users_status;
+	
+	private string _users_img;
+	
+	private string _users_codeActivityEmail;
+	
+	private EntitySet<tbTempTransaction> _tbTempTransactions;
+	
+	private EntityRef<tbGroupUser> _tbGroupUser;
+	
+    #region Extensibility Method Definitions
+    partial void OnLoaded();
+    partial void OnValidate(System.Data.Linq.ChangeAction action);
+    partial void OnCreated();
+    partial void Onusers_idChanging(int value);
+    partial void Onusers_idChanged();
+    partial void Onusers_fullnameChanging(string value);
+    partial void Onusers_fullnameChanged();
+    partial void Onusers_phoneNumberChanging(string value);
+    partial void Onusers_phoneNumberChanged();
+    partial void Onusers_emailChanging(string value);
+    partial void Onusers_emailChanged();
+    partial void Onusers_addressChanging(string value);
+    partial void Onusers_addressChanged();
+    partial void Onusers_accountChanging(string value);
+    partial void Onusers_accountChanged();
+    partial void Onusers_passwordChanging(string value);
+    partial void Onusers_passwordChanged();
+    partial void Ongroup_user_idChanging(System.Nullable<int> value);
+    partial void Ongroup_user_idChanged();
+    partial void Onusers_statusChanging(System.Nullable<bool> value);
+    partial void Onusers_statusChanged();
+    partial void Onusers_imgChanging(string value);
+    partial void Onusers_imgChanged();
+    partial void Onusers_codeActivityEmailChanging(string value);
+    partial void Onusers_codeActivityEmailChanged();
+    #endregion
+	
+	public tbUser()
+	{
+		this._tbTempTransactions = new EntitySet<tbTempTransaction>(new Action<tbTempTransaction>(this.attach_tbTempTransactions), new Action<tbTempTransaction>(this.detach_tbTempTransactions));
+		this._tbGroupUser = default(EntityRef<tbGroupUser>);
+		OnCreated();
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_id", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
+	public int users_id
+	{
+		get
+		{
+			return this._users_id;
+		}
+		set
+		{
+			if ((this._users_id != value))
+			{
+				this.Onusers_idChanging(value);
+				this.SendPropertyChanging();
+				this._users_id = value;
+				this.SendPropertyChanged("users_id");
+				this.Onusers_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_fullname", DbType="NVarChar(MAX)")]
+	public string users_fullname
+	{
+		get
+		{
+			return this._users_fullname;
+		}
+		set
+		{
+			if ((this._users_fullname != value))
+			{
+				this.Onusers_fullnameChanging(value);
+				this.SendPropertyChanging();
+				this._users_fullname = value;
+				this.SendPropertyChanged("users_fullname");
+				this.Onusers_fullnameChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_phoneNumber", DbType="VarChar(13)")]
+	public string users_phoneNumber
+	{
+		get
+		{
+			return this._users_phoneNumber;
+		}
+		set
+		{
+			if ((this._users_phoneNumber != value))
+			{
+				this.Onusers_phoneNumberChanging(value);
+				this.SendPropertyChanging();
+				this._users_phoneNumber = value;
+				this.SendPropertyChanged("users_phoneNumber");
+				this.Onusers_phoneNumberChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_email", DbType="NVarChar(50)")]
+	public string users_email
+	{
+		get
+		{
+			return this._users_email;
+		}
+		set
+		{
+			if ((this._users_email != value))
+			{
+				this.Onusers_emailChanging(value);
+				this.SendPropertyChanging();
+				this._users_email = value;
+				this.SendPropertyChanged("users_email");
+				this.Onusers_emailChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_address", DbType="NVarChar(MAX)")]
+	public string users_address
+	{
+		get
+		{
+			return this._users_address;
+		}
+		set
+		{
+			if ((this._users_address != value))
+			{
+				this.Onusers_addressChanging(value);
+				this.SendPropertyChanging();
+				this._users_address = value;
+				this.SendPropertyChanged("users_address");
+				this.Onusers_addressChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_account", DbType="VarChar(MAX)")]
+	public string users_account
+	{
+		get
+		{
+			return this._users_account;
+		}
+		set
+		{
+			if ((this._users_account != value))
+			{
+				this.Onusers_accountChanging(value);
+				this.SendPropertyChanging();
+				this._users_account = value;
+				this.SendPropertyChanged("users_account");
+				this.Onusers_accountChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_password", DbType="VarChar(MAX)")]
+	public string users_password
+	{
+		get
+		{
+			return this._users_password;
+		}
+		set
+		{
+			if ((this._users_password != value))
+			{
+				this.Onusers_passwordChanging(value);
+				this.SendPropertyChanging();
+				this._users_password = value;
+				this.SendPropertyChanged("users_password");
+				this.Onusers_passwordChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_group_user_id", DbType="Int")]
+	public System.Nullable<int> group_user_id
+	{
+		get
+		{
+			return this._group_user_id;
+		}
+		set
+		{
+			if ((this._group_user_id != value))
+			{
+				if (this._tbGroupUser.HasLoadedOrAssignedValue)
+				{
+					throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
+				}
+				this.Ongroup_user_idChanging(value);
+				this.SendPropertyChanging();
+				this._group_user_id = value;
+				this.SendPropertyChanged("group_user_id");
+				this.Ongroup_user_idChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_status", DbType="Bit")]
+	public System.Nullable<bool> users_status
+	{
+		get
+		{
+			return this._users_status;
+		}
+		set
+		{
+			if ((this._users_status != value))
+			{
+				this.Onusers_statusChanging(value);
+				this.SendPropertyChanging();
+				this._users_status = value;
+				this.SendPropertyChanged("users_status");
+				this.Onusers_statusChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_img", DbType="NVarChar(MAX)")]
+	public string users_img
+	{
+		get
+		{
+			return this._users_img;
+		}
+		set
+		{
+			if ((this._users_img != value))
+			{
+				this.Onusers_imgChanging(value);
+				this.SendPropertyChanging();
+				this._users_img = value;
+				this.SendPropertyChanged("users_img");
+				this.Onusers_imgChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_users_codeActivityEmail", DbType="NChar(10)")]
+	public string users_codeActivityEmail
+	{
+		get
+		{
+			return this._users_codeActivityEmail;
+		}
+		set
+		{
+			if ((this._users_codeActivityEmail != value))
+			{
+				this.Onusers_codeActivityEmailChanging(value);
+				this.SendPropertyChanging();
+				this._users_codeActivityEmail = value;
+				this.SendPropertyChanged("users_codeActivityEmail");
+				this.Onusers_codeActivityEmailChanged();
+			}
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbUser_tbTempTransaction", Storage="_tbTempTransactions", ThisKey="users_id", OtherKey="users_id")]
+	public EntitySet<tbTempTransaction> tbTempTransactions
+	{
+		get
+		{
+			return this._tbTempTransactions;
+		}
+		set
+		{
+			this._tbTempTransactions.Assign(value);
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.AssociationAttribute(Name="tbGroupUser_tbUser", Storage="_tbGroupUser", ThisKey="group_user_id", OtherKey="group_user_id", IsForeignKey=true, DeleteRule="CASCADE")]
+	public tbGroupUser tbGroupUser
+	{
+		get
+		{
+			return this._tbGroupUser.Entity;
+		}
+		set
+		{
+			tbGroupUser previousValue = this._tbGroupUser.Entity;
+			if (((previousValue != value) 
+						|| (this._tbGroupUser.HasLoadedOrAssignedValue == false)))
+			{
+				this.SendPropertyChanging();
+				if ((previousValue != null))
+				{
+					this._tbGroupUser.Entity = null;
+					previousValue.tbUsers.Remove(this);
+				}
+				this._tbGroupUser.Entity = value;
+				if ((value != null))
+				{
+					value.tbUsers.Add(this);
+					this._group_user_id = value.group_user_id;
+				}
+				else
+				{
+					this._group_user_id = default(Nullable<int>);
+				}
+				this.SendPropertyChanged("tbGroupUser");
+			}
+		}
+	}
+	
+	public event PropertyChangingEventHandler PropertyChanging;
+	
+	public event PropertyChangedEventHandler PropertyChanged;
+	
+	protected virtual void SendPropertyChanging()
+	{
+		if ((this.PropertyChanging != null))
+		{
+			this.PropertyChanging(this, emptyChangingEventArgs);
+		}
+	}
+	
+	protected virtual void SendPropertyChanged(String propertyName)
+	{
+		if ((this.PropertyChanged != null))
+		{
+			this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
+		}
+	}
+	
+	private void attach_tbTempTransactions(tbTempTransaction entity)
+	{
+		this.SendPropertyChanging();
+		entity.tbUser = this;
+	}
+	
+	private void detach_tbTempTransactions(tbTempTransaction entity)
+	{
+		this.SendPropertyChanging();
+		entity.tbUser = null;
 	}
 }
 #pragma warning restore 1591
