@@ -3,7 +3,8 @@
 <asp:Content ID="Content1" ContentPlaceHolderID="head" Runat="Server">
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
-    <formview>
+    <div id="cont">
+        <formview id="cont2">
         <div class="form-group">
             <label for="txtField">Nhập tên sản phẩm</label>
             <input type="text" class="form-control" id="txtTenSanPham" runat="server" placeholder="Nhập tên sản phẩm">
@@ -16,7 +17,7 @@
         <span>Chọn loại sản phẩm</span>
         <dx:ASPxComboBox ID="cbbLoaiSanPham" runat="server" TextField="typeProducts_name"
             OnSelectedIndexChanged="cbbLoaiSanPham_SelectedIndexChanged" AutoPostBack="true"
-            ValueField="typeProducts_id" ValueType="System.Int32" ClientInstanceName="cbbLoaiSanPham" Width="95%">
+            ValueField="typeProducts_id" ValueType="System.Int32" ClientInstanceName="cbbLoaiSanPham" Width="100%">
         </dx:ASPxComboBox>
 
         <div style="<%=mainStyle%>">
@@ -50,5 +51,6 @@
         <button type="button" class="btn btn-primary" id="save" runat="server" onserverclick="save_ServerClick">Lưu</button>
         <a href="/quan-ly-san-pham" class="btn btn-primary">Quay lại</a>
     </formview>
+    </div>
 </asp:Content>
 

@@ -5,10 +5,9 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" Runat="Server">
         <div class="khoangcach">
             <h1>Quản lý phản hồi</h1>
-            <div style="margin-top: 50px;">
                 <div class="d-flex flex-column">
-                    <div class="p-2">
-                        <table class="table table-dark">
+                    <div class="p-2" style="margin:auto">
+                        <table class="table table-dark  table-hover">
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
@@ -31,7 +30,7 @@
                                             <td><%#Eval("feedback_dateCreate") %></td>
                                             <td><%#Eval("status")%></td>
                                             <td>
-                                                <a href="/cap-nhat-phan-hoi-<%#Eval("feedback_id") %>-<%#Eval("alert_Id") %>" class="btn btn-success">Sửa</a>
+                                                <a href="/cap-nhat-phan-hoi-<%#Eval("feedback_id") %>-<%#Eval("alert_Id") %>" class="btn btn-success">TRẢ LỜI</a>
                                             </td>
                                         </tr>
                                     </ItemTemplate>
@@ -41,6 +40,4 @@
                     </div>
                 </div>
             </div>
-        </div>
-        <div style="padding:8%;"></div>
 </asp:Content>

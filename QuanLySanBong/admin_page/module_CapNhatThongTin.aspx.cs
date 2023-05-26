@@ -84,6 +84,8 @@ public partial class admin_page_module_CapNhatThongTin : System.Web.UI.Page
     }
     protected void btnChinhSua_ServerClick(object sender, EventArgs e)
     {
+        txtDiaChi.Value = txtDiaChi.Value == null ? "" : txtDiaChi.Value;
+
         if (cls_DangKy.DangKy_KiemTraCapNhapTaiKhoan(txtPhone.Value,
             txtEmail.Value, txtTen.Value, txtDiaChi.Value) != true)
         {
