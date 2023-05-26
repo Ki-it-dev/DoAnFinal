@@ -11,7 +11,7 @@
                             <thead>
                                 <tr>
                                     <th scope="col">#</th>
-                                    <th scope="col">Mã phản hồi</th>
+                                    <%--<th scope="col">Mã phản hồi</th>--%>
                                     <th scope="col">Mã đặt sân</th>
                                     <th scope="col">Nội dung phản hồi</th>
                                     <th scope="col">Ngày gửi</th>
@@ -24,7 +24,7 @@
                                     <ItemTemplate>
                                         <tr>
                                             <th scope="row"><%# Container.ItemIndex + 1 %></th>
-                                            <td><%#Eval("feedback_id") %></td>
+                                            <%--<td><%#Eval("feedback_id") %></td>--%>
                                             <td><%#Eval("field_id") %></td>
                                             <td><%#Eval("feedback_content") %></td>
                                             <td><%#Eval("feedback_dateCreate") %></td>

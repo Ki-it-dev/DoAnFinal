@@ -20,17 +20,20 @@ public class cls_feedback
     public void GetAllFeedBackFromUser(Repeater repeater)
     {
         var getData = (from f in db.tbFeedbacks
-                       join t in db.tbTempTransactions on f.trans_id equals t.temp_transaction_id
-                       join a in db.tbAlerts on f.trans_id equals a.trans_id
-                       where a.alert_Type_Id == 2
+                       //join t in db.tbTempTransactions on f.trans_id equals t.temp_transaction_id
+                       //join a in db.tbAlerts on f.trans_id equals a.trans_id
+                       //where a.alert_Type_Id == 2
+                       //group f by new {f.trans_id} into k
                        select new
                        {
                            f.feedback_id,
                            f.feedback_content,
                            status = f.feedback_content_reply.Length > 0 ? "Đã phản hồi" : "Chưa phản hồi",
-                           t.field_id,
+                           //t.field_id,
+                           field_id = (from t in db.tbTempTransactions where f.trans_id == t.temp_transaction_id select t.field_id).FirstOrDefault(),
                            f.feedback_dateCreate,
-                           a.alert_Id,
+                           //a.alert_Id,
+                           alert_Id = (from t in db.tbAlerts where f.trans_id == t.trans_id && t.alert_Type_Id == 2 select t.alert_Id).FirstOrDefault(),
                        });
 
         if (getData.Count() > 0)

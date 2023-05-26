@@ -5,7 +5,6 @@
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="Server">
     <button id="btnAdd" type="button" onclick="btnAddInput()">+Thêm đơn hàng</button>
     <div id="cont">
-
     </div>
     <formview>
 
@@ -13,7 +12,7 @@
 
         <div id="bodyCart"></div>
 
-        <input type="text" id="txtTong" runat="server"/>
+        <input type="text" id="txtTong" runat="server" />
 
         <div class="d-none">
             <button id="save" runat="server" onserverclick="save_ServerClick"></button>
@@ -31,6 +30,11 @@
         const bodyCart = document.getElementById("bodyCart");
 
         let count = 0;
+
+
+        $(document.ready(function () {
+
+        }))
 
         function btnAddInput() {
 
@@ -81,7 +85,11 @@
         }
 
         function funcDel(count) {
-            document.getElementById("divSelector_" + count).remove();
+            var elem = document.getElementById("divSelector_" + count)
+            var money = document.getElementById("txtThanhTien_" + count).value
+
+            document.getElementById("<%=txtTong.ClientID%>").value = parseFloat(document.getElementById("<%=txtTong.ClientID%>").value) - parseFloat(money);
+            elem.remove();
         }
 
         function funcChange(count) {
@@ -103,10 +111,12 @@
 
             var arr = document.getElementsByName('moneyProducts');
             var total = 0;
+
             for (var i = 0; i < arr.length; i++) {
                 if (parseInt(arr[i].value))
                     total += parseInt(arr[i].value);
             }
+
             document.getElementById("<%=txtTong.ClientID%>").value = total;
         }
 

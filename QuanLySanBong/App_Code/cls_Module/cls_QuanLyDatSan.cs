@@ -59,10 +59,9 @@ public class cls_QuanLyDatSan
                            bt.book_time_id,
                            a.alert_Id,
                            t.temp_transaction_id,
-
                            transaction_datetime = DateTime.Parse(t.transaction_datetime.ToString()).ToString("dd-MM-yyyy"),
                            transaction_bookdate = DateTime.Parse(t.transaction_bookdate.ToString()).ToString("dd-MM-yyyy"),
-                       });
+                       }).OrderByDescending(x=>x.temp_transaction_id);
 
         if (getData.Any())
         {

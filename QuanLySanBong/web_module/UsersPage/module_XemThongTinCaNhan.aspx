@@ -13,7 +13,7 @@
                                 <asp:Repeater runat="server" ID="rpThongTinCaNhan">
                                     <ItemTemplate>
                                         <div class="p-2">
-                                            <img style="margin-bottom: 30px; margin-right: 20px; width: 10rem; height: 10rem;" src="images/tt.jpg" alt="">
+                                            <img style="margin-bottom: 30px; margin-right: 20px; width: 10rem; height: 10rem;" src="../../images/SanPham/bcwcpycr.4au.png" alt="">
                                         </div>
                                         <div class="p-2">
                                             <div class="d-flex flex-column">
