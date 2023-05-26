@@ -111,7 +111,7 @@
     </style>
 
     <div id="cont">
-        <button id="btnAdd" type="button" onclick="btnAddInput()"><span class="text">+ Thêm đơn hàng</span></button>
+        <button id="btnAdd" type="button" onclick="btnThem()"><span class="text">+ Thêm đơn hàng</span></button>
         <formview id="cont3">
 
         
