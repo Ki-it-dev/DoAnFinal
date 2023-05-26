@@ -17,6 +17,11 @@
     margin-top: 5%;
     line-height: 30px;
 }
+#cont3 {
+    width: 900px;
+    margin-top: 5%;
+    line-height: 30px;
+}
 #ContentPlaceHolder1_addField {
     background-color: #0a7c38;
     border: 2px solid #d9e448;
@@ -40,4 +45,17 @@ a{
     border: 1px solid #dee2e6;
     border-radius: 5px;
     font-size: 12px;
+}
+.contn{
+    text-align:center;
+}
+h3 {
+    border-bottom: 1px solid green;
+}
+.form-group{
+    margin:30px;
+}
+.form-group  >input{
+    margin: 5px;
+    width:250px;
 }
