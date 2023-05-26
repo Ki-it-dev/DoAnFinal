@@ -112,6 +112,7 @@
 
     <div id="cont">
 <<<<<<< HEAD
+<<<<<<< HEAD
     </div>
     <formview>
 
@@ -122,6 +123,9 @@
         <input type="text" id="txtTong" runat="server" />
 =======
         <button id="btnAdd" type="button" onclick="btnAddInput()"><span class="text">+ Thêm đơn hàng</span></button>
+=======
+        <button id="btnAdd" type="button" onclick="btnThem()"><span class="text">+ Thêm đơn hàng</span></button>
+>>>>>>> c64e42eab56d8eaea907e16da02a3565033f5c95
         <formview id="cont3">
 
         
