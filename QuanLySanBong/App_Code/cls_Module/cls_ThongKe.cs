@@ -151,10 +151,10 @@ public class cls_ThongKe
     {
         List<int> listSoLuongNguoiDungDatSanTrongNam = new List<int>();
 
-        var countAllUser = (from u in db.tbUsers where u.group_user_id == 3 select u).Count();
+        var countAllUser = (from u in db.tbUsers where u.group_user_id == 3 && u.users_status == true select u).Count();
 
         var countUserDaDatSan = (from u in db.tbUsers
-                                 where u.group_user_id == 3
+                                 where u.group_user_id == 3 && u.users_status == true
                                  join t in db.tbTempTransactions on u.users_id equals t.users_id
                                  where t.transaction_bookdate.Value.Year == year
                                  group t by new { t.users_id } into us

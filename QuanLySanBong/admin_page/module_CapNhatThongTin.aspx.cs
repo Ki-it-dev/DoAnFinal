@@ -56,7 +56,13 @@ public partial class admin_page_module_CapNhatThongTin : System.Web.UI.Page
                            users_status = k.Key.users_status == true ? "Kích hoạt" : "Chưa kích hoạt",
                        }).First();
 
-        var getQuyen = (from q in db.tbGroupUsers select q);
+        var getQuyen = (from q in db.tbGroupUsers 
+                        select q);
+
+        var getTenQuyen = (from q in db.tbGroupUsers
+                           join u in db.tbUsers on q.group_user_id equals u.group_user_id
+                           where u.users_id == id
+                           select q.group_user_id).FirstOrDefault();
 
         txtTenTaiKhoan = getUser.users_account;
         //txtCMND.Value = getUser.users_identity;
@@ -73,17 +79,8 @@ public partial class admin_page_module_CapNhatThongTin : System.Web.UI.Page
         ddlPhanQuyen.DataSource = getQuyen;
         ddlPhanQuyen.DataBind();
 
-        //ddlPhanQuyen.SelectedItem.Text = getQuyen.First().group_user_name == "admin" ? "Admin" : 
-        //    getQuyen.First().group_user_name == "employee" ? "Nhân viên" : "Khách hàng";
+        ddlPhanQuyen.SelectedValue = getTenQuyen.ToString();
 
-        //ddlStatus.SelectedItem.Text = getUser.users_status == true ? "Kích hoạt" : "Chưa kích hoạt";
-
-        //ddlStatus.Items.Clear();
-        //ddlStatus.AppendDataBoundItems = true;
-        //ddlStatus.DataTextField = "users_status";
-        //ddlStatus.DataValueField = "users_id";
-        //ddlStatus.DataSource = getUser;
-        //ddlStatus.DataBind();
     }
     protected void btnChinhSua_ServerClick(object sender, EventArgs e)
     {

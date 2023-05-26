@@ -49,6 +49,7 @@ public class cls_feedback
                            t.field_id,
                            f.feedback_dateCreate,
                            f.feedback_id,
+                           f.feedback_content_reply,
                            f.feedback_content,
                            status = f.feedback_content_reply.Length > 0 ? "Đã phản hồi" : "Chưa phản hồi",
                        });
